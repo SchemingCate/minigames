@@ -10,7 +10,7 @@ export default defineConfig(
   },
 
   js.configs.recommended,
-  
+
   {
     files: ['src/**/*.ts', 'src/**/*.tsx'],
     extends: [...tseslint.configs.recommendedTypeChecked],
@@ -34,4 +34,4 @@ export default defineConfig(
   },
 
   eslintConfigPrettier,
-)
+);
