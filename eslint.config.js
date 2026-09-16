@@ -2,6 +2,7 @@ import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import unicorn from 'eslint-plugin-unicorn';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default defineConfig(
   {
@@ -9,7 +10,7 @@ export default defineConfig(
   },
 
   js.configs.recommended,
-  
+
   {
     files: ['src/**/*.ts', 'src/**/*.tsx'],
     extends: [...tseslint.configs.recommendedTypeChecked],
@@ -30,5 +31,7 @@ export default defineConfig(
     linterOptions: {
       noInlineConfig: true,
     },
-  }
-)
+  },
+
+  eslintConfigPrettier,
+);
