@@ -1,0 +1,5 @@
+@use 'tokens' as var;
+
+@function rem($px, $base: var.$fnt-size-body-medium) {
+  @return ($px / $base) * 1rem;
+}
