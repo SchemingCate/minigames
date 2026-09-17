@@ -1,0 +1,91 @@
+//**  Color  **//
+$col-white: #ffffff; //TODO: CHECK IF USED
+$col-black: #000000; //TODO: CHECK IF USED
+
+$col-bg: #f9f8f3; //TODO: CHECK IF USED
+$col-on-bg: #5f5d75; //TODO: CHECK IF USED
+$col-on-bg-low: #737380; //TODO: CHECK IF USED
+$col-bg-footer: #1e1b3a; //TODO: CHECK IF USED
+$col-bg-footer-low: #2a264f; //TODO: CHECK IF USED
+$col-bg-footer-lowest: #3c376e; //TODO: CHECK IF USED
+$col-on-bg-footer: #b9b5c9; //TODO: CHECK IF USED
+
+$col-surface: #fff9e5; //TODO: CHECK IF USED
+$col-surface-low: #fffcf5; //TODO: CHECK IF USED
+$col-primary: #ffd02b; //TODO: CHECK IF USED
+$col-primary-low: #fde047; //TODO: CHECK IF USED
+$col-primary-high: #e5bb00; //TODO: CHECK IF USED
+$col-on-primary: #242145; //TODO: CHECK IF USED
+$col-secondary: #f0eeff; //TODO: CHECK IF USED
+$col-tertiary: #3a2ebf; //TODO: CHECK IF USED
+$col-like: #ff4b4b; //TODO: CHECK IF USED
+$col-error: #b3261e; //TODO: CHECK IF USED
+$col-price-free: #0b8a8f; //TODO: CHECK IF USED
+
+$col-outline: #e5e7eb; //TODO: CHECK IF USED
+$col-outline-variant: #d2d2d2; //TODO: CHECK IF USED
+
+$col-avatar-random-1: #e9eef6; //TODO: CHECK IF USED
+$col-avatar-random-2: #a3e2c9; //TODO: CHECK IF USED
+$col-avatar-random-3: #bce3ff; //TODO: CHECK IF USED
+$col-avatar-random-4: #ffc6ff; //TODO: CHECK IF USED
+$col-avatar-random-5: #e8dff5; //TODO: CHECK IF USED
+
+//**  Font  **//
+$fnt-size-display-large: 56px; //TODO: CHECK IF USED
+$fnt-size-display-medium: 36px; //TODO: CHECK IF USED
+$fnt-size-display-small: 24px; //TODO: CHECK IF USED
+$fnt-size-headline-large: 32px; //TODO: CHECK IF USED
+$fnt-size-headline-medium: 24px; //TODO: CHECK IF USED
+$fnt-size-headline-small: 20px; //TODO: CHECK IF USED
+$fnt-size-body-large: 18px; //TODO: CHECK IF USED
+$fnt-size-body-medium: 16px; //TODO: CHECK IF USED
+$fnt-size-body-small: 14px; //TODO: CHECK IF USED
+$fnt-size-label-extra-large: 16px; //TODO: CHECK IF USED
+$fnt-size-label-large: 14px; //TODO: CHECK IF USED
+$fnt-size-label-medium: 12px; //TODO: CHECK IF USED
+$fnt-size-label-small: 10px; //TODO: CHECK IF USED
+
+$fnt-weight-regular: 400; //TODO: CHECK IF USED
+$fnt-weight-medium: 500; //TODO: CHECK IF USED
+$fnt-weight-bold: 700; //TODO: CHECK IF USED
+$fnt-weight-extra-bold: 800; //TODO: CHECK IF USED
+
+//TODO: add font family
+
+//**  Size  **//
+$size-05: 4px; //TODO: CHECK IF USED
+$size-1: 8px; //TODO: CHECK IF USED
+$size-2: 16px; //TODO: CHECK IF USED
+$size-3: 24px; //TODO: CHECK IF USED
+$size-4: 32px; //TODO: CHECK IF USED
+$size-5: 40px; //TODO: CHECK IF USED
+$size-6: 48px; //TODO: CHECK IF USED
+$size-7: 56px; //TODO: CHECK IF USED
+$size-8: 64px; //TODO: CHECK IF USED
+$size-9: 72px; //TODO: CHECK IF USED
+$size-10: 80px; //TODO: CHECK IF USED
+$size-11: 88px; //TODO: CHECK IF USED
+$size-12: 96px; //TODO: CHECK IF USED
+$size-13: 104px; //TODO: CHECK IF USED
+$size-14: 112px; //TODO: CHECK IF USED
+$size-15: 120px; //TODO: CHECK IF USED
+
+//**  Border radius  **//
+$brdr-radius-extra-small: 4px; //TODO: CHECK IF USED
+$brdr-radius-small: 8px; //TODO: CHECK IF USED
+$brdr-radius-medium: 12px; //TODO: CHECK IF USED
+$brdr-radius-large: 16px; //TODO: CHECK IF USED
+$brdr-radius-extra-large: 24px; //TODO: CHECK IF USED
+$brdr-radius-full: 100%; //TODO: CHECK IF USED
+
+//** Paddings for buttons **//
+$padding-btn-large: 24px 16px; //TODO: CHECK IF USED
+$padding-btn-medium: 20px 10px; //TODO: CHECK IF USED
+$padding-btn-small: 16px 8px; //TODO: CHECK IF USED
+$padding-btn-icon: 8px; //TODO: CHECK IF USED
+
+//** Box shadow **/
+$box-shadow-lvl-1: 4px 4px $col-on-primary; //TODO: CHECK IF USED
+$box-shadow-lvl-2: 6px 6px $col-on-primary; //TODO: CHECK IF USED
+$box-shadow-lvl-3: 8px 8px $col-on-primary; //TODO: CHECK IF USED
