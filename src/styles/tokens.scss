@@ -1,3 +1,5 @@
+@use 'functions' as func;
+
 //**  Color  **//
 $col-white: #ffffff; //TODO: CHECK IF USED
 $col-black: #000000; //TODO: CHECK IF USED
@@ -32,19 +34,19 @@ $col-avatar-random-4: #ffc6ff; //TODO: CHECK IF USED
 $col-avatar-random-5: #e8dff5; //TODO: CHECK IF USED
 
 //**  Font  **//
-$fnt-size-display-large: 56px; //TODO: CHECK IF USED
-$fnt-size-display-medium: 36px; //TODO: CHECK IF USED
-$fnt-size-display-small: 24px; //TODO: CHECK IF USED
-$fnt-size-headline-large: 32px; //TODO: CHECK IF USED
-$fnt-size-headline-medium: 24px; //TODO: CHECK IF USED
-$fnt-size-headline-small: 20px; //TODO: CHECK IF USED
-$fnt-size-body-large: 18px; //TODO: CHECK IF USED
-$fnt-size-body-medium: 16px; //TODO: CHECK IF USED
-$fnt-size-body-small: 14px; //TODO: CHECK IF USED
-$fnt-size-label-extra-large: 16px; //TODO: CHECK IF USED
-$fnt-size-label-large: 14px; //TODO: CHECK IF USED
-$fnt-size-label-medium: 12px; //TODO: CHECK IF USED
-$fnt-size-label-small: 10px; //TODO: CHECK IF USED
+$fnt-size-display-large: func.rem(56px); //TODO: CHECK IF USED
+$fnt-size-display-medium: func.rem(36px); //TODO: CHECK IF USED
+$fnt-size-display-small: func.rem(24px); //TODO: CHECK IF USED
+$fnt-size-headline-large: func.rem(32px); //TODO: CHECK IF USED
+$fnt-size-headline-medium: func.rem(24px); //TODO: CHECK IF USED
+$fnt-size-headline-small: func.rem(20px); //TODO: CHECK IF USED
+$fnt-size-body-large: func.rem(18px); //TODO: CHECK IF USED
+$fnt-size-body-medium: func.rem(16px); //TODO: CHECK IF USED
+$fnt-size-body-small: func.rem(14px); //TODO: CHECK IF USED
+$fnt-size-label-extra-large: func.rem(16px); //TODO: CHECK IF USED
+$fnt-size-label-large: func.rem(14px); //TODO: CHECK IF USED
+$fnt-size-label-medium: func.rem(12px); //TODO: CHECK IF USED
+$fnt-size-label-small: func.rem(10px); //TODO: CHECK IF USED
 
 $fnt-weight-regular: 400; //TODO: CHECK IF USED
 $fnt-weight-medium: 500; //TODO: CHECK IF USED
