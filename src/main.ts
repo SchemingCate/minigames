@@ -1,5 +1,9 @@
-import './style.scss';
+import './pages/home/home-page';
+import { homePage } from './pages/home/home-page';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-<h1>MiniGames</h1>
-`;
+const startApp = () => {
+  const body = document.querySelector('#app');
+  body?.append(homePage());
+};
+
+startApp();
