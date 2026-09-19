@@ -1,3 +1,4 @@
+import './style.scss';
 import './pages/home/home-page';
 import { homePage } from './pages/home/home-page';
 

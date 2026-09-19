@@ -1,3 +1,5 @@
+@use './styles/tokens.scss' as var;
+
 *,
 *::before,
 *::after {
@@ -7,4 +9,9 @@
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var.$col-bg;
+  color: var.$col-on-bg;
 }
