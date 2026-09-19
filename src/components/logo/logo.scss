@@ -1,0 +1,18 @@
+@use '../../styles/tokens.scss' as var;
+
+.logo {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  & img {
+    width: 32px;
+    height: 32px;
+  }
+  &_title {
+    color: var.$col-on-primary;
+    font-family: var.$fnt-family-inter;
+    font-weight: var.$fnt-weight-bold;
+    font-size: var.$fnt-size-headline-medium;
+  }
+}
