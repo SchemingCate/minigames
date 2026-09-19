@@ -1,15 +1,25 @@
 import './logo.scss';
 import logoSvg from '../../assets/logos/logo.svg';
+import { createHTMLElement } from '../../helpers/dom';
 
-export const logo: () => Node = () => {
-  const logoElement = document.createElement('div');
-  logoElement.classList = 'logo';
-  const logoImg = document.createElement('img');
-  logoImg.src = logoSvg;
-  logoImg.alt = 'MiniGames logo';
-  const title = document.createElement('h1');
-  title.textContent = 'MiniGames';
-  title.classList = 'logo_title';
+export const logo = (): HTMLElement => {
+  const logoElement = createHTMLElement({ tag: 'div', classList: 'logo' });
+
+  const logoImg = createHTMLElement({
+    tag: 'img',
+    attributes: [
+      ['src', logoSvg],
+      ['alt', 'MiniGames logo'],
+    ],
+  });
+
+  const title = createHTMLElement({
+    tag: 'h1',
+    textContent: 'MiniGames',
+    classList: 'logo_title',
+  });
+
   logoElement.append(logoImg, title);
+
   return logoElement;
 };

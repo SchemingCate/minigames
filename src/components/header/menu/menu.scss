@@ -1,0 +1,11 @@
+.menu {
+  display: flex;
+  gap: 32px;
+}
+
+.nav_list {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  text-transform: capitalize;
+}
