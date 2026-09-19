@@ -47,6 +47,7 @@ $fnt-size-label-extra-large: func.rem(16px); //TODO: CHECK IF USED
 $fnt-size-label-large: func.rem(14px); //TODO: CHECK IF USED
 $fnt-size-label-medium: func.rem(12px); //TODO: CHECK IF USED
 $fnt-size-label-small: func.rem(10px); //TODO: CHECK IF USED
+$fnt-size-button: func.rem(14px);
 
 $fnt-weight-regular: 400; //TODO: CHECK IF USED
 $fnt-weight-medium: 500; //TODO: CHECK IF USED
@@ -84,7 +85,7 @@ $brdr-radius-full: 100%; //TODO: CHECK IF USED
 
 //** Paddings for buttons **//
 $padding-btn-large: 24px 16px; //TODO: CHECK IF USED
-$padding-btn-medium: 20px 10px; //TODO: CHECK IF USED
+$padding-btn-medium: 10px 20px; //TODO: CHECK IF USED
 $padding-btn-small: 16px 8px; //TODO: CHECK IF USED
 $padding-btn-icon: 8px; //TODO: CHECK IF USED
 

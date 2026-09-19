@@ -15,3 +15,7 @@ body {
   background-color: var.$col-bg;
   color: var.$col-on-bg;
 }
+
+button:hover {
+  cursor: pointer;
+}

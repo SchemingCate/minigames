@@ -29,7 +29,13 @@ export const menu = (): HTMLElement => {
   }
 
   nav.append(navList);
-  menu.append(nav, button('Log in'), button('Sign up'));
+
+  const buttonContainer = createHTMLElement({
+    tag: 'div',
+    classList: 'buttons',
+  });
+  buttonContainer.append(button('Log in'), button('Sign up'));
+  menu.append(nav, buttonContainer);
 
   return menu;
 };
