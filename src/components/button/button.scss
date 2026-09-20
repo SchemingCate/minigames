@@ -3,19 +3,25 @@
 .button {
   padding: var.$padding-btn-medium;
   background-color: var.$col-primary;
-  border: 2px solid var.$col-on-primary;
+  border: var.$brdr-size solid var.$col-on-primary;
   border-radius: var.$brdr-radius-small;
   font-weight: var.$fnt-weight-bold;
   font-size: var.$fnt-size-button;
   text-transform: capitalize;
-  transition: background-color 0.3s;
+  transition: background-color var.$transition-time;
   &:hover {
     background-color: var.$col-primary-high;
+  }
+  &:active {
+    background-color: var.$col-primary-low;
   }
   &_login {
     background-color: var.$col-bg;
     &:hover {
       background-color: var.$col-primary-low;
+    }
+    &:active {
+      background-color: var.$col-primary-high;
     }
   }
 }

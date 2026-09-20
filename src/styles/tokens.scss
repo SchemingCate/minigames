@@ -79,6 +79,10 @@ $size-15: 120px; //TODO: CHECK IF USED
 
 $width-max-content: 1760px;
 
+$height-link-underline: 1.5px;
+
+$brdr-size: 2px;
+
 //**  Border radius  **//
 $brdr-radius-extra-small: 4px; //TODO: CHECK IF USED
 $brdr-radius-small: 8px; //TODO: CHECK IF USED
@@ -97,3 +101,5 @@ $padding-btn-icon: 8px; //TODO: CHECK IF USED
 $box-shadow-lvl-1: 4px 4px $col-on-primary; //TODO: CHECK IF USED
 $box-shadow-lvl-2: 6px 6px $col-on-primary; //TODO: CHECK IF USED
 $box-shadow-lvl-3: 8px 8px $col-on-primary; //TODO: CHECK IF USED
+
+$transition-time: 0.3s;
