@@ -1,0 +1,23 @@
+@use '../../styles/tokens.scss' as var;
+
+.hero {
+  &_heading {
+    font-size: var.$fnt-size-display-large;
+    color: var.$col-on-primary;
+    @media (max-width: var.$width-trans-to-tablet) {
+      font-size: var.$fnt-size-display-medium;
+    }
+    @media (max-width: var.$width-trans-to-mobile) {
+      font-size: var.$fnt-size-display-small;
+    }
+  }
+  &_paragraph {
+    font-size: var.$fnt-size-body-large;
+    @media (max-width: var.$width-trans-to-tablet) {
+      font-size: var.$fnt-size-body-small;
+    }
+    @media (max-width: var.$width-trans-to-mobile) {
+      font-size: var.$fnt-size-label-medium;
+    }
+  }
+}
