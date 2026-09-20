@@ -82,4 +82,16 @@ $gap-burger-icon-lines: 2px;
       display: none;
     }
   }
+  &_library {
+    padding: var.$padding-btn-large;
+    font-size: var.$fnt-size-body-large;
+    @media (max-width: var.$width-trans-to-tablet) {
+      padding: var.$padding-btn-medium;
+      font-size: var.$fnt-size-button;
+    }
+    @media (max-width: var.$width-trans-to-mobile) {
+      padding: var.$padding-btn-small;
+      font-size: var.$fnt-size-label-medium;
+    }
+  }
 }

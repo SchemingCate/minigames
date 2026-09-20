@@ -34,15 +34,15 @@ $col-avatar-random-4: #ffc6ff; //TODO: CHECK IF USED
 $col-avatar-random-5: #e8dff5; //TODO: CHECK IF USED
 
 //**  Font  **//
-$fnt-size-display-large: func.rem(56px); //TODO: CHECK IF USED
-$fnt-size-display-medium: func.rem(36px); //TODO: CHECK IF USED
-$fnt-size-display-small: func.rem(24px); //TODO: CHECK IF USED
+$fnt-size-display-large: func.rem(56px);
+$fnt-size-display-medium: func.rem(36px);
+$fnt-size-display-small: func.rem(24px);
 $fnt-size-headline-large: func.rem(32px); //TODO: CHECK IF USED
 $fnt-size-headline-medium: func.rem(24px); //TODO: CHECK IF USED
 $fnt-size-headline-small: func.rem(20px); //TODO: CHECK IF USED
-$fnt-size-body-large: func.rem(18px); //TODO: CHECK IF USED
+$fnt-size-body-large: func.rem(18px);
 $fnt-size-body-medium: func.rem(16px); //TODO: CHECK IF USED
-$fnt-size-body-small: func.rem(14px); //TODO: CHECK IF USED
+$fnt-size-body-small: func.rem(14px);
 $fnt-size-label-extra-large: func.rem(16px); //TODO: CHECK IF USED
 $fnt-size-label-large: func.rem(14px); //TODO: CHECK IF USED
 $fnt-size-label-medium: func.rem(12px); //TODO: CHECK IF USED
@@ -50,14 +50,19 @@ $fnt-size-label-small: func.rem(10px); //TODO: CHECK IF USED
 $fnt-size-button: func.rem(14px);
 
 $fnt-weight-regular: 400; //TODO: CHECK IF USED
-$fnt-weight-medium: 500; //TODO: CHECK IF USED
+$fnt-weight-medium: 500;
 $fnt-weight-bold: 700; //TODO: CHECK IF USED
 $fnt-weight-extra-bold: 800; //TODO: CHECK IF USED
 
-$fnt-family-inter: 'Inter', sans-serif; //TODO: CHECK IF USED
+$fnt-family-inter: 'Inter', sans-serif;
 $fnt-family-roboto: 'Roboto', sans-serif; //TODO: CHECK IF USED
 
 $letter-spacing: 0.5px;
+$letter-spacing-medium: 1px;
+$letter-spacing-large: 1.5px;
+
+$line-height: 110%;
+$line-height-large: 140%;
 
 //**  Size  **//
 $size-05: 4px; //TODO: CHECK IF USED
@@ -84,24 +89,25 @@ $width-trans-to-mobile: 425px;
 $height-link-underline: 1.5px;
 
 $brdr-size: 2px;
+$brgr-size-large: 3px;
 
 //**  Border radius  **//
 $brdr-radius-extra-small: 4px; //TODO: CHECK IF USED
 $brdr-radius-small: 8px; //TODO: CHECK IF USED
-$brdr-radius-medium: 12px; //TODO: CHECK IF USED
+$brdr-radius-medium: 12px;
 $brdr-radius-large: 16px; //TODO: CHECK IF USED
-$brdr-radius-extra-large: 24px; //TODO: CHECK IF USED
+$brdr-radius-extra-large: 24px;
 $brdr-radius-full: 100%; //TODO: CHECK IF USED
 
 //** Paddings for buttons **//
-$padding-btn-large: 24px 16px; //TODO: CHECK IF USED
-$padding-btn-medium: 10px 20px; //TODO: CHECK IF USED
-$padding-btn-small: 8px 16px; //TODO: CHECK IF USED
+$padding-btn-large: 16px 24px;
+$padding-btn-medium: 10px 20px;
+$padding-btn-small: 8px 16px;
 $padding-btn-icon: 8px; //TODO: CHECK IF USED
 
 //** Box shadow **/
 $box-shadow-lvl-1: 4px 4px $col-on-primary; //TODO: CHECK IF USED
 $box-shadow-lvl-2: 6px 6px $col-on-primary; //TODO: CHECK IF USED
-$box-shadow-lvl-3: 8px 8px $col-on-primary; //TODO: CHECK IF USED
+$box-shadow-lvl-3: 8px 8px $col-on-primary;
 
 $transition-time: 0.3s;

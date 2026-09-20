@@ -25,5 +25,8 @@ export const button = (type: ButtonType): HTMLButtonElement => {
     buttonElement.setAttribute('commandfor', 'auth');
     buttonElement.setAttribute('command', 'close');
   }
+  if (type === ButtonType.Library) {
+    buttonElement.classList.add('button_library');
+  }
   return buttonElement;
 };

@@ -3,4 +3,5 @@ export enum ButtonType {
   SignUp = 'Sign up',
   Burger = 'Open burger',
   CloseAuth = 'Close',
+  Library = 'Browse Library',
 }
