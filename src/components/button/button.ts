@@ -7,15 +7,23 @@ export const button = (type: ButtonType): HTMLButtonElement => {
   buttonElement.textContent = type;
   if (type === ButtonType.SignUp) {
     buttonElement.classList.add('button_signup');
+    buttonElement.setAttribute('command', 'show-modal');
+    buttonElement.setAttribute('commandfor', 'auth');
   }
   if (type === ButtonType.LogIn) {
     buttonElement.classList.add('button_login');
+    buttonElement.setAttribute('command', 'show-modal');
+    buttonElement.setAttribute('commandfor', 'auth');
   }
   if (type === ButtonType.Burger) {
     buttonElement.classList.add('button_burger');
     const span = document.createElement('span');
     buttonElement.textContent = '';
     buttonElement.append(span);
+  }
+  if (type === ButtonType.CloseAuth) {
+    buttonElement.setAttribute('commandfor', 'auth');
+    buttonElement.setAttribute('command', 'close');
   }
   return buttonElement;
 };
