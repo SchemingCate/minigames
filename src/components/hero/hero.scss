@@ -1,6 +1,48 @@
 @use '../../styles/tokens.scss' as var;
 
+$padding-container: 122px 40px;
+$padding-container-tablet: 72px 0;
+$padding-container-mobile: 64px 0;
+$width-content-box: 640px;
+$padding-content-box: 48px;
+$gap-content-box: 24px;
+$col-hero-bg-overlay: #1e1b3a65;
+
 .hero {
+  position: relative;
+  background-image: url(../../assets/imgs/hero_section.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: var.$col-bg-footer;
+  &::before {
+    position: absolute;
+    content: '';
+    inset: 0;
+    background-color: $col-hero-bg-overlay;
+  }
+  &_container {
+    max-width: var.$width-max-content;
+    margin: 0 auto;
+    padding: $padding-container;
+    @media (max-width: var.$width-trans-to-tablet) {
+      padding: $padding-container-tablet;
+    }
+    @media (max-width: var.$width-trans-to-mobile) {
+      padding: $padding-container-mobile;
+    }
+  }
+  &_content {
+    max-width: $width-content-box;
+    padding: $padding-content-box;
+    display: flex;
+    flex-direction: column;
+    gap: $gap-content-box;
+    background-color: var.$col-bg;
+    border: var.$brgr-size-large solid var.$col-on-primary;
+    box-shadow: var.$box-shadow-lvl-3;
+    border-radius: var.$brdr-radius-extra-large;
+  }
   &_heading {
     font-size: var.$fnt-size-display-large;
     color: var.$col-on-primary;
@@ -19,5 +61,9 @@
     @media (max-width: var.$width-trans-to-mobile) {
       font-size: var.$fnt-size-label-medium;
     }
+  }
+  & > * {
+    position: relative;
+    z-index: 1;
   }
 }

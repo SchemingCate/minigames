@@ -2,7 +2,15 @@ import './hero.scss';
 import { createHTMLElement } from '../../helpers/dom';
 
 export const hero = (): HTMLElement => {
-  const heroSection = createHTMLElement({ tag: 'section', classList: 'hero' });
+  const hero = createHTMLElement({ tag: 'div', classList: 'hero' });
+  const heroContainer = createHTMLElement({
+    tag: 'div',
+    classList: 'hero_container',
+  });
+  const heroContent = createHTMLElement({
+    tag: 'section',
+    classList: 'hero_content',
+  });
   const heroTitle = createHTMLElement({
     tag: 'h2',
     textContent: 'Take a Short Break & Have Fun',
@@ -14,6 +22,8 @@ export const hero = (): HTMLElement => {
     textContent:
       'Discover hundreds of curated casual mini-games. Play instantly in your browser — puzzle, match 3, farm, and board classics.',
   });
-  heroSection.append(heroTitle, heroParagraph);
-  return heroSection;
+  heroContent.append(heroTitle, heroParagraph);
+  heroContainer.append(heroContent);
+  hero.append(heroContainer);
+  return hero;
 };
