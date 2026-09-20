@@ -20,11 +20,22 @@ export const hero = (): HTMLElement => {
   });
   const heroParagraph = createHTMLElement({
     tag: 'p',
-    classList: 'hero_paragraph',
+    classList: 'hero_paragraph hero_paragraph--standard',
     textContent:
       'Discover hundreds of curated casual mini-games. Play instantly in your browser — puzzle, match 3, farm, and board classics.',
   });
-  heroContent.append(heroTitle, heroParagraph, button(ButtonType.Library));
+  const heroParagraphMobile = createHTMLElement({
+    tag: 'p',
+    classList: 'hero_paragraph hero_paragraph--mobile',
+    textContent:
+      'Discover hundreds of curated casual mini-games. Play in your browser.',
+  });
+  heroContent.append(
+    heroTitle,
+    heroParagraph,
+    heroParagraphMobile,
+    button(ButtonType.Library),
+  );
   heroContainer.append(heroContent);
   hero.append(heroContainer);
   return hero;
