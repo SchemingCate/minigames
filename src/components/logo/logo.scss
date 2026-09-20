@@ -1,0 +1,25 @@
+@use '../../styles/tokens.scss' as var;
+
+$size-logo: 32px;
+$gap-logo: 8px;
+
+.logo {
+  display: flex;
+  gap: $gap-logo;
+  align-items: center;
+
+  & img {
+    width: $size-logo;
+    height: $size-logo;
+  }
+  &_title {
+    color: var.$col-on-primary;
+    font-family: var.$fnt-family-inter;
+    font-weight: var.$fnt-weight-bold;
+    font-size: var.$fnt-size-headline-medium;
+    letter-spacing: var.$letter-spacing;
+    @media (max-width: var.$width-trans-to-tablet) {
+      font-size: var.$fnt-size-headline-small;
+    }
+  }
+}

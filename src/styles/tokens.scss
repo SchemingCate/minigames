@@ -47,6 +47,7 @@ $fnt-size-label-extra-large: func.rem(16px); //TODO: CHECK IF USED
 $fnt-size-label-large: func.rem(14px); //TODO: CHECK IF USED
 $fnt-size-label-medium: func.rem(12px); //TODO: CHECK IF USED
 $fnt-size-label-small: func.rem(10px); //TODO: CHECK IF USED
+$fnt-size-button: func.rem(14px);
 
 $fnt-weight-regular: 400; //TODO: CHECK IF USED
 $fnt-weight-medium: 500; //TODO: CHECK IF USED
@@ -55,6 +56,8 @@ $fnt-weight-extra-bold: 800; //TODO: CHECK IF USED
 
 $fnt-family-inter: 'Inter', sans-serif; //TODO: CHECK IF USED
 $fnt-family-roboto: 'Roboto', sans-serif; //TODO: CHECK IF USED
+
+$letter-spacing: 0.5px;
 
 //**  Size  **//
 $size-05: 4px; //TODO: CHECK IF USED
@@ -74,6 +77,14 @@ $size-13: 104px; //TODO: CHECK IF USED
 $size-14: 112px; //TODO: CHECK IF USED
 $size-15: 120px; //TODO: CHECK IF USED
 
+$width-max-content: 1760px;
+$width-trans-to-tablet: 915px;
+$width-trans-to-mobile: 425px;
+
+$height-link-underline: 1.5px;
+
+$brdr-size: 2px;
+
 //**  Border radius  **//
 $brdr-radius-extra-small: 4px; //TODO: CHECK IF USED
 $brdr-radius-small: 8px; //TODO: CHECK IF USED
@@ -84,11 +95,13 @@ $brdr-radius-full: 100%; //TODO: CHECK IF USED
 
 //** Paddings for buttons **//
 $padding-btn-large: 24px 16px; //TODO: CHECK IF USED
-$padding-btn-medium: 20px 10px; //TODO: CHECK IF USED
-$padding-btn-small: 16px 8px; //TODO: CHECK IF USED
+$padding-btn-medium: 10px 20px; //TODO: CHECK IF USED
+$padding-btn-small: 8px 16px; //TODO: CHECK IF USED
 $padding-btn-icon: 8px; //TODO: CHECK IF USED
 
 //** Box shadow **/
 $box-shadow-lvl-1: 4px 4px $col-on-primary; //TODO: CHECK IF USED
 $box-shadow-lvl-2: 6px 6px $col-on-primary; //TODO: CHECK IF USED
 $box-shadow-lvl-3: 8px 8px $col-on-primary; //TODO: CHECK IF USED
+
+$transition-time: 0.3s;

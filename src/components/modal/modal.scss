@@ -1,0 +1,12 @@
+@use '../../styles/tokens.scss' as var;
+
+.modal {
+  padding: 30px;
+  width: 200px;
+  background-color: var.$col-white;
+  text-transform: uppercase;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
