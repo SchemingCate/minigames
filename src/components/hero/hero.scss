@@ -6,20 +6,26 @@ $padding-container-mobile: 64px 0;
 $width-content-box: 640px;
 $padding-content-box: 48px;
 $gap-content-box: 24px;
-$col-hero-bg-overlay: #1e1b3a65;
 
 .hero {
   position: relative;
-  background-image: url(../../assets/imgs/hero_section.webp);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-color: var.$col-bg-footer;
   &::before {
     position: absolute;
     content: '';
     inset: 0;
-    background-color: $col-hero-bg-overlay;
+    background-color: var.$col-bg-footer;
+    opacity: 0.6;
+  }
+  &::after {
+    position: absolute;
+    content: '';
+    inset: 0;
+    background-image: url(../../assets/imgs/hero_section.webp);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.2;
   }
   &_container {
     max-width: var.$width-max-content;
