@@ -1,9 +1,12 @@
 import './button.scss';
+import { ButtonType } from '../../helpers/enums';
 
-export const button = (text: string): HTMLButtonElement => {
+export const button = (type: ButtonType): HTMLButtonElement => {
   const buttonElement = document.createElement('button');
-  buttonElement.classList =
-    text === 'Log in' ? 'button button_login' : 'button';
-  buttonElement.textContent = text;
+  buttonElement.classList = 'button';
+  buttonElement.textContent = type;
+  if (type === ButtonType.LogIn) {
+    buttonElement.classList.add('button_login');
+  }
   return buttonElement;
 };

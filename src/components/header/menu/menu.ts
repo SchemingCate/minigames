@@ -1,4 +1,5 @@
 import './menu.scss';
+import { ButtonType } from '../../../helpers/enums';
 import { button } from '../../button/button';
 import { createHTMLElement } from '../../../helpers/dom';
 
@@ -39,7 +40,7 @@ export const menu = (): HTMLElement => {
     tag: 'div',
     classList: 'buttons',
   });
-  buttonContainer.append(button('Log in'), button('Sign up'));
+  buttonContainer.append(button(ButtonType.LogIn), button(ButtonType.SignUp));
   menu.append(nav, buttonContainer);
 
   return menu;
