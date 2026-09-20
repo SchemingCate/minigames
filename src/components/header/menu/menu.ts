@@ -40,7 +40,11 @@ export const menu = (): HTMLElement => {
     tag: 'div',
     classList: 'buttons',
   });
-  buttonContainer.append(button(ButtonType.LogIn), button(ButtonType.SignUp));
+  buttonContainer.append(
+    button(ButtonType.LogIn),
+    button(ButtonType.SignUp),
+    button(ButtonType.Burger),
+  );
   menu.append(nav, buttonContainer);
 
   return menu;

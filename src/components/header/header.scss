@@ -1,20 +1,31 @@
 @use '../../styles/tokens.scss' as var;
 
 $width-header: var.$width-max-content;
-$height-header: 83px;
+$border-header-size: 2px;
+$height-header: 85px;
+$height-header-tablet: 72px;
+$height-header-mobile: 64px;
 $padding-side-header: 40px;
+$padding-side-header-mobile: 16px;
 
 .header {
-  border-bottom: 2px solid var.$col-on-primary;
+  border-bottom: $border-header-size solid var.$col-on-primary;
   font-family: var.$fnt-family-inter;
   &_container {
     margin: 0 auto;
     padding: 0 $padding-side-header;
-    height: $height-header;
+    height: calc($height-header - $border-header-size);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     max-width: calc($width-header + ($padding-side-header * 2));
+    @media (max-width: var.$width-trans-to-tablet) {
+      height: calc($height-header-tablet - $border-header-size);
+    }
+    @media (max-width: var.$width-trans-to-mobile) {
+      height: calc($height-header-mobile - $border-header-size);
+      padding: 0 $padding-side-header-mobile;
+    }
   }
 }

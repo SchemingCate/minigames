@@ -18,5 +18,8 @@ $gap-logo: 8px;
     font-weight: var.$fnt-weight-bold;
     font-size: var.$fnt-size-headline-medium;
     letter-spacing: var.$letter-spacing;
+    @media (max-width: var.$width-trans-to-tablet) {
+      font-size: var.$fnt-size-headline-small;
+    }
   }
 }

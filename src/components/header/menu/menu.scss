@@ -13,10 +13,14 @@ $padding-navigation-links: 10px;
 .nav {
   display: flex;
   align-items: center;
+  @media (max-width: var.$width-trans-to-tablet) {
+    display: none; // TODO: TEMP
+  }
 }
 
 .nav_list {
   display: flex;
+  flex-wrap: wrap;
   gap: calc($gap-navigation-list - ($padding-navigation-links * 2));
   list-style: none;
   text-transform: capitalize;
@@ -49,5 +53,6 @@ $padding-navigation-links: 10px;
 
 .buttons {
   display: flex;
+  align-items: center;
   gap: $gap-buttons;
 }
