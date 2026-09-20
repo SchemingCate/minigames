@@ -1,16 +1,38 @@
+@use '../../../styles/tokens.scss' as var;
+
+$gap-between-nav-and-buttons: 32px;
+$gap-navigation-list: 40px;
+$gap-buttons: 16px;
+$padding-navigation-links: 10px;
+
 .menu {
   display: flex;
-  gap: 32px;
+  gap: calc($gap-between-nav-and-buttons - $padding-navigation-links);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
 }
 
 .nav_list {
   display: flex;
-  gap: 40px;
+  gap: calc($gap-navigation-list - ($padding-navigation-links * 2));
   list-style: none;
   text-transform: capitalize;
 }
 
+.nav_link {
+  padding: $padding-navigation-links;
+  color: currentColor;
+  text-decoration: none;
+  &--current {
+    font-weight: var.$fnt-weight-bold;
+    color: var.$col-on-primary;
+  }
+}
+
 .buttons {
   display: flex;
-  gap: 16px;
+  gap: $gap-buttons;
 }

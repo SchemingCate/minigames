@@ -11,18 +11,23 @@ const menuLinks: [string, string][] = [
 
 export const menu = (): HTMLElement => {
   const menu = createHTMLElement({ tag: 'div', classList: 'menu' });
-  const nav = createHTMLElement({ tag: 'nav' });
+  const nav = createHTMLElement({ tag: 'nav', classList: 'nav' });
 
   const navList = createHTMLElement({ tag: 'ul', classList: 'nav_list' });
+
+  const currentPage = 'home';
 
   for (const [title, link] of menuLinks) {
     const listElement = createHTMLElement({ tag: 'li' });
 
     const linkElement = createHTMLElement({
       tag: 'a',
+      classList: 'nav_link',
       textContent: title,
       attributes: [['href', link]],
     });
+
+    if (title === currentPage) linkElement.classList.add('nav_link--current');
 
     listElement.append(linkElement);
     navList.append(listElement);
