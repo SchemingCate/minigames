@@ -1,5 +1,7 @@
 import './hero.scss';
 import { createHTMLElement } from '../../helpers/dom';
+import { ButtonType } from '../../helpers/enums';
+import { button } from '../button/button';
 
 export const hero = (): HTMLElement => {
   const hero = createHTMLElement({ tag: 'div', classList: 'hero' });
@@ -22,7 +24,7 @@ export const hero = (): HTMLElement => {
     textContent:
       'Discover hundreds of curated casual mini-games. Play instantly in your browser — puzzle, match 3, farm, and board classics.',
   });
-  heroContent.append(heroTitle, heroParagraph);
+  heroContent.append(heroTitle, heroParagraph, button(ButtonType.Library));
   heroContainer.append(heroContent);
   hero.append(heroContainer);
   return hero;

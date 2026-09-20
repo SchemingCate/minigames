@@ -37,6 +37,7 @@ $col-hero-bg-overlay: #1e1b3a65;
     padding: $padding-content-box;
     display: flex;
     flex-direction: column;
+    align-items: baseline;
     gap: $gap-content-box;
     background-color: var.$col-bg;
     border: var.$brgr-size-large solid var.$col-on-primary;
@@ -55,6 +56,7 @@ $col-hero-bg-overlay: #1e1b3a65;
   }
   &_paragraph {
     font-size: var.$fnt-size-body-large;
+    font-weight: var.$fnt-weight-medium;
     @media (max-width: var.$width-trans-to-tablet) {
       font-size: var.$fnt-size-body-small;
     }
