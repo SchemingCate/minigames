@@ -31,15 +31,19 @@ export const footer = (): HTMLElement => {
     classList: 'footer_top',
   });
 
-  const game = createHTMLElement({ tag: 'div' });
+  const game = createHTMLElement({ tag: 'div', classList: 'game-description' });
   const description = createHTMLElement({
     tag: 'p',
     textContent:
       'Take a short break and have fun. Hundreds of curated casual mini-games right in your web browser. No download required.',
+    classList: 'game-description_paragraph',
   });
-  game.append(logo(), description);
+  game.append(logo('light'), description);
 
-  const linksContainer = createHTMLElement({ tag: 'div' });
+  const linksContainer = createHTMLElement({
+    tag: 'div',
+    classList: 'links-container',
+  });
 
   const linksContent: [string, [string, string, PageId][]][] = [
     ['explore', exploreLinks],
@@ -49,9 +53,13 @@ export const footer = (): HTMLElement => {
 
   for (const [headingText, links] of linksContent) {
     const linkCategory = createHTMLElement({ tag: 'div' });
-    const heading = createHTMLElement({ tag: 'h3', textContent: headingText });
+    const heading = createHTMLElement({
+      tag: 'h3',
+      textContent: headingText,
+      classList: 'link-heading',
+    });
 
-    const linkList = createHTMLElement({ tag: 'ul' });
+    const linkList = createHTMLElement({ tag: 'ul', classList: 'link-list' });
 
     for (const [title, link, id] of links) {
       const listElement = createHTMLElement({ tag: 'li' });
@@ -83,10 +91,15 @@ export const footer = (): HTMLElement => {
     tag: 'span',
     textContent: '© 2026 MiniGames. All rights reserved.',
   });
-  const rsLink = createHTMLElement({ tag: 'a', textContent: 'RS School' });
+  const rsLink = createHTMLElement({
+    tag: 'a',
+    textContent: 'RS School',
+    classList: 'bottom-link bottom-link--rs',
+  });
   const studentLink = createHTMLElement({
     tag: 'a',
     textContent: '@SchemingCate',
+    classList: 'bottom-link bottom-link--github',
   });
   const design = createHTMLElement({
     tag: 'span',

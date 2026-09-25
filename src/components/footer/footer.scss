@@ -1,0 +1,75 @@
+@use '../../styles/tokens.scss' as var;
+
+.footer {
+  background-color: var.$col-bg-footer;
+  color: var.$col-on-bg-footer;
+  font-size: var.$fnt-size-body-small;
+  &_top,
+  &_bottom {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: var.$width-max-content;
+    padding: 40px;
+  }
+  &_bottom {
+    padding-top: 24px;
+    border: var.$brdr-size-x-small solid var.$col-bg-footer-low;
+  }
+}
+
+.game-description {
+  &_paragraph {
+    max-width: 57ch;
+    margin-top: 24px;
+    line-height: var.$line-height-footer;
+  }
+}
+
+.links-container {
+  display: flex;
+  gap: 80px;
+}
+
+.link-heading {
+  text-transform: capitalize;
+  font-size: var.$fnt-size-body-medium;
+  font-weight: var.$fnt-weight-bold;
+  color: var.$col-white;
+}
+
+.link-list {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-transform: capitalize;
+  list-style: none;
+}
+
+.bottom-link::before {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: var.$brdr-radius-full;
+  background-color: var.$col-on-primary;
+  text-align: center;
+  line-height: 24px;
+  content: 'hi';
+}
+
+.bottom-link--rs::before {
+  content: 'RS';
+  background-color: var.$col-on-primary;
+  font-size: var.$fnt-size-label-small;
+  letter-spacing: -0.05em;
+  color: var.$col-primary;
+  font-weight: var.$fnt-weight-bold;
+}
+
+.bottom-link--github::before {
+  content: '<>';
+  background-color: var.$col-white;
+  color: var.$col-on-primary;
+  font-size: var.$fnt-size-body-medium;
+}

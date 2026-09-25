@@ -21,5 +21,8 @@ $gap-logo: 8px;
     @media (max-width: var.$width-trans-to-tablet) {
       font-size: var.$fnt-size-headline-small;
     }
+    &--light {
+      color: var.$col-white;
+    }
   }
 }
