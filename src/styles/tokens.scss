@@ -51,8 +51,8 @@ $fnt-size-button: func.rem(14px);
 
 $fnt-weight-regular: 400; //TODO: CHECK IF USED
 $fnt-weight-medium: 500;
-$fnt-weight-bold: 700; //TODO: CHECK IF USED
-$fnt-weight-extra-bold: 800; //TODO: CHECK IF USED
+$fnt-weight-bold: 700;
+$fnt-weight-extra-bold: 800;
 
 $fnt-family-inter: 'Inter', sans-serif;
 $fnt-family-roboto: 'Roboto', sans-serif; //TODO: CHECK IF USED
@@ -89,13 +89,14 @@ $width-trans-to-mobile: 425px;
 $height-link-underline: 1.5px;
 
 $brdr-size: 2px;
+$brdr-size-medium: 2.5px;
 $brgr-size-large: 3px;
 
 //**  Border radius  **//
 $brdr-radius-extra-small: 4px; //TODO: CHECK IF USED
 $brdr-radius-small: 8px; //TODO: CHECK IF USED
 $brdr-radius-medium: 12px;
-$brdr-radius-large: 16px; //TODO: CHECK IF USED
+$brdr-radius-large: 16px;
 $brdr-radius-extra-large: 24px;
 $brdr-radius-full: 100%; //TODO: CHECK IF USED
 

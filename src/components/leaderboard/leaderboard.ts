@@ -49,21 +49,23 @@ const data = [
   },
 ];
 
+//TODO needs refactoring
 export const leaderboard = (): HTMLElement => {
+  const wrapper = createHTMLElement({ tag: 'div', classList: 'wrapper' });
   const leaderboard = createHTMLElement({ tag: 'section' });
   const heading = createHTMLElement({
     tag: 'h2',
     textContent: 'Top players this week',
   });
 
-  const table = createHTMLElement({ tag: 'table' });
-  const thead = createHTMLElement({ tag: 'thead' });
+  const table = createHTMLElement({ tag: 'table', classList: 'table' });
+  const thead = createHTMLElement({ tag: 'thead', classList: 'table_head' });
   const headRow = createHTMLElement({ tag: 'tr' });
   thead.append(headRow);
   const rows = [
     'Rank',
     'Player',
-    'Games played',
+    'Games',
     'Total score',
     'Streak',
     'Favorite game',
@@ -71,15 +73,17 @@ export const leaderboard = (): HTMLElement => {
 
   for (const rowName of rows) {
     const element = createHTMLElement({ tag: 'th', textContent: rowName });
+    if (rowName === 'Favorite game') element.dataset.row = 'favgames';
+    else if (rowName === 'Games') element.dataset.row = 'games';
     headRow.append(element);
   }
 
   const tbody = createHTMLElement({ tag: 'tbody' });
 
   for (const playerInfo of data) {
-    const row = createHTMLElement({ tag: 'tr' });
+    const row = createHTMLElement({ tag: 'tr', classList: 'table_row' });
 
-    const rankString = playerInfo.rank.toString();
+    const rankString = '#' + playerInfo.rank;
     const rank = createHTMLElement({ tag: 'td', textContent: rankString });
     row.append(rank);
 
@@ -93,20 +97,26 @@ export const leaderboard = (): HTMLElement => {
     const gamesPlayed = createHTMLElement({
       tag: 'td',
       textContent: gamesString,
+      attributes: [['data-row', 'games']],
     });
     row.append(gamesPlayed);
 
-    const scoreString = playerInfo.totalScore.toString();
+    const scoreString = playerInfo.totalScore.toLocaleString();
     const score = createHTMLElement({ tag: 'td', textContent: scoreString });
     row.append(score);
 
-    const streakString = playerInfo.streakDays.toString();
-    const streak = createHTMLElement({ tag: 'td', textContent: streakString });
+    const streakString = '🔥 ' + playerInfo.streakDays;
+    const streak = createHTMLElement({
+      tag: 'td',
+      textContent: streakString,
+      classList: 'info_streak',
+    });
     row.append(streak);
 
     const fav = createHTMLElement({
       tag: 'td',
       textContent: playerInfo.favoriteGameName,
+      attributes: [['data-row', 'favgames']],
     });
     row.append(fav);
 
@@ -116,5 +126,6 @@ export const leaderboard = (): HTMLElement => {
   table.append(thead, tbody);
 
   leaderboard.append(heading, table);
-  return leaderboard;
+  wrapper.append(leaderboard);
+  return wrapper;
 };
