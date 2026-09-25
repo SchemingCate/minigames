@@ -1,0 +1,66 @@
+@use '../../styles/tokens.scss' as var;
+
+.wrapper {
+  max-width: var.$width-max-content;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.table {
+  width: 100%;
+  border-spacing: 0;
+  border: var.$brdr-size-medium solid var.$col-on-primary;
+  border-radius: var.$brdr-radius-large;
+  overflow: hidden;
+  font-family: var.$fnt-family-roboto;
+  text-align: center;
+  &_head {
+    height: 72px;
+    background-color: var.$col-tertiary;
+    font-weight: var.$fnt-weight-extra-bold;
+    color: var.$col-white;
+    text-transform: uppercase;
+  }
+  &_row {
+    height: 72px;
+    font-weight: var.$fnt-weight-bold;
+    color: var.$col-on-primary;
+    &:nth-child(even) {
+      background-color: var.$col-white;
+    }
+    &:nth-child(4),
+    &:nth-child(5) {
+      @media (max-width: var.$width-trans-to-tablet) {
+        display: none;
+      }
+    }
+  }
+}
+
+.info_streak {
+  &:after {
+    content: ' days';
+    @media (max-width: var.$width-trans-to-tablet) {
+      content: 'd';
+    }
+  }
+}
+
+[data-row='favgames'] {
+  @media (max-width: var.$width-trans-to-tablet) {
+    display: none;
+  }
+}
+
+[data-row='games'] {
+  @media (max-width: var.$width-trans-to-mobile) {
+    display: none;
+  }
+}
+
+th[data-row='games']::after {
+  content: ' played';
+  @media (max-width: var.$width-trans-to-tablet) {
+    content: '';
+  }
+}
