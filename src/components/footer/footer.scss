@@ -47,29 +47,57 @@
   list-style: none;
 }
 
+.bottom-link {
+  text-decoration: none;
+  color: currentColor;
+  display: flex;
+  align-items: center;
+  transition: var.$transition-time;
+}
+
 .bottom-link::before {
   display: inline-block;
   width: 24px;
   height: 24px;
+  margin-right: 8px;
   border-radius: var.$brdr-radius-full;
   background-color: var.$col-on-primary;
   text-align: center;
   line-height: 24px;
-  content: 'hi';
+  transition: var.$transition-time;
 }
 
-.bottom-link--rs::before {
-  content: 'RS';
-  background-color: var.$col-on-primary;
-  font-size: var.$fnt-size-label-small;
-  letter-spacing: -0.05em;
-  color: var.$col-primary;
-  font-weight: var.$fnt-weight-bold;
+.bottom-link--rs {
+  &::before {
+    content: 'RS';
+    background-color: var.$col-on-primary;
+    font-size: var.$fnt-size-label-small;
+    letter-spacing: -0.05em;
+    color: var.$col-primary;
+    font-weight: var.$fnt-weight-bold;
+  }
+  &:hover {
+    color: var.$col-primary;
+    &::before {
+      color: var.$col-on-primary;
+      background-color: var.$col-primary;
+    }
+  }
 }
 
-.bottom-link--github::before {
-  content: '<>';
-  background-color: var.$col-white;
-  color: var.$col-on-primary;
-  font-size: var.$fnt-size-body-medium;
+.bottom-link--github {
+  &::before {
+    font-family: 'Material Icons';
+    content: '\e5cb\e5cc';
+    letter-spacing: -7px;
+    background-color: var.$col-white;
+    color: var.$col-on-primary;
+    font-size: var.$fnt-size-body-medium;
+  }
+  &:hover {
+    color: var.$col-white;
+    &::before {
+      background-color: var.$col-white;
+    }
+  }
 }

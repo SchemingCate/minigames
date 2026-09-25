@@ -95,11 +95,19 @@ export const footer = (): HTMLElement => {
     tag: 'a',
     textContent: 'RS School',
     classList: 'bottom-link bottom-link--rs',
+    attributes: [
+      ['href', 'https://rs.school/courses/short-track'],
+      ['target', '_blank'],
+    ],
   });
   const studentLink = createHTMLElement({
     tag: 'a',
     textContent: '@SchemingCate',
     classList: 'bottom-link bottom-link--github',
+    attributes: [
+      ['href', 'https://github.com/SchemingCate'],
+      ['target', '_blank'],
+    ],
   });
   const design = createHTMLElement({
     tag: 'span',
