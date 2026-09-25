@@ -2,12 +2,13 @@ import './menu.scss';
 import { ButtonType } from '../../../helpers/enums';
 import { button } from '../../button/button';
 import { createHTMLElement } from '../../../helpers/dom';
+import type { PageId } from '../../../helpers/types';
 
-const menuLinks: [string, string][] = [
-  ['home', '#'],
-  ['library', '#'],
-  ['tournaments', '#'],
-  ['community', '#'],
+const menuLinks: [string, string, PageId][] = [
+  ['home', '#', 'home'],
+  ['library', '#', 'library'],
+  ['tournaments', '#', 'home'],
+  ['community', '#', 'home'],
 ];
 
 export const menu = (): HTMLElement => {
@@ -18,14 +19,17 @@ export const menu = (): HTMLElement => {
 
   const currentPage = 'home';
 
-  for (const [title, link] of menuLinks) {
+  for (const [title, link, page] of menuLinks) {
     const listElement = createHTMLElement({ tag: 'li' });
 
     const linkElement = createHTMLElement({
       tag: 'a',
       classList: 'nav_link',
       textContent: title,
-      attributes: [['href', link]],
+      attributes: [
+        ['href', link],
+        ['data-page', page],
+      ],
     });
 
     if (title === currentPage) linkElement.classList.add('nav_link--current');
