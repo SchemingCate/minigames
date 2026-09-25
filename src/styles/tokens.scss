@@ -38,7 +38,7 @@ $fnt-size-display-large: func.rem(56px);
 $fnt-size-display-medium: func.rem(36px);
 $fnt-size-display-small: func.rem(24px);
 $fnt-size-headline-large: func.rem(32px); //TODO: CHECK IF USED
-$fnt-size-headline-medium: func.rem(24px); //TODO: CHECK IF USED
+$fnt-size-headline-medium: func.rem(24px);
 $fnt-size-headline-small: func.rem(20px); //TODO: CHECK IF USED
 $fnt-size-body-large: func.rem(18px);
 $fnt-size-body-medium: func.rem(16px); //TODO: CHECK IF USED
@@ -66,7 +66,7 @@ $line-height-large: 140%;
 
 //**  Size  **//
 $size-05: 4px; //TODO: CHECK IF USED
-$size-1: 8px; //TODO: CHECK IF USED
+$size-1: 8px;
 $size-2: 16px; //TODO: CHECK IF USED
 $size-3: 24px; //TODO: CHECK IF USED
 $size-4: 32px; //TODO: CHECK IF USED
@@ -88,6 +88,7 @@ $width-trans-to-mobile: 425px;
 
 $height-link-underline: 1.5px;
 
+$brdr-size-small: 1.5px;
 $brdr-size: 2px;
 $brdr-size-medium: 2.5px;
 $brgr-size-large: 3px;

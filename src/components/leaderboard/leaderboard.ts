@@ -1,5 +1,6 @@
 import './leaderboard.scss';
 import { createHTMLElement } from '../../helpers/dom';
+import { heading } from '../heading/heading';
 
 const data = [
   {
@@ -53,10 +54,7 @@ const data = [
 export const leaderboard = (): HTMLElement => {
   const wrapper = createHTMLElement({ tag: 'div', classList: 'wrapper' });
   const leaderboard = createHTMLElement({ tag: 'section' });
-  const heading = createHTMLElement({
-    tag: 'h2',
-    textContent: 'Top players this week',
-  });
+  const headingElement = heading('Top players this week');
 
   const table = createHTMLElement({ tag: 'table', classList: 'table' });
   const thead = createHTMLElement({ tag: 'thead', classList: 'table_head' });
@@ -125,7 +123,7 @@ export const leaderboard = (): HTMLElement => {
 
   table.append(thead, tbody);
 
-  leaderboard.append(heading, table);
+  leaderboard.append(headingElement, table);
   wrapper.append(leaderboard);
   return wrapper;
 };
