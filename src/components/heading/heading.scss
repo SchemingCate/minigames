@@ -1,0 +1,40 @@
+@use '../../styles/tokens.scss' as var;
+
+$gap-between-text-and-decor: 8px;
+$margin-top-bottom: 40px;
+$margin-top-bottom-tablet: 24px;
+$margin-top-bottom-mobile: 16px;
+
+.heading {
+  margin: $margin-top-bottom 0;
+  padding-left: calc(var.$size-1 + $gap-between-text-and-decor);
+  position: relative;
+  font-size: var.$fnt-size-headline-large;
+  font-weight: var.$fnt-weight-bold;
+  color: var.$col-on-primary;
+  text-transform: capitalize;
+  @media (max-width: var.$width-trans-to-tablet) {
+    margin: $margin-top-bottom-tablet 0;
+    font-size: var.$fnt-size-headline-medium;
+  }
+  @media (max-width: var.$width-trans-to-mobile) {
+    margin: $margin-top-bottom-mobile 0;
+  }
+
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '';
+    display: inline-block;
+    width: var.$size-1;
+    height: var.$fnt-size-headline-large;
+    background-color: var.$col-primary;
+    border: var.$brdr-size-small solid var.$col-on-primary;
+    border-radius: var.$brdr-radius-extra-small;
+    @media (max-width: var.$width-trans-to-tablet) {
+      height: var.$fnt-size-headline-medium;
+    }
+  }
+}
