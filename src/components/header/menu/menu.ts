@@ -11,15 +11,15 @@ const menuLinks: [string, string, PageId][] = [
   ['community', '#', 'home'],
 ];
 
-export const menu = (): HTMLElement => {
+export const menu = (page: PageId): HTMLElement => {
   const menu = createHTMLElement({ tag: 'div', classList: 'menu' });
   const nav = createHTMLElement({ tag: 'nav', classList: 'nav' });
 
   const navList = createHTMLElement({ tag: 'ul', classList: 'nav_list' });
 
-  const currentPage = 'home';
+  const currentPage = page;
 
-  for (const [title, link, page] of menuLinks) {
+  for (const [title, link, id] of menuLinks) {
     const listElement = createHTMLElement({ tag: 'li' });
 
     const linkElement = createHTMLElement({
@@ -28,11 +28,12 @@ export const menu = (): HTMLElement => {
       textContent: title,
       attributes: [
         ['href', link],
-        ['data-page', page],
+        ['data-page', id],
       ],
     });
 
-    if (title === currentPage) linkElement.classList.add('nav_link--current');
+    if (id === currentPage && title !== 'tournaments' && title !== 'community')
+      linkElement.classList.add('nav_link--current');
 
     listElement.append(linkElement);
     navList.append(listElement);

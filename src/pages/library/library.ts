@@ -1,5 +1,7 @@
+import { header } from '../../components/header/header';
+
 export const libraryPage = (): HTMLElement => {
   const page = document.createElement('div');
-  page.textContent = 'LIBRARY';
+  page.append(header('library'));
   return page;
 };
