@@ -70,7 +70,6 @@ export const sortDropdown = (): HTMLElement => {
       (event.target as HTMLElement).closest('.sort_button') ||
       (event.target as HTMLElement).closest('.sort_list_item');
     if (!target) return;
-    console.log('click');
     const isAriaExpandedNew =
       sortButton.getAttribute('aria-expanded') !== 'true';
     sortButton.setAttribute('aria-expanded', isAriaExpandedNew.toString());
