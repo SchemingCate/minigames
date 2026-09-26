@@ -59,20 +59,33 @@ export const footer = (): HTMLElement => {
       classList: 'link-heading',
     });
 
-    const linkList = createHTMLElement({ tag: 'ul', classList: 'link-list' });
+    const linkList = createHTMLElement({
+      tag: 'ul',
+      classList: `link-list link-list--${headingText}`,
+    });
 
     for (const [title, link, id] of links) {
       const listElement = createHTMLElement({ tag: 'li' });
 
       const a = createHTMLElement({
         tag: 'a',
-        classList: 'nav_link',
+        classList: 'footer_link',
         textContent: title,
         attributes: [
           ['href', link],
           ['data-page', id],
         ],
       });
+      if (['share', 'messages', 'rss'].includes(title)) {
+        const logo = createHTMLElement({
+          tag: 'span',
+          classList: 'footer_link_logo',
+          attributes: [['aria-hidden', 'true']],
+        });
+        a.textContent = '';
+        a.setAttribute('aria-label', title);
+        a.append(logo);
+      }
       listElement.append(a);
       linkList.append(listElement);
     }

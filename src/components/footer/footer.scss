@@ -16,6 +16,21 @@
     padding-top: 24px;
     border: var.$brdr-size-x-small solid var.$col-bg-footer-low;
   }
+  &_link {
+    position: relative;
+    color: currentColor;
+    text-decoration: none;
+    &_logo {
+      display: block;
+      width: 40px;
+      height: 40px;
+      background-color: var.$col-bg-footer-low;
+      border-radius: var.$brdr-radius-full;
+      &:hover {
+        border: var.$brdr-size solid var.$col-primary;
+      }
+    }
+  }
 }
 
 .game-description {
@@ -45,6 +60,9 @@
   gap: 16px;
   text-transform: capitalize;
   list-style: none;
+  &--community {
+    flex-direction: row;
+  }
 }
 
 .bottom-link {
@@ -88,8 +106,7 @@
 .bottom-link--github {
   &::before {
     font-family: 'Material Icons';
-    content: '\e5cb\e5cc';
-    letter-spacing: -7px;
+    content: '\e86f';
     background-color: var.$col-white;
     color: var.$col-on-primary;
     font-size: var.$fnt-size-body-medium;
@@ -100,4 +117,28 @@
       background-color: var.$col-white;
     }
   }
+}
+
+.footer_link[aria-label='share']::after,
+.footer_link[aria-label='messages']::before,
+.footer_link[aria-label='rss']::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var.$fnt-size-headline-small;
+  font-family: 'Material Icons';
+  color: var.$col-white;
+  pointer-events: none;
+}
+
+.footer_link[aria-label='share']::after {
+  content: '\e80d';
+}
+
+.footer_link[aria-label='messages']::before {
+  content: '\e0b7';
+}
+.footer_link[aria-label='rss']::before {
+  content: '\e0e5';
 }
