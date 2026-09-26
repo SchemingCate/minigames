@@ -2,11 +2,15 @@
 @use '../../styles/tokens.scss' as var;
 
 $padding-page-horizontal: 40px;
+$padding-page-horizontal-mobile: 16px;
 
 .library {
   max-width: var.$width-max-content;
   margin: 0 auto;
   padding: 0 $padding-page-horizontal;
+  @media (max-width: var.$width-trans-to-mobile) {
+    padding: 0 $padding-page-horizontal-mobile;
+  }
   &_page-title {
     padding: 40px 0;
     @media (max-width: var.$width-trans-to-tablet) {

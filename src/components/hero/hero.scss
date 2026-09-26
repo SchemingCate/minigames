@@ -65,14 +65,7 @@ $gap-content-box-tablet: 16px;
   }
   &_heading {
     @include m.h1;
-    letter-spacing: var.$letter-spacing-large;
     line-height: var.$line-height;
-    @media (max-width: var.$width-trans-to-tablet) {
-      letter-spacing: var.$letter-spacing-medium;
-    }
-    @media (max-width: var.$width-trans-to-mobile) {
-      letter-spacing: var.$letter-spacing;
-    }
   }
   &_paragraph {
     font-size: var.$fnt-size-body-large;

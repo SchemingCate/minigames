@@ -2,6 +2,9 @@
 
 .sort {
   position: relative;
+  @media (max-width: var.$width-trans-to-mobile) {
+    width: 100%;
+  }
   &_button {
     width: 190px;
     padding: var.$padding-btn-medium;
@@ -16,17 +19,28 @@
     &[aria-expanded='true'] {
       background-color: var.$col-surface;
     }
+    @media (max-width: var.$width-trans-to-mobile) {
+      min-width: 100%;
+    }
+    @media (max-width: var.$width-trans-to-mobile) {
+      font-size: var.$fnt-size-label-medium;
+    }
   }
   &_list {
     position: absolute;
     right: 0;
     width: 200px;
+    margin-top: 4px;
     overflow: hidden;
     background-color: var.$col-white;
     border-radius: var.$brdr-radius-extra-large;
     border: var.$brdr-size solid var.$col-on-primary;
     box-shadow: var.$box-shadow-lvl-1;
     list-style: none;
+    @media (max-width: var.$width-trans-to-mobile) {
+      width: 100%;
+      font-size: var.$fnt-size-label-medium;
+    }
     &_item {
       padding: 16px 16px 16px 38px;
       font-size: var.$fnt-size-button;

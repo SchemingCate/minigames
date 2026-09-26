@@ -12,6 +12,9 @@
   &::-webkit-scrollbar {
     display: none;
   }
+  @media (max-width: var.$width-trans-to-tablet) {
+    gap: 8px;
+  }
   &_item {
     padding: var.$padding-btn-small;
     font-weight: var.$fnt-weight-bold;
@@ -21,6 +24,9 @@
     border: var.$brdr-size solid var.$col-black;
     border-radius: var.$brdr-radius-extra-large;
     transition: background-color var.$transition-time;
+    @media (max-width: var.$width-trans-to-mobile) {
+      font-size: var.$fnt-size-label-medium;
+    }
     &:hover {
       background-color: var.$col-surface;
     }
