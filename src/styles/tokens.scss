@@ -54,7 +54,9 @@ $fnt-weight-medium: 500;
 $fnt-weight-bold: 700;
 $fnt-weight-extra-bold: 800;
 
-$text-shadow-pseudo-bold: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
+$text-shadow-pseudo-bold:
+  0.4px 0 0 currentColor,
+  -0.4px 0 0 currentColor;
 
 $fnt-family-inter: 'Inter', sans-serif;
 $fnt-family-roboto: 'Roboto', sans-serif; //TODO: CHECK IF USED
