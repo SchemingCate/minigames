@@ -2,6 +2,7 @@ import './library.scss';
 import { header } from '../../components/header/header';
 import { footer } from '../../components/footer/footer';
 import { createHTMLElement } from '../../helpers/dom';
+import { filterChip } from '../../components/filter-chip/filter-chip';
 
 export const libraryPage = (): HTMLElement => {
   const page = createHTMLElement({ tag: 'div' });
@@ -20,8 +21,13 @@ export const libraryPage = (): HTMLElement => {
     textContent: 'Browse our collection of casual mini-games',
     classList: 'library_page-title_paragraph',
   });
+  const filterControls = createHTMLElement({
+    tag: 'div',
+    classList: 'controls',
+  });
+  filterControls.append(filterChip('Puzzle'));
   pageTitle.append(pageTitleHeading, pageTitleDescription);
-  pageContent.append(pageTitle);
+  pageContent.append(pageTitle, filterControls);
   page.append(header('library'), pageContent, footer());
   return page;
 };
