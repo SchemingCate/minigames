@@ -1,0 +1,97 @@
+@use '../../styles/tokens.scss' as var;
+
+$size-burger-button: 40px;
+$size-burger-button-tablet: 32px;
+$width-burger-icon-lines: 16px;
+$height-burger-icon-lines: 2px;
+$gap-burger-icon-lines: 2px;
+
+.button {
+  padding: var.$padding-btn-medium;
+  background-color: var.$col-primary;
+  border: var.$brdr-size solid var.$col-on-primary;
+  border-radius: var.$brdr-radius-small;
+  font-weight: var.$fnt-weight-bold;
+  font-size: var.$fnt-size-button;
+  text-transform: capitalize;
+  transition: background-color var.$transition-time;
+  &:hover {
+    background-color: var.$col-primary-high;
+  }
+  &:active {
+    background-color: var.$col-primary-low;
+  }
+  @media (max-width: var.$width-trans-to-tablet) {
+    padding: var.$padding-btn-small;
+  }
+  &_login {
+    background-color: var.$col-bg;
+    &:hover {
+      background-color: var.$col-primary-low;
+    }
+    &:active {
+      background-color: var.$col-primary-high;
+    }
+    @media (max-width: var.$width-trans-to-tablet) {
+      display: none; // TODO: TEMP
+    }
+  }
+  &_burger {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: $size-burger-button;
+    height: $size-burger-button;
+    padding: 0;
+    background-color: transparent;
+    @media (max-width: var.$width-trans-to-tablet) {
+      display: flex;
+      height: $size-burger-button-tablet;
+      width: $size-burger-button-tablet;
+    }
+    &:hover {
+      background-color: var.$col-surface;
+    }
+    &:active {
+      background-color: var.$col-primary;
+    }
+    & span {
+      position: relative;
+      height: $height-burger-icon-lines;
+      width: $width-burger-icon-lines;
+      background-color: var.$col-on-primary;
+      &::before,
+      &::after {
+        content: '';
+        height: $height-burger-icon-lines;
+        width: $width-burger-icon-lines;
+        background-color: var.$col-on-primary;
+        position: absolute;
+        transform: translateX(-50%);
+      }
+      &::before {
+        bottom: calc($gap-burger-icon-lines + $height-burger-icon-lines);
+      }
+      &:after {
+        top: calc($gap-burger-icon-lines + $height-burger-icon-lines);
+      }
+    }
+  }
+  &_signup {
+    @media (max-width: var.$width-trans-to-mobile) {
+      display: none;
+    }
+  }
+  &_library {
+    padding: var.$padding-btn-large;
+    font-size: var.$fnt-size-body-large;
+    @media (max-width: var.$width-trans-to-tablet) {
+      padding: var.$padding-btn-medium;
+      font-size: var.$fnt-size-button;
+    }
+    @media (max-width: var.$width-trans-to-mobile) {
+      padding: var.$padding-btn-small;
+      font-size: var.$fnt-size-label-medium;
+    }
+  }
+}
