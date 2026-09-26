@@ -2,7 +2,7 @@ import './library.scss';
 import { header } from '../../components/header/header';
 import { footer } from '../../components/footer/footer';
 import { createHTMLElement } from '../../helpers/dom';
-import { filterChip } from '../../components/filter-chip/filter-chip';
+import { filterChips } from '../../components/filter-chips/filter-chips';
 
 export const libraryPage = (): HTMLElement => {
   const page = createHTMLElement({ tag: 'div' });
@@ -25,7 +25,7 @@ export const libraryPage = (): HTMLElement => {
     tag: 'div',
     classList: 'controls',
   });
-  filterControls.append(filterChip('Puzzle'));
+  filterControls.append(filterChips());
   pageTitle.append(pageTitleHeading, pageTitleDescription);
   pageContent.append(pageTitle, filterControls);
   page.append(header('library'), pageContent, footer());
