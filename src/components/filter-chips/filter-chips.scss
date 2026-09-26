@@ -3,6 +3,15 @@
 .chips {
   display: flex;
   gap: 16px;
+  overflow-x: auto;
+  white-space: nowrap;
+  touch-action: pan-x;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   &_item {
     padding: var.$padding-btn-small;
     font-weight: var.$fnt-weight-bold;
