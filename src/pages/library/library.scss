@@ -1,0 +1,34 @@
+@use '../../styles/mixins.scss' as m;
+@use '../../styles/tokens.scss' as var;
+
+$padding-page-horizontal: 40px;
+
+.library {
+  max-width: var.$width-max-content;
+  margin: 0 auto;
+  padding: 0 $padding-page-horizontal;
+  &_page-title {
+    padding: 40px 0;
+    @media (max-width: var.$width-trans-to-tablet) {
+      padding: 24px 0;
+    }
+    @media (max-width: var.$width-trans-to-mobile) {
+      padding: 16px 0;
+    }
+    &_heading {
+      @include m.h1;
+      margin-bottom: 8px;
+    }
+
+    &_paragraph {
+      font-weight: var.$fnt-weight-medium;
+      font-size: var.$fnt-size-body-large;
+      @media (max-width: var.$width-trans-to-tablet) {
+        font-size: var.$fnt-size-body-medium;
+      }
+      @media (max-width: var.$width-trans-to-mobile) {
+        font-size: var.$fnt-size-body-small;
+      }
+    }
+  }
+}

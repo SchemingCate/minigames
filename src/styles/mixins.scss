@@ -1,3 +1,5 @@
+@use './tokens.scss' as var;
+
 @mixin visually-hidden {
   position: absolute;
   width: 1px;
@@ -8,4 +10,16 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+@mixin h1 {
+  font-weight: var.$fnt-weight-bold;
+  font-size: var.$fnt-size-display-large;
+  color: var.$col-on-primary;
+  @media (max-width: var.$width-trans-to-tablet) {
+    font-size: var.$fnt-size-display-medium;
+  }
+  @media (max-width: var.$width-trans-to-mobile) {
+    font-size: var.$fnt-size-display-small;
+  }
 }

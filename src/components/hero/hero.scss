@@ -1,4 +1,5 @@
 @use '../../styles/tokens.scss' as var;
+@use '../../styles/mixins.scss' as m;
 
 $padding-container: calc(118px - (var.$brgr-size-large * 2)) 40px;
 $padding-container-tablet: 72px 40px;
@@ -63,17 +64,13 @@ $gap-content-box-tablet: 16px;
     }
   }
   &_heading {
+    @include m.h1;
     letter-spacing: var.$letter-spacing-large;
     line-height: var.$line-height;
-    font-weight: var.$fnt-weight-bold;
-    font-size: var.$fnt-size-display-large;
-    color: var.$col-on-primary;
     @media (max-width: var.$width-trans-to-tablet) {
-      font-size: var.$fnt-size-display-medium;
       letter-spacing: var.$letter-spacing-medium;
     }
     @media (max-width: var.$width-trans-to-mobile) {
-      font-size: var.$fnt-size-display-small;
       letter-spacing: var.$letter-spacing;
     }
   }
