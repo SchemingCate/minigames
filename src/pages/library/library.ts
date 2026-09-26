@@ -3,6 +3,7 @@ import { header } from '../../components/header/header';
 import { footer } from '../../components/footer/footer';
 import { createHTMLElement } from '../../helpers/dom';
 import { filterChips } from '../../components/filter-chips/filter-chips';
+import { sortDropdown } from '../../components/sort-dropdown/sort-dropdown';
 
 export const libraryPage = (): HTMLElement => {
   const page = createHTMLElement({ tag: 'div' });
@@ -25,7 +26,7 @@ export const libraryPage = (): HTMLElement => {
     tag: 'div',
     classList: 'controls',
   });
-  filterControls.append(filterChips());
+  filterControls.append(filterChips(), sortDropdown());
   pageTitle.append(pageTitleHeading, pageTitleDescription);
   pageContent.append(pageTitle, filterControls);
   page.append(header('library'), pageContent, footer());

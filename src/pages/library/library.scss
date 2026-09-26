@@ -32,3 +32,12 @@ $padding-page-horizontal: 40px;
     }
   }
 }
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 16px;
+  padding: 16px 0;
+}
