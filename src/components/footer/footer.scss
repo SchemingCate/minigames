@@ -20,6 +20,14 @@
     position: relative;
     color: currentColor;
     text-decoration: none;
+    &:hover {
+      color: var.$col-primary;
+      border-bottom: 1.5px solid var.$col-primary;
+    }
+    &:active {
+      color: var.$col-primary;
+      font-weight: var.$fnt-weight-bold;
+    }
     &_logo {
       display: block;
       width: 40px;
