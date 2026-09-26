@@ -1,8 +1,11 @@
 @use '../../styles/tokens.scss' as var;
 
+$gap: 16px;
+$gap-tablet: 8px;
+
 .chips {
   display: flex;
-  gap: 16px;
+  gap: $gap;
   overflow-x: auto;
   white-space: nowrap;
   touch-action: pan-x;
@@ -13,7 +16,7 @@
     display: none;
   }
   @media (max-width: var.$width-trans-to-tablet) {
-    gap: 8px;
+    gap: $gap-tablet;
   }
   &_item {
     padding: var.$padding-btn-small;

@@ -4,6 +4,14 @@
 $padding-page-horizontal: 40px;
 $padding-page-horizontal-mobile: 16px;
 
+$padding-page-top: 40px;
+$padding-page-top-tablet: 24px;
+$padding-page-top-mobile: 16px;
+
+$gap-controls: 16px;
+
+$gap-heading-paragraph: 8px;
+
 .library {
   max-width: var.$width-max-content;
   margin: 0 auto;
@@ -12,16 +20,16 @@ $padding-page-horizontal-mobile: 16px;
     padding: 0 $padding-page-horizontal-mobile;
   }
   &_page-title {
-    padding: 40px 0;
+    padding: $padding-page-top 0;
     @media (max-width: var.$width-trans-to-tablet) {
-      padding: 24px 0;
+      padding: $padding-page-top-tablet 0;
     }
     @media (max-width: var.$width-trans-to-mobile) {
-      padding: 16px 0;
+      padding: $padding-page-top-mobile 0;
     }
     &_heading {
       @include m.h1;
-      margin-bottom: 8px;
+      margin-bottom: $gap-heading-paragraph;
     }
 
     &_paragraph {
@@ -42,6 +50,6 @@ $padding-page-horizontal-mobile: 16px;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  row-gap: 16px;
-  padding: 16px 0;
+  row-gap: $gap-controls;
+  padding: $gap-controls 0;
 }
