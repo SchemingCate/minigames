@@ -14,7 +14,7 @@ export const header = (page: PageId): Node => {
     classList: 'header_container',
   });
 
-  container.append(logo(), menu(page));
+  container.append(logo('dark'), menu(page));
   headerElement.append(container);
   return headerElement;
 };
