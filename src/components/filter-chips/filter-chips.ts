@@ -70,5 +70,17 @@ export const filterChips = (): HTMLElement => {
     chips.append(chip);
   }
 
+  chips.addEventListener('click', (event) => {
+    //TODO fix delay when hover is active
+    const pressedChip = (event.target as HTMLElement).closest('.chips_item');
+    if (!pressedChip) return;
+    const allChips = chips.querySelectorAll('.chips_item');
+    for (const chipButton of allChips) {
+      const isPressedChip = chipButton === pressedChip;
+      chipButton.classList.toggle('chips_item--active', isPressedChip);
+      chipButton.setAttribute('aria-checked', isPressedChip.toString());
+    }
+  });
+
   return chips;
 };

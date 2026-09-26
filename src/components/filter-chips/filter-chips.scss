@@ -15,9 +15,12 @@
     &:hover {
       background-color: var.$col-surface;
     }
-    &:active,
-    &--active {
+    &--active,
+    &:active {
       background-color: var.$col-primary;
+    }
+    &--active {
+      pointer-events: none;
     }
   }
 }
