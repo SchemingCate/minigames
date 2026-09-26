@@ -1,0 +1,50 @@
+@use '../../styles/tokens.scss' as var;
+
+.sort {
+  position: relative;
+  &_button {
+    width: 190px;
+    padding: var.$padding-btn-medium;
+    border-radius: var.$brdr-radius-extra-large;
+    background-color: var.$col-white;
+    border: var.$brdr-size solid var.$col-black;
+    text-align: left;
+    font-weight: var.$fnt-weight-bold;
+    font-size: var.$fnt-size-button;
+    font-family: var.$fnt-family-inter;
+    &:hover,
+    &[aria-expanded='true'] {
+      background-color: var.$col-surface;
+    }
+  }
+  &_list {
+    position: absolute;
+    right: 0;
+    width: 200px;
+    overflow: hidden;
+    background-color: var.$col-white;
+    border-radius: var.$brdr-radius-extra-large;
+    border: var.$brdr-size solid var.$col-on-primary;
+    box-shadow: var.$box-shadow-lvl-1;
+    list-style: none;
+    &_item {
+      padding: 16px 16px 16px 38px;
+      font-size: var.$fnt-size-button;
+      font-weight: var.$fnt-weight-medium;
+      border-top: 1px solid var.$col-on-primary;
+      color: var.$col-on-primary;
+      &:first-child {
+        border-top: none;
+      }
+      &[aria-selected='true'] {
+        background-color: var.$col-primary-low;
+        pointer-events: none;
+        font-weight: var.$fnt-weight-extra-bold;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: var.$col-surface;
+      }
+    }
+  }
+}
