@@ -39,13 +39,13 @@ $fnt-size-display-medium: func.rem(36px);
 $fnt-size-display-small: func.rem(24px);
 $fnt-size-headline-large: func.rem(32px); //TODO: CHECK IF USED
 $fnt-size-headline-medium: func.rem(24px);
-$fnt-size-headline-small: func.rem(20px); //TODO: CHECK IF USED
+$fnt-size-headline-small: func.rem(20px);
 $fnt-size-body-large: func.rem(18px);
 $fnt-size-body-medium: func.rem(16px);
 $fnt-size-body-small: func.rem(14px);
 $fnt-size-label-extra-large: func.rem(16px); //TODO: CHECK IF USED
-$fnt-size-label-large: func.rem(14px); //TODO: CHECK IF USED
-$fnt-size-label-medium: func.rem(12px); //TODO: CHECK IF USED
+$fnt-size-label-large: func.rem(14px);
+$fnt-size-label-medium: func.rem(12px);
 $fnt-size-label-small: func.rem(10px);
 $fnt-size-button: func.rem(14px);
 
@@ -102,7 +102,7 @@ $brgr-size-large: 3px;
 
 //**  Border radius  **//
 $brdr-radius-extra-small: 4px; //TODO: CHECK IF USED
-$brdr-radius-small: 8px; //TODO: CHECK IF USED
+$brdr-radius-small: 8px;
 $brdr-radius-medium: 12px;
 $brdr-radius-large: 16px;
 $brdr-radius-extra-large: 24px;

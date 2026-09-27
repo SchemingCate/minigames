@@ -1,0 +1,136 @@
+@use '../../styles/tokens.scss' as var;
+
+.card {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  width: 828px;
+  height: 200px;
+  box-shadow: var.$box-shadow-lvl-1;
+  border-radius: var.$brdr-radius-large;
+  background-color: var.$col-white;
+
+  &_image {
+    width: 320px;
+    height: 100%;
+    background-color: aquamarine;
+  }
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 508px;
+    height: 100%;
+    padding: 16px;
+
+    &_title {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      &_heading {
+        font-weight: var.$fnt-weight-bold;
+        font-size: var.$fnt-size-headline-medium;
+        color: var.$col-on-primary;
+        @media (max-width: var.$width-trans-to-tablet) {
+          font-size: var.$fnt-size-headline-small;
+        }
+      }
+
+      &_category {
+        padding: 4px 8px;
+        background-color: var.$col-secondary;
+        border-radius: var.$brdr-radius-extra-large;
+        border: var.$brdr-size-small solid var.$col-on-primary;
+        font-size: var.$fnt-size-label-medium;
+        font-weight: var.$fnt-weight-bold;
+        color: var.$col-on-primary;
+        text-transform: capitalize;
+        @media (max-width: var.$width-trans-to-mobile) {
+          padding: 2px 8px;
+          border-radius: 20px;
+        }
+      }
+    }
+
+    &_description {
+      line-height: var.$line-height-large;
+      font-size: var.$fnt-size-body-medium;
+      font-weight: var.$fnt-weight-medium;
+      @media (max-width: var.$width-trans-to-tablet) {
+        font-size: var.$fnt-size-body-small;
+      }
+    }
+
+    &_footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &_price {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: var.$fnt-size-headline-medium;
+        font-weight: var.$fnt-weight-bold;
+        color: var.$col-price-free;
+        @media (max-width: var.$width-trans-to-tablet) {
+          font-size: var.$fnt-size-headline-small;
+        }
+      }
+
+      &_button {
+        padding: var.$padding-btn-medium;
+        background-color: var.$col-primary;
+        border: var.$brdr-size solid var.$col-black;
+        border-radius: var.$brdr-radius-small;
+        font-weight: var.$fnt-weight-bold;
+        font-size: var.$fnt-size-label-large;
+        color: var.$col-on-primary;
+        transition: background-color var.$transition-time;
+        &:hover {
+          background-color: var.$col-primary-high;
+        }
+        @media (max-width: var.$width-trans-to-tablet) {
+          padding: var.$padding-btn-small;
+        }
+        @media (max-width: var.$width-trans-to-mobile) {
+          padding: var.$padding-btn-medium;
+        }
+      }
+
+      &_feedback {
+        display: flex;
+        gap: 24px;
+        font-weight: var.$fnt-weight-bold;
+        font-size: var.$fnt-size-label-large;
+        color: var.$col-on-primary;
+        @media (max-width: var.$width-trans-to-tablet) {
+          gap: 16px;
+          font-size: var.$fnt-size-label-medium;
+        }
+        &_item {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          &::before {
+            font-size: 24px;
+            font-family: 'Material Symbols Outlined';
+          }
+          &--likes {
+            &::before {
+              content: '\e87d';
+              color: var.$col-like;
+            }
+          }
+          &--rating {
+            &::before {
+              content: '\e838';
+              color: var.$col-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}
