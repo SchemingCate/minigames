@@ -56,7 +56,7 @@ export const gameCard = (info: gameInfo): HTMLElement => {
     tag: 'span',
     classList:
       'card_content_footer_feedback_item card_content_footer_feedback_item--likes',
-    textContent: info.likesCount.toString(),
+    textContent: (Math.floor(info.likesCount / 100) / 10).toFixed(1) + 'K',
   });
   const feedback = createHTMLElement({
     tag: 'div',
