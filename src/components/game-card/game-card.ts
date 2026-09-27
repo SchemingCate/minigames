@@ -1,6 +1,6 @@
 import './game-card.scss';
 import { createHTMLElement } from '../../helpers/dom';
-
+import { getImageUrl } from '../../helpers/get-image-url';
 import type { gameInfo } from '../../helpers/interfaces';
 
 export const gameCard = (info: gameInfo): HTMLElement => {
@@ -14,10 +14,11 @@ export const gameCard = (info: gameInfo): HTMLElement => {
     classList: 'card_image',
   });
 
+  const imgUrl = getImageUrl(info.cardImage);
   const image = createHTMLElement({
     tag: 'img',
     attributes: [
-      ['src', `./src${info.cardImage}`],
+      ['src', imgUrl],
       ['alt', info.name],
     ],
   });
