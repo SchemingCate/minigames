@@ -4,6 +4,7 @@ import { footer } from '../../components/footer/footer';
 import { createHTMLElement } from '../../helpers/dom';
 import { filterChips } from '../../components/filter-chips/filter-chips';
 import { sortDropdown } from '../../components/sort-dropdown/sort-dropdown';
+import { gameCardsList } from '../../components/game-cards-list/game-cards-list';
 
 export const libraryPage = (): HTMLElement => {
   const page = createHTMLElement({ tag: 'div' });
@@ -28,7 +29,7 @@ export const libraryPage = (): HTMLElement => {
   });
   filterControls.append(filterChips(), sortDropdown());
   pageTitle.append(pageTitleHeading, pageTitleDescription);
-  pageContent.append(pageTitle, filterControls);
+  pageContent.append(pageTitle, filterControls, gameCardsList());
   page.append(header('library'), pageContent, footer());
   return page;
 };
