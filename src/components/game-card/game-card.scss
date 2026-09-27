@@ -113,13 +113,16 @@
         right: 16px;
         font-size: var.$fnt-size-headline-medium;
         font-weight: var.$fnt-weight-bold;
-        color: var.$col-price-free;
+        color: var.$col-on-primary;
         @media (max-width: var.$width-trans-to-tablet-library) {
           font-size: var.$fnt-size-headline-small;
         }
         @media (max-width: var.$width-trans-to-mobile-library) {
           top: 0;
           right: 0;
+        }
+        &--free {
+          color: var.$col-price-free;
         }
       }
 

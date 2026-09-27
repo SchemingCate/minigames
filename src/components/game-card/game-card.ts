@@ -68,6 +68,8 @@ export const gameCard = (info: gameInfo): HTMLElement => {
     classList: 'card_content_footer_price',
     textContent: info.price,
   });
+  if (info.price === 'Free')
+    price.classList.add('card_content_footer_price--free');
   const detailsButton = createHTMLElement({
     tag: 'button',
     classList: 'card_content_footer_button',
