@@ -19,10 +19,15 @@
   &_image {
     width: 39%;
     height: 100%;
-    background-color: aquamarine;
+    overflow: hidden;
     @media (max-width: var.$width-trans-to-mobile-library) {
       width: 100%;
       height: 160px;
+    }
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 

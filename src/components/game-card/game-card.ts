@@ -14,6 +14,12 @@ export const gameCard = (info: gameInfo): HTMLElement => {
     classList: 'card_image',
   });
 
+  const image = createHTMLElement({
+    tag: 'img',
+    attributes: [['src', `./src${info.cardImage}`]],
+  });
+  imageContainer.append(image);
+
   const contentContainer = createHTMLElement({
     tag: 'div',
     classList: 'card_content',
