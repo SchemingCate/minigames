@@ -33,6 +33,7 @@ $gap-button-dropdown: 4px;
     }
   }
   &_list {
+    z-index: 1;
     position: absolute;
     right: 0;
     width: $width-dropdown;
