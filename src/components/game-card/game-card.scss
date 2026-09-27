@@ -4,35 +4,54 @@
   position: relative;
   display: flex;
   overflow: hidden;
-  width: 828px;
+  width: 100%;
   height: 200px;
   box-shadow: var.$box-shadow-lvl-1;
   border-radius: var.$brdr-radius-large;
   background-color: var.$col-white;
-
+  @media (max-width: var.$width-trans-to-tablet-library) {
+    height: 152px;
+  }
+  @media (max-width: var.$width-trans-to-mobile-library) {
+    flex-direction: column;
+    height: 392px;
+  }
   &_image {
-    width: 320px;
+    width: 39%;
     height: 100%;
     background-color: aquamarine;
+    @media (max-width: var.$width-trans-to-mobile-library) {
+      width: 100%;
+      height: 160px;
+    }
   }
 
   &_content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 508px;
+    width: 61%;
     height: 100%;
     padding: 16px;
+    @media (max-width: var.$width-trans-to-mobile-library) {
+      width: 100%;
+      height: 232px;
+    }
 
     &_title {
       display: flex;
       align-items: center;
       gap: 16px;
+      @media (max-width: var.$width-trans-to-mobile-library) {
+        flex-direction: column;
+        align-items: baseline;
+        gap: 8px;
+      }
       &_heading {
         font-weight: var.$fnt-weight-bold;
         font-size: var.$fnt-size-headline-medium;
         color: var.$col-on-primary;
-        @media (max-width: var.$width-trans-to-tablet) {
+        @media (max-width: var.$width-trans-to-tablet-library) {
           font-size: var.$fnt-size-headline-small;
         }
       }
@@ -46,7 +65,10 @@
         font-weight: var.$fnt-weight-bold;
         color: var.$col-on-primary;
         text-transform: capitalize;
-        @media (max-width: var.$width-trans-to-mobile) {
+        @media (max-width: var.$width-trans-to-tablet-library) {
+          border-width: var.$brdr-size-small;
+        }
+        @media (max-width: var.$width-trans-to-mobile-library) {
           padding: 2px 8px;
           border-radius: 20px;
         }
@@ -54,11 +76,18 @@
     }
 
     &_description {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      overflow: hidden;
       line-height: var.$line-height-large;
       font-size: var.$fnt-size-body-medium;
       font-weight: var.$fnt-weight-medium;
-      @media (max-width: var.$width-trans-to-tablet) {
+      @media (max-width: var.$width-trans-to-tablet-library) {
         font-size: var.$fnt-size-body-small;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
       }
     }
 
@@ -66,6 +95,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      @media (max-width: var.$width-trans-to-mobile-library) {
+        flex-direction: column;
+        align-items: baseline;
+        gap: 16px;
+        position: relative;
+      }
 
       &_price {
         position: absolute;
@@ -74,8 +109,12 @@
         font-size: var.$fnt-size-headline-medium;
         font-weight: var.$fnt-weight-bold;
         color: var.$col-price-free;
-        @media (max-width: var.$width-trans-to-tablet) {
+        @media (max-width: var.$width-trans-to-tablet-library) {
           font-size: var.$fnt-size-headline-small;
+        }
+        @media (max-width: var.$width-trans-to-mobile-library) {
+          top: 0;
+          right: 0;
         }
       }
 
@@ -91,11 +130,12 @@
         &:hover {
           background-color: var.$col-primary-high;
         }
-        @media (max-width: var.$width-trans-to-tablet) {
+        @media (max-width: var.$width-trans-to-tablet-library) {
           padding: var.$padding-btn-small;
         }
-        @media (max-width: var.$width-trans-to-mobile) {
+        @media (max-width: var.$width-trans-to-mobile-library) {
           padding: var.$padding-btn-medium;
+          width: 100%;
         }
       }
 
@@ -105,7 +145,7 @@
         font-weight: var.$fnt-weight-bold;
         font-size: var.$fnt-size-label-large;
         color: var.$col-on-primary;
-        @media (max-width: var.$width-trans-to-tablet) {
+        @media (max-width: var.$width-trans-to-tablet-library) {
           gap: 16px;
           font-size: var.$fnt-size-label-medium;
         }

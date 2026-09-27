@@ -1,4 +1,6 @@
-export const gamesData = [
+import type { gameInfo } from '../helpers/interfaces';
+
+export const gamesData: gameInfo[] = [
   {
     slug: 'vacation-cafe-simulator',
     name: 'Vacation Cafe Simulator',

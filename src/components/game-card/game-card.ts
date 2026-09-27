@@ -1,7 +1,9 @@
 import './game-card.scss';
 import { createHTMLElement } from '../../helpers/dom';
 
-export const gameCard = (): HTMLElement => {
+import type { gameInfo } from '../../helpers/interfaces';
+
+export const gameCard = (info: gameInfo): HTMLElement => {
   const card = createHTMLElement({
     tag: 'article',
     classList: 'card',
@@ -19,12 +21,12 @@ export const gameCard = (): HTMLElement => {
   const heading = createHTMLElement({
     tag: 'h2',
     classList: 'card_content_title_heading',
-    textContent: 'Vacation Cafe Simulator',
+    textContent: info.name,
   });
   const category = createHTMLElement({
     tag: 'span',
     classList: 'card_content_title_category',
-    textContent: 'strategy',
+    textContent: info.category,
   });
   const contentTitle = createHTMLElement({
     tag: 'div',
@@ -35,21 +37,20 @@ export const gameCard = (): HTMLElement => {
   const description = createHTMLElement({
     tag: 'p',
     classList: 'card_content_description',
-    textContent:
-      'Cozy Italian Vacation Cafe 🏖️ No timers, No stress 😌 cook traditional dishes 🍝 upgrade and customize 🏠 just drink Prosecco 🥂 relax and grow your dream cafe ✨',
+    textContent: info.shortDescription,
   });
 
   const rating = createHTMLElement({
     tag: 'span',
     classList:
       'card_content_footer_feedback_item card_content_footer_feedback_item--rating',
-    textContent: '4.8',
+    textContent: info.rating.toString(),
   });
   const likes = createHTMLElement({
     tag: 'span',
     classList:
       'card_content_footer_feedback_item card_content_footer_feedback_item--likes',
-    textContent: '28.75K',
+    textContent: info.likesCount.toString(),
   });
   const feedback = createHTMLElement({
     tag: 'div',
@@ -59,7 +60,7 @@ export const gameCard = (): HTMLElement => {
   const price = createHTMLElement({
     tag: 'span',
     classList: 'card_content_footer_price',
-    textContent: 'Free',
+    textContent: info.price,
   });
   const detailsButton = createHTMLElement({
     tag: 'button',
