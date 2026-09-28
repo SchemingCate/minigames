@@ -5,12 +5,13 @@ export const gameModal = (): HTMLElement => {
   const gameModal = createHTMLElement({
     tag: 'dialog',
     attributes: [['id', 'gameModal']],
-    classList: 'gameModal',
+    classList: 'game-modal',
   });
 
   const content = createHTMLElement({
     tag: 'div',
     textContent: 'the Game Details dialog',
+    classList: 'game-modal_content',
   });
 
   const closeButton = createHTMLElement({
