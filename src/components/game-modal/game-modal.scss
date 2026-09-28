@@ -1,16 +1,29 @@
 @use '../../styles/tokens.scss' as var;
 
+$modal-width: 600px;
+$modal-width-mobile: 375px;
+$size-close-button: 40px;
+$size-close-button-mobile: 32px;
+$hight-hero-img: 220px;
+
 .game-modal {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
+  width: $modal-width;
+  min-width: $modal-width-mobile;
+  background-color: var.$col-bg;
+  border: var.$brdr-size-x-small solid var.$col-outline-variant;
+  border-radius: var.$brdr-radius-extra-large;
+  box-shadow: var.$box-shadow-lvl-3;
+
   opacity: 0;
   transition:
-    opacity 0.3s ease,
-    overlay 0.3s allow-discrete,
-    display 0.3s allow-discrete;
+    opacity var.$transition-time ease,
+    overlay var.$transition-time allow-discrete,
+    display var.$transition-time allow-discrete;
 
   &::backdrop {
     background-color: var.$col-backdrop;
@@ -26,6 +39,52 @@
   &[open],
   &[open]::backdrop {
     opacity: 1;
+  }
+
+  &_content {
+    position: relative;
+    width: 100%;
+
+    &_hero {
+      width: 100%;
+      height: $hight-hero-img;
+      & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &_button {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: $size-close-button;
+      height: $size-close-button;
+      background-color: var.$col-white;
+      border: var.$brdr-size solid var.$col-black;
+      border-radius: var.$brdr-radius-full;
+      box-shadow: 2px 2px var.$col-black;
+      color: var.$col-black;
+      transition:
+        background-color var.$transition-time,
+        color var.$transition-time,
+        border-color var.$transition-time;
+      @media (max-width: var.$width-trans-to-mobile) {
+        width: $size-close-button-mobile;
+        height: $size-close-button-mobile;
+      }
+      &:hover {
+        border-color: var.$col-on-primary;
+        background-color: var.$col-surface;
+        color: var.$col-on-primary;
+      }
+      &::after {
+        font-family: 'Material Symbols Outlined';
+        content: '\e5cd';
+        font-size: 24px;
+      }
+    }
   }
 }
 
