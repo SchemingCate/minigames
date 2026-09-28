@@ -1,13 +1,37 @@
 @use '../../styles/tokens.scss' as var;
 
-.gameModal {
+.game-modal {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
+
   &::backdrop {
     background-color: var.$col-backdrop;
     backdrop-filter: var.$filter-backdrop;
+
+    opacity: 0;
+    transition:
+      opacity 0.3s ease,
+      overlay 0.3s allow-discrete,
+      display 0.3s allow-discrete;
+  }
+
+  &[open],
+  &[open]::backdrop {
+    opacity: 1;
+  }
+}
+
+@starting-style {
+  .game-modal[open],
+  .game-modal[open]::backdrop {
+    opacity: 0;
   }
 }
