@@ -53,6 +53,27 @@
       position: absolute;
       top: 16px;
       right: 16px;
+      width: 40px;
+      height: 40px;
+      background-color: var.$col-white;
+      border: var.$brdr-size solid var.$col-black;
+      border-radius: var.$brdr-radius-full;
+      box-shadow: 2px 2px var.$col-black;
+      color: var.$col-black;
+      transition:
+        background-color var.$transition-time,
+        color var.$transition-time,
+        border-color var.$transition-time;
+      &:hover {
+        border-color: var.$col-on-primary;
+        background-color: var.$col-surface;
+        color: var.$col-on-primary;
+      }
+      &::after {
+        font-family: 'Material Symbols Outlined';
+        content: '\e5cd';
+        font-size: 24px;
+      }
     }
   }
 }

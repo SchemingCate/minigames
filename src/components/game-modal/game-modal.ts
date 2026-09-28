@@ -56,8 +56,8 @@ export const gameModal = (): HTMLElement => {
     attributes: [
       ['commandfor', 'gameModal'],
       ['command', 'close'],
+      ['aria-label', 'close modal'],
     ],
-    textContent: 'Close',
     classList: 'game-modal_content_button',
   });
 
