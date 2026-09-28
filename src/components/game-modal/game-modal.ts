@@ -5,8 +5,12 @@ export const gameModal = (): HTMLElement => {
   const gameModal = createHTMLElement({
     tag: 'dialog',
     attributes: [['id', 'gameModal']],
-    textContent: 'the Game Details dialog',
     classList: 'gameModal',
+  });
+
+  const content = createHTMLElement({
+    tag: 'div',
+    textContent: 'the Game Details dialog',
   });
 
   const closeButton = createHTMLElement({
@@ -18,6 +22,12 @@ export const gameModal = (): HTMLElement => {
     textContent: 'Close',
   });
 
-  gameModal.append(closeButton);
+  content.append(closeButton);
+  gameModal.append(content);
+
+  gameModal.addEventListener('click', (event) => {
+    if (event.target === gameModal) gameModal.close();
+  });
+
   return gameModal;
 };
