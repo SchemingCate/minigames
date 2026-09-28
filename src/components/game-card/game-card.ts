@@ -78,6 +78,11 @@ export const gameCard = (info: gameInfo): HTMLElement => {
     tag: 'button',
     classList: 'card_content_footer_button',
     textContent: 'Details',
+    attributes: [
+      ['type', 'button'],
+      ['command', 'show-modal'],
+      ['commandfor', 'gameModal'],
+    ],
   });
   const footer = createHTMLElement({
     tag: 'div',

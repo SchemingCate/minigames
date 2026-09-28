@@ -6,6 +6,7 @@ import { filterChips } from '../../components/filter-chips/filter-chips';
 import { sortDropdown } from '../../components/sort-dropdown/sort-dropdown';
 import { gameCardsList } from '../../components/game-cards-list/game-cards-list';
 import { pagination } from '../../components/pagination/pagination';
+import { gameModal } from '../../components/game-modal/game-modal';
 
 export const libraryPage = (): HTMLElement => {
   const page = createHTMLElement({ tag: 'div' });
@@ -30,7 +31,13 @@ export const libraryPage = (): HTMLElement => {
   });
   filterControls.append(filterChips(), sortDropdown());
   pageTitle.append(pageTitleHeading, pageTitleDescription);
-  pageContent.append(pageTitle, filterControls, gameCardsList(), pagination());
+  pageContent.append(
+    pageTitle,
+    filterControls,
+    gameCardsList(),
+    pagination(),
+    gameModal(),
+  );
   page.append(header('library'), pageContent, footer());
   return page;
 };
