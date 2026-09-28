@@ -43,7 +43,6 @@ export const pagination = (): HTMLElement => {
     const button = (event.target as HTMLElement).closest<HTMLButtonElement>(
       '.pagination_button--page',
     );
-    console.log('click');
 
     const buttonArrow = (
       event.target as HTMLElement
