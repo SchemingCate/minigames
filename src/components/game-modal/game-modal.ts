@@ -75,28 +75,50 @@ export const gameModal = (): HTMLElement => {
   });
   hero.append(heroImage);
 
-  const gameInfo = createHTMLElement({ tag: 'div' });
-  const gameHeading = createHTMLElement({
+  const mainContent = createHTMLElement({
     tag: 'div',
+    classList: 'game-modal_content_main',
   });
-  const gameName = createHTMLElement({
+  const gameHeader = createHTMLElement({
+    tag: 'div',
+    classList: 'game-modal_content_main_header',
+  });
+  const gameTitle = createHTMLElement({
     tag: 'h2',
     textContent: gameData.name,
+    classList: 'game-modal_content_main_header_title',
   });
 
-  const feedback = createHTMLElement({ tag: 'div' });
+  const feedback = createHTMLElement({
+    tag: 'div',
+    classList: 'game-modal_content_main_header_feedback',
+  });
   feedback.append(
     feedbackCount('rating', gameData.rating),
     feedbackCount('likes', gameData.likesCount),
   );
 
-  gameHeading.append(gameName, feedback);
+  gameHeader.append(gameTitle, feedback);
 
-  const gameSpecs = createHTMLElement({ tag: 'dl' });
+  const gameSpecs = createHTMLElement({
+    tag: 'dl',
+    classList: 'game-modal_content_main_specs',
+  });
   for (const [spec, value] of Object.entries(gameData.specs)) {
-    const item = createHTMLElement({ tag: 'div' });
-    const specElement = createHTMLElement({ tag: 'dt', textContent: spec });
-    const valueElement = createHTMLElement({ tag: 'dd', textContent: value });
+    const item = createHTMLElement({
+      tag: 'div',
+      classList: 'game-modal_content_main_specs_item',
+    });
+    const specElement = createHTMLElement({
+      tag: 'dt',
+      textContent: spec,
+      classList: 'game-modal_content_main_specs_item_name',
+    });
+    const valueElement = createHTMLElement({
+      tag: 'dd',
+      textContent: value,
+      classList: 'game-modal_content_main_specs_item_value',
+    });
     item.append(specElement, valueElement);
     gameSpecs.append(item);
   }
@@ -104,8 +126,9 @@ export const gameModal = (): HTMLElement => {
   const gameDescription = createHTMLElement({
     tag: 'p',
     textContent: gameData.fullDescription,
+    classList: 'game-modal_content_main_description',
   });
-  gameInfo.append(gameHeading, gameDescription, gameSpecs);
+  mainContent.append(gameHeader, gameDescription, gameSpecs);
 
   const action = createHTMLElement({ tag: 'div' });
   const playButton = createHTMLElement({
@@ -118,7 +141,7 @@ export const gameModal = (): HTMLElement => {
   });
   action.append(playButton, favButton);
 
-  content.append(closeButton, hero, gameInfo, action);
+  content.append(closeButton, hero, mainContent, action);
   gameModal.append(content);
 
   gameModal.addEventListener('click', (event) => {
