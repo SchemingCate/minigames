@@ -1,6 +1,7 @@
 import './game-modal.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import { getImageUrl } from '../../helpers/get-image-url';
+import { feedbackCount } from '../feedback-count/feedback-count';
 
 const gameData = {
   slug: 'tukoni-forest-keepers',
@@ -74,7 +75,50 @@ export const gameModal = (): HTMLElement => {
   });
   hero.append(heroImage);
 
-  content.append(closeButton, hero);
+  const gameInfo = createHTMLElement({ tag: 'div' });
+  const gameHeading = createHTMLElement({
+    tag: 'div',
+  });
+  const gameName = createHTMLElement({
+    tag: 'h2',
+    textContent: gameData.name,
+  });
+
+  const feedback = createHTMLElement({ tag: 'div' });
+  feedback.append(
+    feedbackCount('rating', gameData.rating),
+    feedbackCount('likes', gameData.likesCount),
+  );
+
+  gameHeading.append(gameName, feedback);
+
+  const gameSpecs = createHTMLElement({ tag: 'dl' });
+  for (const [spec, value] of Object.entries(gameData.specs)) {
+    const item = createHTMLElement({ tag: 'div' });
+    const specElement = createHTMLElement({ tag: 'dt', textContent: spec });
+    const valueElement = createHTMLElement({ tag: 'dd', textContent: value });
+    item.append(specElement, valueElement);
+    gameSpecs.append(item);
+  }
+
+  const gameDescription = createHTMLElement({
+    tag: 'p',
+    textContent: gameData.fullDescription,
+  });
+  gameInfo.append(gameHeading, gameDescription, gameSpecs);
+
+  const action = createHTMLElement({ tag: 'div' });
+  const playButton = createHTMLElement({
+    tag: 'button',
+    textContent: 'Play now',
+  });
+  const favButton = createHTMLElement({
+    tag: 'button',
+    textContent: 'Add to favorites',
+  });
+  action.append(playButton, favButton);
+
+  content.append(closeButton, hero, gameInfo, action);
   gameModal.append(content);
 
   gameModal.addEventListener('click', (event) => {
