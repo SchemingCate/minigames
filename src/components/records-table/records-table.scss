@@ -1,0 +1,32 @@
+@use '../../styles/tokens.scss' as var;
+
+.records {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &_item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background-color: var.$col-white;
+    border-radius: var.$brdr-radius-small;
+    &_name {
+      flex-grow: 1;
+      font-size: var.$fnt-size-label-large;
+      font-weight: var.$fnt-weight-bold;
+      color: var.$col-on-primary;
+    }
+    &_points {
+      font-size: var.$fnt-size-label-large;
+      font-weight: var.$fnt-weight-bold;
+      color: var.$col-on-primary;
+    }
+    &_time {
+      font-size: var.$fnt-size-label-medium;
+      color: var.$col-on-bg;
+    }
+  }
+}

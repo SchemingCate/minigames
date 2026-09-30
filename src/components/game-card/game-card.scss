@@ -157,27 +157,6 @@
           gap: 16px;
           font-size: var.$fnt-size-label-medium;
         }
-        &_item {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          &::before {
-            font-size: 24px;
-            font-family: 'Material Symbols Outlined';
-          }
-          &--likes {
-            &::before {
-              content: '\e87d';
-              color: var.$col-like;
-            }
-          }
-          &--rating {
-            &::before {
-              content: '\e838';
-              color: var.$col-primary;
-            }
-          }
-        }
       }
     }
   }

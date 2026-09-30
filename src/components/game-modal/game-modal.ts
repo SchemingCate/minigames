@@ -1,8 +1,13 @@
 import './game-modal.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import { getImageUrl } from '../../helpers/get-image-url';
+import { feedbackCount } from '../feedback-count/feedback-count';
+import { recordsTable } from '../records-table/records-table';
 
-const gameData = {
+import type { gameData } from '../../helpers/interfaces';
+import type { gameSpecs } from '../../helpers/interfaces';
+
+const gameData: gameData = {
   slug: 'tukoni-forest-keepers',
   name: 'Tukoni: Forest Keepers',
   heroImage: '/assets/images/games/tukoni-forest-keepers-hero.jpg',
@@ -74,7 +79,93 @@ export const gameModal = (): HTMLElement => {
   });
   hero.append(heroImage);
 
-  content.append(closeButton, hero);
+  const mainContent = createHTMLElement({
+    tag: 'div',
+    classList: 'game-modal_content_main',
+  });
+  const gameHeader = createHTMLElement({
+    tag: 'div',
+    classList: 'game-modal_content_main_header',
+  });
+  const gameTitle = createHTMLElement({
+    tag: 'h2',
+    textContent: gameData.name,
+    classList: 'game-modal_content_main_header_title',
+  });
+
+  const feedback = createHTMLElement({
+    tag: 'div',
+    classList: 'game-modal_content_main_header_feedback',
+  });
+  feedback.append(
+    feedbackCount('rating', gameData.rating),
+    feedbackCount('likes', gameData.likesCount),
+  );
+
+  gameHeader.append(gameTitle, feedback);
+
+  const gameSpecs = createHTMLElement({
+    tag: 'dl',
+    classList: 'game-modal_content_main_specs',
+  });
+  for (const [spec, value] of Object.entries(gameData.specs) as [
+    keyof gameSpecs,
+    string,
+  ][]) {
+    const item = createHTMLElement({
+      tag: 'div',
+      classList: 'game-modal_content_main_specs_item',
+    });
+    const specElement = createHTMLElement({
+      tag: 'dt',
+      textContent: spec,
+      classList: 'game-modal_content_main_specs_item_name',
+    });
+    const valueElement = createHTMLElement({
+      tag: 'dd',
+      textContent: value,
+      classList: 'game-modal_content_main_specs_item_value',
+    });
+    item.append(specElement, valueElement);
+    gameSpecs.append(item);
+  }
+
+  const gameDescription = createHTMLElement({
+    tag: 'p',
+    textContent: gameData.fullDescription,
+    classList: 'game-modal_content_main_description',
+  });
+
+  const action = createHTMLElement({
+    tag: 'div',
+    classList: 'game-modal_content_main_action',
+  });
+  const playButton = createHTMLElement({
+    tag: 'button',
+    textContent: 'Play now',
+    classList: 'game-modal_content_main_action_play',
+  });
+  const favButton = createHTMLElement({
+    tag: 'button',
+    textContent: 'Add to favorites',
+    classList: 'game-modal_content_main_action_favorite',
+  });
+  action.append(playButton, favButton);
+
+  const records = createHTMLElement({
+    tag: 'div',
+    classList: 'game-modal_content_main_records',
+  });
+  const recordsHeader = createHTMLElement({
+    tag: 'h2',
+    textContent: '🏆 Top Records',
+    classList: 'game-modal_content_main_records_heading',
+  });
+
+  records.append(recordsHeader, recordsTable(gameData.topRecords));
+
+  mainContent.append(gameHeader, gameDescription, gameSpecs, action, records);
+  content.append(closeButton, hero, mainContent);
   gameModal.append(content);
 
   gameModal.addEventListener('click', (event) => {
