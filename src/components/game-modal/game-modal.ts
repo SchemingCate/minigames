@@ -128,20 +128,25 @@ export const gameModal = (): HTMLElement => {
     textContent: gameData.fullDescription,
     classList: 'game-modal_content_main_description',
   });
-  mainContent.append(gameHeader, gameDescription, gameSpecs);
 
-  const action = createHTMLElement({ tag: 'div' });
+  const action = createHTMLElement({
+    tag: 'div',
+    classList: 'game-modal_content_main_action',
+  });
   const playButton = createHTMLElement({
     tag: 'button',
     textContent: 'Play now',
+    classList: 'game-modal_content_main_action_play',
   });
   const favButton = createHTMLElement({
     tag: 'button',
     textContent: 'Add to favorites',
+    classList: 'game-modal_content_main_action_favorite',
   });
   action.append(playButton, favButton);
 
-  content.append(closeButton, hero, mainContent, action);
+  mainContent.append(gameHeader, gameDescription, gameSpecs, action);
+  content.append(closeButton, hero, mainContent);
   gameModal.append(content);
 
   gameModal.addEventListener('click', (event) => {

@@ -115,13 +115,43 @@ $hight-hero-img: 220px;
       }
 
       &_specs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+
+        @media (max-width: 562px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
         &_item {
           display: flex;
           flex-direction: column;
+          padding: var.$padding-btn-small;
+          border-radius: var.$brdr-radius-small;
+          border: var.$brdr-size-x-small solid var.$col-outline-variant;
+          box-shadow: var.$box-shadow-lvl-0;
           &_name {
+            font-size: var.$fnt-size-label-medium;
+            text-transform: capitalize;
+            color: var.$col-on-bg;
           }
           &_value {
+            font-size: var.$fnt-size-label-large;
+            font-weight: var.$fnt-weight-bold;
+            color: var.$col-on-primary;
           }
+        }
+      }
+
+      &_action {
+        display: flex;
+        gap: 16px;
+        height: 48px;
+        &_play {
+          flex-grow: 1;
+        }
+        &_favorite {
+          flex-grow: 1;
         }
       }
     }
