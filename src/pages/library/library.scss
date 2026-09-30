@@ -1,0 +1,55 @@
+@use '../../styles/mixins.scss' as m;
+@use '../../styles/tokens.scss' as var;
+
+$padding-page-horizontal: 40px;
+$padding-page-horizontal-mobile: 16px;
+
+$padding-page-top: 40px;
+$padding-page-top-tablet: 24px;
+$padding-page-top-mobile: 16px;
+
+$gap-controls: 16px;
+
+$gap-heading-paragraph: 8px;
+
+.library {
+  max-width: var.$width-max-content;
+  margin: 0 auto;
+  padding: 0 $padding-page-horizontal;
+  @media (max-width: var.$width-trans-to-mobile) {
+    padding: 0 $padding-page-horizontal-mobile;
+  }
+  &_page-title {
+    padding: $padding-page-top 0;
+    @media (max-width: var.$width-trans-to-tablet) {
+      padding: $padding-page-top-tablet 0;
+    }
+    @media (max-width: var.$width-trans-to-mobile) {
+      padding: $padding-page-top-mobile 0;
+    }
+    &_heading {
+      @include m.h1;
+      margin-bottom: $gap-heading-paragraph;
+    }
+
+    &_paragraph {
+      font-weight: var.$fnt-weight-medium;
+      font-size: var.$fnt-size-body-large;
+      @media (max-width: var.$width-trans-to-tablet) {
+        font-size: var.$fnt-size-body-medium;
+      }
+      @media (max-width: var.$width-trans-to-mobile) {
+        font-size: var.$fnt-size-body-small;
+      }
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: $gap-controls;
+  padding: $gap-controls 0;
+}
