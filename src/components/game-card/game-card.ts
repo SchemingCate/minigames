@@ -1,6 +1,7 @@
 import './game-card.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import { getImageUrl } from '../../helpers/get-image-url';
+import { feedbackCount } from '../feedback-count/feedback-count';
 import type { gameInfo } from '../../helpers/interfaces';
 
 export const gameCard = (info: gameInfo): HTMLElement => {
@@ -50,18 +51,10 @@ export const gameCard = (info: gameInfo): HTMLElement => {
     textContent: info.shortDescription,
   });
 
-  const rating = createHTMLElement({
-    tag: 'span',
-    classList:
-      'card_content_footer_feedback_item card_content_footer_feedback_item--rating',
-    textContent: info.rating.toString(),
-  });
-  const likes = createHTMLElement({
-    tag: 'span',
-    classList:
-      'card_content_footer_feedback_item card_content_footer_feedback_item--likes',
-    textContent: (Math.floor(info.likesCount / 100) / 10).toFixed(1) + 'K',
-  });
+  const rating = feedbackCount('rating', info.rating);
+
+  const likes = feedbackCount('likes', info.likesCount);
+
   const feedback = createHTMLElement({
     tag: 'div',
     classList: 'card_content_footer_feedback',
@@ -78,6 +71,11 @@ export const gameCard = (info: gameInfo): HTMLElement => {
     tag: 'button',
     classList: 'card_content_footer_button',
     textContent: 'Details',
+    attributes: [
+      ['type', 'button'],
+      ['command', 'show-modal'],
+      ['commandfor', 'gameModal'],
+    ],
   });
   const footer = createHTMLElement({
     tag: 'div',

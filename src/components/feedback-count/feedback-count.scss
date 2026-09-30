@@ -1,0 +1,26 @@
+@use '../../styles/tokens.scss' as var;
+
+.feedback-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: var.$fnt-weight-bold;
+  font-size: var.$fnt-size-label-large;
+  color: var.$col-on-primary;
+  &::before {
+    font-size: 24px;
+    font-family: 'Material Symbols Outlined';
+  }
+  &--likes {
+    &::before {
+      content: '\e87d';
+      color: var.$col-like;
+    }
+  }
+  &--rating {
+    &::before {
+      content: '\e838';
+      color: var.$col-primary;
+    }
+  }
+}
