@@ -1,6 +1,6 @@
 import type { SortType, GameCategory } from './types';
 
-export interface gameInfo {
+export interface GameInfo {
   slug: string;
   name: string;
   category: string;
@@ -34,7 +34,7 @@ export interface Meta {
 }
 
 export interface GameListResponse {
-  data: gameInfo[];
+  data: GameInfo[];
   meta: Meta;
   additionalProp1?: object;
 }
@@ -46,14 +46,14 @@ export interface Record {
   achievedAt: string;
 }
 
-export interface gameSpecs {
+export interface GameSpecs {
   genre: string;
   players: string;
   duration: string;
   price: string;
 }
 
-export interface gameData {
+export interface GameData {
   slug: string;
   name: string;
   heroImage: string;
@@ -61,6 +61,6 @@ export interface gameData {
   likesCount: number;
   isLikedByCurrentUser: boolean;
   fullDescription: string;
-  specs: gameSpecs;
+  specs: GameSpecs;
   topRecords: Record[];
 }

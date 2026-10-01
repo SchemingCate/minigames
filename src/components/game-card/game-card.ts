@@ -2,9 +2,9 @@ import './game-card.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import { getImageUrl } from '../../helpers/get-image-url';
 import { feedbackCount } from '../feedback-count/feedback-count';
-import type { gameInfo } from '../../helpers/interfaces';
+import type { GameInfo } from '../../helpers/interfaces';
 
-export const gameCard = (info: gameInfo): HTMLElement => {
+export const gameCard = (info: GameInfo): HTMLElement => {
   const card = createHTMLElement({
     tag: 'article',
     classList: 'card',
