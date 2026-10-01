@@ -11,20 +11,28 @@ import {
   createGameCard,
   fillGameCard,
 } from '../../components/game-card/game-card';
+import { errorBanner } from '../../error-banner/error-banner';
 
 const cardsPerLibraryPage = 6;
 
-const loadGames = async (cards: HTMLElement[]): Promise<void> => {
+const loadGames = async (
+  container: HTMLElement,
+  cards: HTMLElement[],
+): Promise<void> => {
   try {
     const data = await fetchGames({ limit: cardsPerLibraryPage });
-    console.log(data);
     const games = data.data;
     const itemsPerPage = data.meta.limit;
     for (let index = 0; index < itemsPerPage; index++) {
       fillGameCard(cards[index], games[index]);
     }
   } catch (error) {
-    console.error(error);
+    container.replaceChildren(
+      errorBanner(error, () => {
+        container.replaceChildren(...cards);
+        void loadGames(container, cards);
+      }),
+    );
   }
 };
 
@@ -65,7 +73,7 @@ export const libraryPage = (): HTMLElement => {
   );
   page.append(header('library'), pageContent, footer());
 
-  void loadGames(cards);
+  void loadGames(gameCards, cards);
 
   return page;
 };
