@@ -12,6 +12,7 @@ import {
   fillGameCard,
 } from '../../components/game-card/game-card';
 import { errorBanner } from '../../components/error-banner/error-banner';
+import { emptyStateBanner } from '../../components/empty-state-banner/empty-state-banner';
 
 const cardsPerLibraryPage = 6;
 
@@ -22,6 +23,11 @@ const loadGames = async (
   try {
     const data = await fetchGames({ limit: cardsPerLibraryPage });
     const games = data.data;
+
+    if (games.length === 0) {
+      container.replaceChildren(emptyStateBanner());
+      return;
+    }
     const itemsPerPage = data.meta.limit;
     for (let index = 0; index < itemsPerPage; index++) {
       fillGameCard(cards[index], games[index]);
