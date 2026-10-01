@@ -11,7 +11,7 @@ import {
   createGameCard,
   fillGameCard,
 } from '../../components/game-card/game-card';
-import { errorBanner } from '../../error-banner/error-banner';
+import { errorBanner } from '../../components/error-banner/error-banner';
 
 const cardsPerLibraryPage = 6;
 

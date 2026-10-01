@@ -1,5 +1,5 @@
 import './error-banner.scss';
-import { createHTMLElement } from '../helpers/dom';
+import { createHTMLElement } from '../../helpers/dom';
 
 export const errorBanner = (error: unknown, retry: () => void): HTMLElement => {
   const banner = createHTMLElement({
