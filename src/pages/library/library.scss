@@ -53,3 +53,17 @@ $gap-heading-paragraph: 8px;
   row-gap: $gap-controls;
   padding: $gap-controls 0;
 }
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 200px;
+  gap: 24px;
+  @media (max-width: var.$width-trans-to-tablet-library) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 152px;
+  }
+  @media (max-width: var.$width-trans-to-mobile-library) {
+    grid-template-rows: 392px;
+  }
+}

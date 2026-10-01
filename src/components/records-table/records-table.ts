@@ -1,6 +1,6 @@
 import { createHTMLElement } from '../../helpers/dom';
 import './records-table.scss';
-import type { record } from '../../helpers/interfaces';
+import type { Record } from '../../helpers/interfaces';
 
 const placeRewardMap = {
   1: '🥇',
@@ -8,7 +8,7 @@ const placeRewardMap = {
   3: '🥉',
 };
 
-export const recordsTable = (recordsData: record[]): HTMLElement => {
+export const recordsTable = (recordsData: Record[]): HTMLElement => {
   const records = createHTMLElement({ tag: 'ol', classList: 'records' });
 
   //TODO : add dynamic time

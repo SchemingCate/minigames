@@ -1,3 +1,5 @@
+import type { SortType, GameCategory } from './types';
+
 export interface gameInfo {
   slug: string;
   name: string;
@@ -10,7 +12,34 @@ export interface gameInfo {
   featured: boolean;
 }
 
-export interface record {
+export interface LibraryParameters {
+  featured?: boolean;
+  page?: number;
+  limit?: number;
+  category?: GameCategory;
+  sort?: SortType;
+}
+
+export interface FilterValues {
+  category: GameCategory;
+  sort: SortType;
+}
+
+export interface Meta {
+  page: number;
+  limit: number;
+  totalItems: number;
+  totalPages: number;
+  appliedFilter: FilterValues;
+}
+
+export interface GameListResponse {
+  data: gameInfo[];
+  meta: Meta;
+  additionalProp1?: object;
+}
+
+export interface Record {
   position: 1 | 2 | 3;
   playerName: string;
   score: number;
@@ -33,5 +62,5 @@ export interface gameData {
   isLikedByCurrentUser: boolean;
   fullDescription: string;
   specs: gameSpecs;
-  topRecords: record[];
+  topRecords: Record[];
 }
