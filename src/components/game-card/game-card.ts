@@ -4,24 +4,20 @@ import { getImageUrl } from '../../helpers/get-image-url';
 import { feedbackCount } from '../feedback-count/feedback-count';
 import type { GameInfo } from '../../helpers/interfaces';
 
-export const gameCard = (info: GameInfo): HTMLElement => {
+export const createGameCard = (): HTMLElement => {
   const card = createHTMLElement({
     tag: 'article',
-    classList: 'card',
+    classList: 'card card--loading',
   });
 
   const imageContainer = createHTMLElement({
     tag: 'div',
-    classList: 'card_image',
+    classList: 'card_image card_image--loading',
   });
 
-  const imgUrl = getImageUrl(info.cardImage);
   const image = createHTMLElement({
     tag: 'img',
-    attributes: [
-      ['src', imgUrl],
-      ['alt', info.name],
-    ],
+    attributes: [['id', 'cardImage']],
   });
   imageContainer.append(image);
 
@@ -32,12 +28,11 @@ export const gameCard = (info: GameInfo): HTMLElement => {
   const heading = createHTMLElement({
     tag: 'h2',
     classList: 'card_content_title_heading',
-    textContent: info.name,
   });
   const category = createHTMLElement({
     tag: 'span',
     classList: 'card_content_title_category',
-    textContent: info.category,
+    // textContent: info.category,
   });
   const contentTitle = createHTMLElement({
     tag: 'div',
@@ -48,12 +43,11 @@ export const gameCard = (info: GameInfo): HTMLElement => {
   const description = createHTMLElement({
     tag: 'p',
     classList: 'card_content_description',
-    textContent: info.shortDescription,
   });
 
-  const rating = feedbackCount('rating', info.rating);
+  const rating = feedbackCount('rating', 4.9);
 
-  const likes = feedbackCount('likes', info.likesCount);
+  const likes = feedbackCount('likes', 500);
 
   const feedback = createHTMLElement({
     tag: 'div',
@@ -63,10 +57,8 @@ export const gameCard = (info: GameInfo): HTMLElement => {
   const price = createHTMLElement({
     tag: 'span',
     classList: 'card_content_footer_price',
-    textContent: info.price,
   });
-  if (info.price === 'Free')
-    price.classList.add('card_content_footer_price--free');
+
   const detailsButton = createHTMLElement({
     tag: 'button',
     classList: 'card_content_footer_button',
@@ -89,4 +81,18 @@ export const gameCard = (info: GameInfo): HTMLElement => {
   card.append(imageContainer, contentContainer);
 
   return card;
+};
+
+export const fillGameCard = (card: HTMLElement, info: GameInfo): void => {
+  // TODO look into refactoring without !
+  card.querySelector('.card_content_title_heading')!.textContent = info.name;
+  card.querySelector('.card_content_title_category')!.textContent =
+    info.category;
+  card.querySelector('.card_content_footer_price')!.textContent = info.price;
+  card.querySelector('.card_content_description')!.textContent =
+    info.shortDescription;
+  card.classList.remove('card--loading');
+  const image = card.querySelector<HTMLImageElement>('#cardImage');
+  image!.setAttribute('src', getImageUrl(info.cardImage));
+  image!.setAttribute('alt', 'info.name');
 };

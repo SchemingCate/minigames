@@ -7,16 +7,21 @@ import { sortDropdown } from '../../components/sort-dropdown/sort-dropdown';
 import { pagination } from '../../components/pagination/pagination';
 import { gameModal } from '../../components/game-modal/game-modal';
 import { fetchGames } from '../../api/fetch-games';
-import { gameCard } from '../../components/game-card/game-card';
+import {
+  createGameCard,
+  fillGameCard,
+} from '../../components/game-card/game-card';
 
-const loadGames = async (container: HTMLElement): Promise<void> => {
+const cardsPerLibraryPage = 6;
+
+const loadGames = async (cards: HTMLElement[]): Promise<void> => {
   try {
-    const data = await fetchGames({ limit: 6 });
+    const data = await fetchGames({ limit: cardsPerLibraryPage });
     console.log(data);
     const games = data.data;
     const itemsPerPage = data.meta.limit;
     for (let index = 0; index < itemsPerPage; index++) {
-      container.append(gameCard(games[index]));
+      fillGameCard(cards[index], games[index]);
     }
   } catch (error) {
     console.error(error);
@@ -48,6 +53,8 @@ export const libraryPage = (): HTMLElement => {
   pageTitle.append(pageTitleHeading, pageTitleDescription);
 
   const gameCards = createHTMLElement({ tag: 'div', classList: 'cards' });
+  const cards = Array.from({ length: cardsPerLibraryPage }, createGameCard);
+  for (const element of cards) gameCards.append(element);
 
   pageContent.append(
     pageTitle,
@@ -58,7 +65,7 @@ export const libraryPage = (): HTMLElement => {
   );
   page.append(header('library'), pageContent, footer());
 
-  void loadGames(gameCards);
+  void loadGames(cards);
 
   return page;
 };
