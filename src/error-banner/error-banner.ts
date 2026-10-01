@@ -18,10 +18,10 @@ export const errorBanner = (error: unknown, retry: () => void): HTMLElement => {
   });
   const errorMessage = createHTMLElement({
     tag: 'p',
-    classList: 'error_text',
+    classList: 'error_message',
   });
   if (error instanceof Error) {
-    errorMessage.textContent = `Error: ${error.message}`;
+    errorMessage.textContent = error.message;
   }
   const button = createHTMLElement({
     tag: 'button',

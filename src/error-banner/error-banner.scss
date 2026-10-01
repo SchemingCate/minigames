@@ -17,6 +17,10 @@
     font-size: var.$fnt-size-headline-medium;
     font-weight: var.$fnt-weight-medium;
   }
+  &_message {
+    font-size: var.$fnt-size-body-large;
+    font-weight: var.$fnt-weight-medium;
+  }
   &_button {
     font-size: var.$fnt-size-body-large;
     font-weight: var.$fnt-weight-bold;

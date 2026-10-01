@@ -2,6 +2,7 @@ import type {
   LibraryParameters,
   GameListResponse,
 } from '../helpers/interfaces';
+import { networkError, serverError } from './errors';
 
 export const fetchGames = async ({
   featured,
@@ -16,11 +17,21 @@ export const fetchGames = async ({
   const categoryParameter = category ?? 'all';
   const sortParameter = sort ?? 'rating-desc';
 
-  const response = await fetch(
-    `${import.meta.env.VITE_API_URL}/games?featured=${isFeatured}&page=${pageParameter}&limit=${limitParameter}&category=${categoryParameter}&sort=${sortParameter}`,
-  );
-  if (!response.ok) {
-    throw new Error(`Response status: ${response.status}`);
+  let response: Response;
+  try {
+    response = await fetch(
+      `${import.meta.env.VITE_API_URL}/games?featured=${isFeatured}&page=${pageParameter}&limit=${limitParameter}&category=${categoryParameter}&sort=${sortParameter}`,
+    );
+  } catch {
+    throw new networkError();
   }
-  return (await response.json()) as GameListResponse;
+  if (!response.ok) {
+    throw new serverError(response.status);
+  }
+
+  try {
+    return (await response.json()) as GameListResponse;
+  } catch {
+    throw new serverError(response.status, 'Invalid data');
+  }
 };
