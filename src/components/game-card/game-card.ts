@@ -100,6 +100,7 @@ export const fillGameCard = (card: HTMLElement, info: GameInfo): void => {
   if (feedbackContainer) fillFeedbackCount(feedbackContainer, info);
   card.classList.remove('card--loading');
   const image = card.querySelector<HTMLImageElement>('#cardImage');
+  // TODO tackle unavailable image case
   image!.setAttribute('src', getImageUrl(info.cardImage));
   image!.setAttribute('alt', 'info.name');
 };
