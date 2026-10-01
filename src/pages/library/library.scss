@@ -67,3 +67,11 @@ $gap-heading-paragraph: 8px;
     grid-template-rows: 392px;
   }
 }
+
+.snackbars {
+  position: fixed;
+  top: 0;
+  right: 50%;
+  transform: translateX(50%);
+  width: 400px;
+}

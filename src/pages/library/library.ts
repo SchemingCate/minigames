@@ -13,12 +13,14 @@ import {
 } from '../../components/game-card/game-card';
 import { errorBanner } from '../../components/error-banner/error-banner';
 import { emptyStateBanner } from '../../components/empty-state-banner/empty-state-banner';
+import { snackbar } from '../../components/snackbar/snackbar';
 
 const cardsPerLibraryPage = 6;
 
 const loadGames = async (
   container: HTMLElement,
   cards: HTMLElement[],
+  messageContainer: HTMLElement,
 ): Promise<void> => {
   try {
     const data = await fetchGames({ limit: cardsPerLibraryPage });
@@ -32,11 +34,13 @@ const loadGames = async (
     for (let index = 0; index < itemsPerPage; index++) {
       fillGameCard(cards[index], games[index]);
     }
+    messageContainer.append(snackbar('success', 'Success: Games loaded')); // TODO remove snackbar on when response doesn't need to have clarification
   } catch (error) {
+    messageContainer.append(snackbar('error', 'Error: failed to load games'));
     container.replaceChildren(
       errorBanner(error, () => {
         container.replaceChildren(...cards);
-        void loadGames(container, cards);
+        void loadGames(container, cards, messageContainer);
       }),
     );
   }
@@ -70,6 +74,11 @@ export const libraryPage = (): HTMLElement => {
   const cards = Array.from({ length: cardsPerLibraryPage }, createGameCard);
   for (const element of cards) gameCards.append(element);
 
+  const snackbarContainer = createHTMLElement({
+    tag: 'div',
+    classList: 'snackbars',
+  });
+
   pageContent.append(
     pageTitle,
     filterControls,
@@ -77,9 +86,10 @@ export const libraryPage = (): HTMLElement => {
     pagination(),
     gameModal(),
   );
-  page.append(header('library'), pageContent, footer());
+  // snackbarContainer.append(snackbar());
+  page.append(header('library'), pageContent, footer(), snackbarContainer);
 
-  void loadGames(gameCards, cards);
+  void loadGames(gameCards, cards, snackbarContainer);
 
   return page;
 };
