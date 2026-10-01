@@ -1,7 +1,7 @@
 import './game-modal.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import { getImageUrl } from '../../helpers/get-image-url';
-import { feedbackCount } from '../feedback-count/feedback-count';
+import { feedbackCountPlaceholder } from '../feedback-count/feedback-count';
 import { recordsTable } from '../records-table/records-table';
 
 import type { GameData } from '../../helpers/interfaces';
@@ -98,8 +98,8 @@ export const gameModal = (): HTMLElement => {
     classList: 'game-modal_content_main_header_feedback',
   });
   feedback.append(
-    feedbackCount('rating', gameData.rating),
-    feedbackCount('likes', gameData.likesCount),
+    feedbackCountPlaceholder('rating'),
+    feedbackCountPlaceholder('likes'),
   );
 
   gameHeader.append(gameTitle, feedback);

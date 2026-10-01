@@ -1,7 +1,10 @@
 import './game-card.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import { getImageUrl } from '../../helpers/get-image-url';
-import { feedbackCount } from '../feedback-count/feedback-count';
+import {
+  feedbackCountPlaceholder,
+  fillFeedbackCount,
+} from '../feedback-count/feedback-count';
 import type { GameInfo } from '../../helpers/interfaces';
 
 export const createGameCard = (): HTMLElement => {
@@ -45,9 +48,9 @@ export const createGameCard = (): HTMLElement => {
     classList: 'card_content_description',
   });
 
-  const rating = feedbackCount('rating', 4.9);
+  const rating = feedbackCountPlaceholder('rating');
 
-  const likes = feedbackCount('likes', 500);
+  const likes = feedbackCountPlaceholder('likes');
 
   const feedback = createHTMLElement({
     tag: 'div',
@@ -91,6 +94,10 @@ export const fillGameCard = (card: HTMLElement, info: GameInfo): void => {
   card.querySelector('.card_content_footer_price')!.textContent = info.price;
   card.querySelector('.card_content_description')!.textContent =
     info.shortDescription;
+  const feedbackContainer = card.querySelector<HTMLElement>(
+    '.card_content_footer_feedback',
+  );
+  if (feedbackContainer) fillFeedbackCount(feedbackContainer, info);
   card.classList.remove('card--loading');
   const image = card.querySelector<HTMLImageElement>('#cardImage');
   image!.setAttribute('src', getImageUrl(info.cardImage));
