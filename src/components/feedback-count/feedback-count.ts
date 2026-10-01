@@ -9,23 +9,17 @@ export const feedbackCountPlaceholder = (
   //TODO naming - feedbackItem?
   type: feedbackType,
 ): HTMLElement => {
-  // const countText =
-  //   type === 'rating'
-  //     ? count.toString()
-  //     : (Math.floor(count / 100) / 10).toFixed(1) + 'K';
   const classes =
     type === 'rating'
-      ? 'feedback-count feedback-count--rating'
-      : 'feedback-count feedback-count--likes';
+      ? 'feedback-count feedback-count--loading feedback-count--rating'
+      : 'feedback-count feedback-count--loading feedback-count--likes';
   const item = createHTMLElement({
     tag: 'span',
-    // textContent: countText,
     classList: classes,
   });
 
   const placeholder = createHTMLElement({
     tag: 'div',
-    textContent: 'placeholder',
   });
   item.append(placeholder);
 
@@ -37,7 +31,9 @@ export const fillFeedbackCount = (
   info: GameInfo,
 ): void => {
   const rating = container.querySelector('.feedback-count--rating');
+  rating?.classList.remove('feedback-count--loading');
   const likes = container.querySelector('.feedback-count--likes');
+  likes?.classList.remove('feedback-count--loading');
   if (rating) rating.textContent = info.rating.toString();
   if (likes)
     likes.textContent =

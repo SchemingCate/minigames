@@ -5,6 +5,7 @@
   align-items: center;
   gap: 4px;
   font-weight: var.$fnt-weight-bold;
+  height: 24px;
   font-size: var.$fnt-size-label-large;
   color: var.$col-on-primary;
   &::before {
@@ -21,6 +22,22 @@
     &::before {
       content: '\e838';
       color: var.$col-primary;
+    }
+  }
+
+  &--loading {
+    background-color: var.$col-outline;
+    width: 5ch;
+    border-radius: 4px;
+    animation: pulse 1.5s ease-in-out infinite;
+    &::before {
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulse {
+    50% {
+      opacity: 0.5;
     }
   }
 }
