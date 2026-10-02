@@ -18,6 +18,7 @@ import { snackbar } from '../../components/snackbar/snackbar';
 const cardsPerLibraryPage = 6;
 
 const loadGames = async (
+  //TODO refactor first
   container: HTMLElement,
   cards: HTMLElement[],
   messageContainer: HTMLElement,
@@ -67,17 +68,16 @@ export const libraryPage = (): HTMLElement => {
     tag: 'div',
     classList: 'controls',
   });
-  filterControls.append(filterChips(), sortDropdown());
+  const snackbarContainer = createHTMLElement({
+    tag: 'div',
+    classList: 'snackbars',
+  });
+  filterControls.append(filterChips(snackbarContainer), sortDropdown());
   pageTitle.append(pageTitleHeading, pageTitleDescription);
 
   const gameCards = createHTMLElement({ tag: 'div', classList: 'cards' });
   const cards = Array.from({ length: cardsPerLibraryPage }, createGameCard);
   for (const element of cards) gameCards.append(element);
-
-  const snackbarContainer = createHTMLElement({
-    tag: 'div',
-    classList: 'snackbars',
-  });
 
   pageContent.append(
     pageTitle,

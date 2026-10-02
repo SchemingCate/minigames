@@ -33,6 +33,23 @@ export interface Meta {
   appliedFilter: FilterValues;
 }
 
+export interface MetaCategories {
+  totalItems: number;
+  description: string;
+  additionalProp1?: object;
+}
+
+export interface Category {
+  slug: string;
+  label: string;
+  isDefault: boolean;
+}
+
+export interface CategoriesResponse {
+  data: Category[];
+  meta: MetaCategories;
+}
+
 export interface GameListResponse {
   data: GameInfo[];
   meta: Meta;
