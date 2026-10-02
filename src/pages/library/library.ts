@@ -14,34 +14,59 @@ import {
 import { errorBanner } from '../../components/error-banner/error-banner';
 import { emptyStateBanner } from '../../components/empty-state-banner/empty-state-banner';
 import { snackbar } from '../../components/snackbar/snackbar';
+import type { LibraryParameters } from '../../helpers/interfaces';
 
 const cardsPerLibraryPage = 6;
 
-const loadGames = async (
-  //TODO refactor first
-  container: HTMLElement,
-  cards: HTMLElement[],
-  messageContainer: HTMLElement,
+const gameCardsContainer = createHTMLElement({
+  tag: 'div',
+  classList: 'cards',
+});
+
+const snackbarContainer = createHTMLElement({
+  tag: 'div',
+  classList: 'snackbars',
+});
+
+export type LoadGames = (parameters: LibraryParameters) => Promise<void>;
+
+const loadGames: LoadGames = async (
+  //TODO needs refactoring first :')
+  parameters: LibraryParameters,
 ): Promise<void> => {
+  const cards = Array.from({ length: cardsPerLibraryPage }, createGameCard);
+  gameCardsContainer.replaceChildren('');
+  for (const element of cards) gameCardsContainer.append(element);
+
   try {
-    const data = await fetchGames({ limit: cardsPerLibraryPage });
+    const data = await fetchGames(parameters);
     const games = data.data;
 
     if (games.length === 0) {
-      container.replaceChildren(emptyStateBanner());
+      gameCardsContainer.replaceChildren(emptyStateBanner());
       return;
     }
+
     const itemsPerPage = data.meta.limit;
+    const totalItems = data.meta.totalItems;
     for (let index = 0; index < itemsPerPage; index++) {
-      fillGameCard(cards[index], games[index]);
+      if (index < totalItems) {
+        fillGameCard(cards[index], games[index]);
+        continue;
+      }
+      cards[index].remove();
+      console.log('cards[index]');
+      console.log(cards[index]);
     }
-    messageContainer.append(snackbar('success', 'Success: Games loaded')); // TODO remove snackbar on when response doesn't need to have clarification
+
+    snackbarContainer.append(snackbar('success', 'Success: Games loaded')); // TODO remove snackbar on when response doesn't need to have clarification
   } catch (error) {
-    messageContainer.append(snackbar('error', 'Error: failed to load games'));
-    container.replaceChildren(
+    console.error(error);
+    snackbarContainer.append(snackbar('error', 'Error: failed to load games'));
+    gameCardsContainer.replaceChildren(
       errorBanner(error, () => {
-        container.replaceChildren(...cards);
-        void loadGames(container, cards, messageContainer);
+        gameCardsContainer.replaceChildren(...cards);
+        void loadGames(parameters);
       }),
     );
   }
@@ -68,28 +93,28 @@ export const libraryPage = (): HTMLElement => {
     tag: 'div',
     classList: 'controls',
   });
-  const snackbarContainer = createHTMLElement({
-    tag: 'div',
-    classList: 'snackbars',
-  });
-  filterControls.append(filterChips(snackbarContainer), sortDropdown());
+
+  filterControls.append(
+    filterChips(snackbarContainer, loadGames, { limit: cardsPerLibraryPage }),
+    sortDropdown(),
+  );
   pageTitle.append(pageTitleHeading, pageTitleDescription);
 
-  const gameCards = createHTMLElement({ tag: 'div', classList: 'cards' });
   const cards = Array.from({ length: cardsPerLibraryPage }, createGameCard);
-  for (const element of cards) gameCards.append(element);
+
+  for (const element of cards) gameCardsContainer.append(element);
 
   pageContent.append(
     pageTitle,
     filterControls,
-    gameCards,
+    gameCardsContainer,
     pagination(),
     gameModal(),
   );
   // snackbarContainer.append(snackbar());
   page.append(header('library'), pageContent, footer(), snackbarContainer);
 
-  void loadGames(gameCards, cards, snackbarContainer);
+  void loadGames({ limit: cardsPerLibraryPage });
 
   return page;
 };

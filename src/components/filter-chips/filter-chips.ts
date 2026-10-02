@@ -2,6 +2,9 @@ import './filter-chips.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import { fetchCategories } from '../../api/fetch-categories';
 import { snackbar } from '../snackbar/snackbar';
+import type { LibraryParameters } from '../../helpers/interfaces';
+import type { GameCategory } from '../../helpers/types';
+import type { LoadGames } from '../../pages/library/library';
 
 const chips = createHTMLElement({
   tag: 'div',
@@ -16,7 +19,7 @@ const loadCategories = async (messageContainer: HTMLElement): Promise<void> => {
   try {
     const data = await fetchCategories();
     const categories = data.data;
-    for (const { label, isDefault } of categories) {
+    for (const { slug, label, isDefault } of categories) {
       const chip = createHTMLElement({
         tag: 'button',
         classList: 'chips_item',
@@ -25,6 +28,7 @@ const loadCategories = async (messageContainer: HTMLElement): Promise<void> => {
           ['type', 'button'],
           ['role', 'radio'],
           ['aria-checked', isDefault.toString()],
+          ['data-category', slug],
         ],
       });
       if (isDefault) chip.classList.add('chips_item--active');
@@ -39,10 +43,16 @@ const loadCategories = async (messageContainer: HTMLElement): Promise<void> => {
   }
 };
 
-export const filterChips = (messageContainer: HTMLElement): HTMLElement => {
+export const filterChips = (
+  messageContainer: HTMLElement,
+  updateUIFunction: LoadGames,
+  UIParameters: LibraryParameters,
+): HTMLElement => {
   chips.addEventListener('click', (event) => {
     //TODO fix delay when hover is active
-    const pressedChip = (event.target as HTMLElement).closest('.chips_item');
+    const pressedChip = (event.target as HTMLElement).closest(
+      '.chips_item',
+    ) as HTMLElement;
     if (!pressedChip) return;
     const allChips = chips.querySelectorAll('.chips_item');
     for (const chipButton of allChips) {
@@ -50,6 +60,12 @@ export const filterChips = (messageContainer: HTMLElement): HTMLElement => {
       chipButton.classList.toggle('chips_item--active', isPressedChip);
       chipButton.setAttribute('aria-checked', isPressedChip.toString());
     }
+
+    const parameters = UIParameters;
+    const category = pressedChip.dataset.category as GameCategory;
+    parameters.category = category;
+
+    void updateUIFunction(parameters);
   });
 
   void loadCategories(messageContainer);
