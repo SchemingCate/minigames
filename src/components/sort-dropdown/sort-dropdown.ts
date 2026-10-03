@@ -51,7 +51,7 @@ export const sortDropdown = (updateUI: LoadGames): HTMLElement => {
     ],
   });
 
-  let selectedId = 'rating-highest';
+  let selectedId: SortType = 'rating-desc';
   for (const { slug, label, isActive } of sortOptions) {
     const optionElement = createHTMLElement({
       tag: 'li',
@@ -81,11 +81,11 @@ export const sortDropdown = (updateUI: LoadGames): HTMLElement => {
     if (!target.classList.contains('sort_list_item')) return;
     const previous = sort.querySelector(`#${selectedId}`);
     previous?.setAttribute('aria-selected', 'false');
-    selectedId = target.id;
+    selectedId = target.id as SortType; //TODO refactor
     target.setAttribute('aria-selected', 'true');
     sortButton.textContent = `Sort by: ${target.textContent}`;
 
-    const sortParameter = selectedId as SortType; //TODO refactor
+    const sortParameter = selectedId;
     updateSort(sortParameter);
     void updateUI();
   });
