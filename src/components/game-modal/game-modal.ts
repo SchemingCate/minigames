@@ -1,13 +1,13 @@
 import './game-modal.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import { getImageUrl } from '../../helpers/get-image-url';
-import { feedbackCount } from '../feedback-count/feedback-count';
+import { feedbackCountPlaceholder } from '../feedback-count/feedback-count';
 import { recordsTable } from '../records-table/records-table';
 
-import type { gameData } from '../../helpers/interfaces';
-import type { gameSpecs } from '../../helpers/interfaces';
+import type { GameData } from '../../helpers/interfaces';
+import type { GameSpecs } from '../../helpers/interfaces';
 
-const gameData: gameData = {
+const gameData: GameData = {
   slug: 'tukoni-forest-keepers',
   name: 'Tukoni: Forest Keepers',
   heroImage: '/assets/images/games/tukoni-forest-keepers-hero.jpg',
@@ -98,8 +98,8 @@ export const gameModal = (): HTMLElement => {
     classList: 'game-modal_content_main_header_feedback',
   });
   feedback.append(
-    feedbackCount('rating', gameData.rating),
-    feedbackCount('likes', gameData.likesCount),
+    feedbackCountPlaceholder('rating'),
+    feedbackCountPlaceholder('likes'),
   );
 
   gameHeader.append(gameTitle, feedback);
@@ -109,7 +109,7 @@ export const gameModal = (): HTMLElement => {
     classList: 'game-modal_content_main_specs',
   });
   for (const [spec, value] of Object.entries(gameData.specs) as [
-    keyof gameSpecs,
+    keyof GameSpecs,
     string,
   ][]) {
     const item = createHTMLElement({
