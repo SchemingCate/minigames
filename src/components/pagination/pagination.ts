@@ -104,7 +104,9 @@ export const updatePagination = (
     return;
   }
 
-  const maxVisible = window.innerWidth <= 425 ? 3 : 4;
+  const threshold = globalThis.matchMedia('(max-width: 425px)');
+
+  const maxVisible = threshold.matches ? 3 : 4;
 
   const count = Math.min(maxVisible, totalPages);
 
@@ -132,4 +134,8 @@ export const updatePagination = (
   const isLastPage = currentPage === totalPages;
   previous.toggleAttribute('disabled', isFirstPage);
   next.toggleAttribute('disabled', isLastPage);
+
+  threshold.addEventListener('change', () => {
+    updatePagination(currentPage, totalPages);
+  });
 };

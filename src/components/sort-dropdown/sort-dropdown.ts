@@ -2,7 +2,10 @@ import './sort-dropdown.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import type { LoadGames } from '../../pages/library/library';
 import type { SortType } from '../../helpers/types';
-import { updateSort } from '../../api/fetch-games/fetch-games-parameters';
+import {
+  updatePage,
+  updateSort,
+} from '../../api/fetch-games/fetch-games-parameters';
 
 const sortOptions = [
   {
@@ -86,6 +89,7 @@ export const sortDropdown = (updateUI: LoadGames): HTMLElement => {
     sortButton.textContent = `Sort by: ${target.textContent}`;
 
     const sortParameter = selectedId;
+    updatePage(1);
     updateSort(sortParameter);
     void updateUI();
   });
