@@ -1,14 +1,28 @@
 import './pagination.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import type { LoadGames } from '../../pages/library/library';
-import { updatePage } from '../../api/fetch-games/fetch-games-parameters';
-
-const state = {
-  currentPage: 1,
-  totalPages: 1,
-};
+import {
+  parameters,
+  updatePage,
+} from '../../api/fetch-games/fetch-games-parameters';
 
 const pageNumbersContainer = createHTMLElement({ tag: 'div' });
+
+const previous = createHTMLElement({
+  tag: 'button',
+  textContent: '<',
+  classList: 'pagination_button pagination_button--arrow',
+  attributes: [
+    ['disabled', ''],
+    ['data-direction', 'previous'],
+  ],
+});
+const next = createHTMLElement({
+  tag: 'button',
+  textContent: '>',
+  classList: 'pagination_button pagination_button--arrow',
+  attributes: [['data-direction', 'next']],
+});
 
 export const pagination = (updateUI: LoadGames): HTMLElement => {
   const pagination = createHTMLElement({
@@ -16,21 +30,7 @@ export const pagination = (updateUI: LoadGames): HTMLElement => {
     classList: 'pagination',
     attributes: [['aria-label', 'pagination']],
   });
-  const previous = createHTMLElement({
-    tag: 'button',
-    textContent: '<',
-    classList: 'pagination_button pagination_button--arrow',
-    attributes: [
-      ['disabled', ''],
-      ['data-direction', 'previous'],
-    ],
-  });
-  const next = createHTMLElement({
-    tag: 'button',
-    textContent: '>',
-    classList: 'pagination_button pagination_button--arrow',
-    attributes: [['data-direction', 'next']],
-  });
+
   pagination.append(previous, pageNumbersContainer, next);
 
   const page = createHTMLElement({
@@ -42,7 +42,6 @@ export const pagination = (updateUI: LoadGames): HTMLElement => {
       ['aria-current', 'page'],
     ],
   });
-
   pageNumbersContainer.append(page);
 
   pagination.addEventListener('click', (event) => {
@@ -57,30 +56,17 @@ export const pagination = (updateUI: LoadGames): HTMLElement => {
     if (!button && !buttonArrow) return;
 
     if (buttonArrow) {
-      state.currentPage =
+      const page =
         buttonArrow.dataset.direction === 'previous'
-          ? state.currentPage - 1
-          : state.currentPage + 1;
+          ? parameters.page - 1
+          : parameters.page + 1;
+      updatePage(page);
     }
 
     if (button) {
       updatePage(Number(button.dataset.page));
     }
 
-    // const allPagesButtons = pagination.querySelectorAll<HTMLButtonElement>(
-    //   '.pagination_button--page',
-    // );
-    // const isFirstPage = state.currentPage === 1;
-    // const isLastPage = state.currentPage === state.totalPages;
-    // previous.toggleAttribute('disabled', isFirstPage);
-    // next.toggleAttribute('disabled', isLastPage);
-
-    // for (const pageButton of allPagesButtons) {
-    //   if (pageButton.hasAttribute('aria-current'))
-    //     pageButton.removeAttribute('aria-current');
-    //   if (pageButton.dataset.page === state.currentPage.toString())
-    //     pageButton.setAttribute('aria-current', 'page');
-    // }
     void updateUI();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -117,4 +103,9 @@ export const updatePagination = (
     if (pageNumber === currentPage) page.setAttribute('aria-current', 'page');
     pageNumbersContainer.append(page);
   }
+
+  const isFirstPage = currentPage === 1;
+  const isLastPage = currentPage === totalPages;
+  previous.toggleAttribute('disabled', isFirstPage);
+  next.toggleAttribute('disabled', isLastPage);
 };
