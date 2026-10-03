@@ -82,6 +82,7 @@ export const pagination = (updateUI: LoadGames): HTMLElement => {
     //     pageButton.setAttribute('aria-current', 'page');
     // }
     void updateUI();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   return pagination;
