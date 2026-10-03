@@ -54,13 +54,10 @@ const loadGames = async (
         continue;
       }
       cards[index].remove();
-      console.log('cards[index]');
-      console.log(cards[index]);
     }
 
     snackbarContainer.append(snackbar('success', 'Success: Games loaded')); // TODO remove snackbar on when response doesn't need to have clarification
   } catch (error) {
-    console.error(error);
     snackbarContainer.append(snackbar('error', 'Error: failed to load games'));
     gameCardsContainer.replaceChildren(
       errorBanner(error, () => {

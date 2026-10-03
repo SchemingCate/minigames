@@ -35,11 +35,10 @@ const loadCategories = async (messageContainer: HTMLElement): Promise<void> => {
       chips.append(chip);
     }
     messageContainer.append(snackbar('success', 'Success: Categories loaded'));
-  } catch (error) {
+  } catch {
     messageContainer.append(
       snackbar('error', 'Error: failed to load categories'),
     );
-    console.error(error);
   }
 };
 
