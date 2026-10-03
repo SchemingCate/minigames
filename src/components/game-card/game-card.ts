@@ -6,6 +6,9 @@ import {
   fillFeedbackCount,
 } from '../feedback-count/feedback-count';
 import type { GameInfo } from '../../helpers/interfaces';
+// import { button } from '../button/button';
+
+// let button: HTMLButtonElement;
 
 export const createGameCard = (): HTMLElement => {
   const card = createHTMLElement({
@@ -72,6 +75,9 @@ export const createGameCard = (): HTMLElement => {
       ['commandfor', 'gameModal'],
     ],
   });
+
+  // button = detailsButton;
+
   const footer = createHTMLElement({
     tag: 'div',
     classList: 'card_content_footer',
@@ -94,10 +100,24 @@ export const fillGameCard = (card: HTMLElement, info: GameInfo): void => {
   card.querySelector('.card_content_footer_price')!.textContent = info.price;
   card.querySelector('.card_content_description')!.textContent =
     info.shortDescription;
+  // button.setAttribute('dataset-game', info.slug);
+  const button = card.querySelector<HTMLButtonElement>(
+    '.card_content_footer_button',
+  );
+  if (button) {
+    button.dataset.game = info.slug;
+  }
+
   const feedbackContainer = card.querySelector<HTMLElement>(
     '.card_content_footer_feedback',
   );
-  if (feedbackContainer) fillFeedbackCount(feedbackContainer, info);
+  if (feedbackContainer) {
+    const feedbackCount = {
+      likes: info.likesCount,
+      rating: info.rating,
+    };
+    fillFeedbackCount(feedbackContainer, feedbackCount);
+  }
   card.classList.remove('card--loading');
   const image = card.querySelector<HTMLImageElement>('#cardImage');
   // TODO tackle unavailable image case

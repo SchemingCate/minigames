@@ -9,7 +9,10 @@ const placeRewardMap = {
 };
 
 export const recordsTable = (recordsData: Record[]): HTMLElement => {
-  const records = createHTMLElement({ tag: 'ol', classList: 'records' });
+  const records = createHTMLElement({
+    tag: 'ol',
+    classList: 'records records--loading',
+  });
 
   //TODO : add dynamic time
   for (const { position, playerName, score } of recordsData) {

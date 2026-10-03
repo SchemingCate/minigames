@@ -29,4 +29,14 @@
       color: var.$col-on-bg;
     }
   }
+
+  &--loading {
+    .records_item {
+      background-color: var.$col-outline;
+      color: transparent;
+      & * {
+        color: transparent;
+      }
+    }
+  }
 }

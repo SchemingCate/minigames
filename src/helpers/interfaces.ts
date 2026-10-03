@@ -20,6 +20,16 @@ export interface LibraryParameters {
   sort: SortType;
 }
 
+export interface FeedbackCount {
+  likes: number;
+  rating: number;
+}
+
+export interface GameParameters {
+  userEmail?: string;
+  gameSlug: string;
+}
+
 export interface FilterValues {
   category: GameCategory;
   sort: SortType;
@@ -54,6 +64,22 @@ export interface GameListResponse {
   data: GameInfo[];
   meta: Meta;
   additionalProp1?: object;
+}
+
+export interface GameDetails {
+  slug: string;
+  name: string;
+  heroImage: string;
+  rating: number;
+  likesCount: number;
+  isLikedByCurrentUser: boolean;
+  fullDescription: string;
+  specs: GameSpecs;
+  topRecords: Record[];
+}
+
+export interface GameDetailsResponse {
+  data: GameDetails;
 }
 
 export interface Record {
