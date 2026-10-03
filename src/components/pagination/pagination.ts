@@ -1,7 +1,12 @@
 import './pagination.scss';
 import { createHTMLElement } from '../../helpers/dom';
 
-const pageCount = 4;
+const state = {
+  currentPage: 1,
+  totalPages: 1,
+};
+
+const pageNumbersContainer = createHTMLElement({ tag: 'div' });
 
 export const pagination = (): HTMLElement => {
   const pagination = createHTMLElement({
@@ -18,26 +23,25 @@ export const pagination = (): HTMLElement => {
       ['data-direction', 'previous'],
     ],
   });
-  pagination.append(previous);
-  let currentPage = 1;
-  for (let index = 0; index < pageCount; index++) {
-    const pageNumber = index + 1;
-    const page = createHTMLElement({
-      tag: 'button',
-      textContent: pageNumber.toString(),
-      classList: 'pagination_button pagination_button--page',
-      attributes: [['data-page', pageNumber.toString()]],
-    });
-    if (index + 1 === currentPage) page.setAttribute('aria-current', 'page');
-    pagination.append(page);
-  }
   const next = createHTMLElement({
     tag: 'button',
     textContent: '>',
     classList: 'pagination_button pagination_button--arrow',
     attributes: [['data-direction', 'next']],
   });
-  pagination.append(next);
+  pagination.append(previous, pageNumbersContainer, next);
+
+  const page = createHTMLElement({
+    tag: 'button',
+    textContent: '1',
+    classList: 'pagination_button pagination_button--page',
+    attributes: [
+      ['data-page', '1'],
+      ['aria-current', 'page'],
+    ],
+  });
+
+  pageNumbersContainer.append(page);
 
   pagination.addEventListener('click', (event) => {
     const button = (event.target as HTMLElement).closest<HTMLButtonElement>(
@@ -51,31 +55,50 @@ export const pagination = (): HTMLElement => {
     if (!button && !buttonArrow) return;
 
     if (buttonArrow) {
-      currentPage =
+      state.currentPage =
         buttonArrow.dataset.direction === 'previous'
-          ? currentPage - 1
-          : currentPage + 1;
+          ? state.currentPage - 1
+          : state.currentPage + 1;
     }
 
     if (button) {
-      currentPage = Number(button.dataset.page);
+      state.currentPage = Number(button.dataset.page);
     }
 
     const allPagesButtons = pagination.querySelectorAll<HTMLButtonElement>(
       '.pagination_button--page',
     );
-    const isFirstPage = currentPage === 1;
-    const isLastPage = currentPage === pageCount;
+    const isFirstPage = state.currentPage === 1;
+    const isLastPage = state.currentPage === state.totalPages;
     previous.toggleAttribute('disabled', isFirstPage);
     next.toggleAttribute('disabled', isLastPage);
 
     for (const pageButton of allPagesButtons) {
       if (pageButton.hasAttribute('aria-current'))
         pageButton.removeAttribute('aria-current');
-      if (pageButton.dataset.page === currentPage.toString())
+      if (pageButton.dataset.page === state.currentPage.toString())
         pageButton.setAttribute('aria-current', 'page');
     }
   });
 
   return pagination;
+};
+
+export const updatePagination = (
+  currentPage: number,
+  totalPages: number,
+): void => {
+  pageNumbersContainer.replaceChildren('');
+
+  for (let index = 0; index < totalPages; index++) {
+    const pageNumber = index + 1;
+    const page = createHTMLElement({
+      tag: 'button',
+      textContent: pageNumber.toString(),
+      classList: 'pagination_button pagination_button--page',
+      attributes: [['data-page', pageNumber.toString()]],
+    });
+    if (index + 1 === currentPage) page.setAttribute('aria-current', 'page');
+    pageNumbersContainer.append(page);
+  }
 };

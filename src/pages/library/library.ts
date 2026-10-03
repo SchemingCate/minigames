@@ -4,7 +4,10 @@ import { footer } from '../../components/footer/footer';
 import { createHTMLElement } from '../../helpers/dom';
 import { filterChips } from '../../components/filter-chips/filter-chips';
 import { sortDropdown } from '../../components/sort-dropdown/sort-dropdown';
-import { pagination } from '../../components/pagination/pagination';
+import {
+  pagination,
+  updatePagination,
+} from '../../components/pagination/pagination';
 import { gameModal } from '../../components/game-modal/game-modal';
 import { fetchGames } from '../../api/fetch-games/fetch-games';
 import {
@@ -17,6 +20,8 @@ import { snackbar } from '../../components/snackbar/snackbar';
 import { updateLimit } from '../../api/fetch-games/fetch-games-parameters';
 
 const cardsPerLibraryPage = 6;
+
+const pageContent = createHTMLElement({ tag: 'main', classList: 'library' });
 
 const gameCardsContainer = createHTMLElement({
   tag: 'div',
@@ -56,6 +61,10 @@ const loadGames = async (
       cards[index].remove();
     }
 
+    const currentPage = data.meta.page;
+    const totalPages = data.meta.totalPages;
+    updatePagination(currentPage, totalPages);
+
     snackbarContainer.append(snackbar('success', 'Success: Games loaded')); // TODO remove snackbar on when response doesn't need to have clarification
   } catch (error) {
     snackbarContainer.append(snackbar('error', 'Error: failed to load games'));
@@ -72,7 +81,7 @@ export const libraryPage = (): HTMLElement => {
   updateLimit(cardsPerLibraryPage);
 
   const page = createHTMLElement({ tag: 'div' });
-  const pageContent = createHTMLElement({ tag: 'main', classList: 'library' });
+
   const pageTitle = createHTMLElement({
     tag: 'div',
     classList: 'library_page-title',
@@ -106,8 +115,8 @@ export const libraryPage = (): HTMLElement => {
     pageTitle,
     filterControls,
     gameCardsContainer,
-    pagination(),
     gameModal(),
+    pagination(),
   );
   // snackbarContainer.append(snackbar());
   page.append(header('library'), pageContent, footer(), snackbarContainer);
