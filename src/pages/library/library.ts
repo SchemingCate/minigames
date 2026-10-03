@@ -46,6 +46,10 @@ const loadGames = async (
     const data = await fetchGames();
     const games = data.data;
 
+    const currentPage = data.meta.page;
+    const totalPages = data.meta.totalPages;
+    updatePagination(currentPage, totalPages);
+
     if (games.length === 0) {
       gameCardsContainer.replaceChildren(emptyStateBanner());
       return;
@@ -53,17 +57,18 @@ const loadGames = async (
 
     const itemsPerPage = data.meta.limit;
     const totalItems = data.meta.totalItems;
+    const page = data.meta.page;
+    const itemsOnCurrentPage = Math.min(
+      itemsPerPage,
+      totalItems - (page - 1) * itemsPerPage,
+    );
     for (let index = 0; index < itemsPerPage; index++) {
-      if (index < totalItems) {
+      if (index < itemsOnCurrentPage) {
         fillGameCard(cards[index], games[index]);
         continue;
       }
       cards[index].remove();
     }
-
-    const currentPage = data.meta.page;
-    const totalPages = data.meta.totalPages;
-    updatePagination(currentPage, totalPages);
 
     snackbarContainer.append(snackbar('success', 'Success: Games loaded')); // TODO remove snackbar on when response doesn't need to have clarification
   } catch (error) {
@@ -116,7 +121,7 @@ export const libraryPage = (): HTMLElement => {
     filterControls,
     gameCardsContainer,
     gameModal(),
-    pagination(),
+    pagination(loadGames),
   );
   // snackbarContainer.append(snackbar());
   page.append(header('library'), pageContent, footer(), snackbarContainer);

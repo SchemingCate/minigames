@@ -1,5 +1,7 @@
 import './pagination.scss';
 import { createHTMLElement } from '../../helpers/dom';
+import type { LoadGames } from '../../pages/library/library';
+import { updatePage } from '../../api/fetch-games/fetch-games-parameters';
 
 const state = {
   currentPage: 1,
@@ -8,7 +10,7 @@ const state = {
 
 const pageNumbersContainer = createHTMLElement({ tag: 'div' });
 
-export const pagination = (): HTMLElement => {
+export const pagination = (updateUI: LoadGames): HTMLElement => {
   const pagination = createHTMLElement({
     tag: 'div',
     classList: 'pagination',
@@ -62,23 +64,24 @@ export const pagination = (): HTMLElement => {
     }
 
     if (button) {
-      state.currentPage = Number(button.dataset.page);
+      updatePage(Number(button.dataset.page));
     }
 
-    const allPagesButtons = pagination.querySelectorAll<HTMLButtonElement>(
-      '.pagination_button--page',
-    );
-    const isFirstPage = state.currentPage === 1;
-    const isLastPage = state.currentPage === state.totalPages;
-    previous.toggleAttribute('disabled', isFirstPage);
-    next.toggleAttribute('disabled', isLastPage);
+    // const allPagesButtons = pagination.querySelectorAll<HTMLButtonElement>(
+    //   '.pagination_button--page',
+    // );
+    // const isFirstPage = state.currentPage === 1;
+    // const isLastPage = state.currentPage === state.totalPages;
+    // previous.toggleAttribute('disabled', isFirstPage);
+    // next.toggleAttribute('disabled', isLastPage);
 
-    for (const pageButton of allPagesButtons) {
-      if (pageButton.hasAttribute('aria-current'))
-        pageButton.removeAttribute('aria-current');
-      if (pageButton.dataset.page === state.currentPage.toString())
-        pageButton.setAttribute('aria-current', 'page');
-    }
+    // for (const pageButton of allPagesButtons) {
+    //   if (pageButton.hasAttribute('aria-current'))
+    //     pageButton.removeAttribute('aria-current');
+    //   if (pageButton.dataset.page === state.currentPage.toString())
+    //     pageButton.setAttribute('aria-current', 'page');
+    // }
+    void updateUI();
   });
 
   return pagination;
@@ -90,7 +93,19 @@ export const updatePagination = (
 ): void => {
   pageNumbersContainer.replaceChildren('');
 
-  for (let index = 0; index < totalPages; index++) {
+  const firstPage = createHTMLElement({
+    tag: 'button',
+    textContent: '1',
+    classList: 'pagination_button pagination_button--page',
+    attributes: [['data-page', '1']],
+  });
+
+  if (totalPages === 0 || currentPage === 1)
+    firstPage.setAttribute('aria-current', 'page');
+
+  pageNumbersContainer.append(firstPage);
+
+  for (let index = 1; index < totalPages; index++) {
     const pageNumber = index + 1;
     const page = createHTMLElement({
       tag: 'button',
@@ -98,7 +113,7 @@ export const updatePagination = (
       classList: 'pagination_button pagination_button--page',
       attributes: [['data-page', pageNumber.toString()]],
     });
-    if (index + 1 === currentPage) page.setAttribute('aria-current', 'page');
+    if (pageNumber === currentPage) page.setAttribute('aria-current', 'page');
     pageNumbersContainer.append(page);
   }
 };
