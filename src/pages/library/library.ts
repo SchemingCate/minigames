@@ -6,7 +6,7 @@ import { filterChips } from '../../components/filter-chips/filter-chips';
 import { sortDropdown } from '../../components/sort-dropdown/sort-dropdown';
 import { pagination } from '../../components/pagination/pagination';
 import { gameModal } from '../../components/game-modal/game-modal';
-import { fetchGames } from '../../api/fetch-games';
+import { fetchGames } from '../../api/fetch-games/fetch-games';
 import {
   createGameCard,
   fillGameCard,
@@ -14,7 +14,7 @@ import {
 import { errorBanner } from '../../components/error-banner/error-banner';
 import { emptyStateBanner } from '../../components/empty-state-banner/empty-state-banner';
 import { snackbar } from '../../components/snackbar/snackbar';
-import type { LibraryParameters } from '../../helpers/interfaces';
+import { updateLimit } from '../../api/fetch-games/fetch-games-parameters';
 
 const cardsPerLibraryPage = 6;
 
@@ -28,18 +28,17 @@ const snackbarContainer = createHTMLElement({
   classList: 'snackbars',
 });
 
-export type LoadGames = (parameters: LibraryParameters) => Promise<void>;
+export type LoadGames = () => Promise<void>;
 
-const loadGames: LoadGames = async (
+const loadGames = async (
   //TODO needs refactoring first :')
-  parameters: LibraryParameters,
 ): Promise<void> => {
   const cards = Array.from({ length: cardsPerLibraryPage }, createGameCard);
   gameCardsContainer.replaceChildren('');
   for (const element of cards) gameCardsContainer.append(element);
 
   try {
-    const data = await fetchGames(parameters);
+    const data = await fetchGames();
     const games = data.data;
 
     if (games.length === 0) {
@@ -66,13 +65,15 @@ const loadGames: LoadGames = async (
     gameCardsContainer.replaceChildren(
       errorBanner(error, () => {
         gameCardsContainer.replaceChildren(...cards);
-        void loadGames(parameters);
+        void loadGames();
       }),
     );
   }
 };
 
 export const libraryPage = (): HTMLElement => {
+  updateLimit(cardsPerLibraryPage);
+
   const page = createHTMLElement({ tag: 'div' });
   const pageContent = createHTMLElement({ tag: 'main', classList: 'library' });
   const pageTitle = createHTMLElement({
@@ -95,8 +96,8 @@ export const libraryPage = (): HTMLElement => {
   });
 
   filterControls.append(
-    filterChips(snackbarContainer, loadGames, { limit: cardsPerLibraryPage }),
-    sortDropdown(),
+    filterChips(snackbarContainer, loadGames),
+    sortDropdown(loadGames),
   );
   pageTitle.append(pageTitleHeading, pageTitleDescription);
 
@@ -114,7 +115,7 @@ export const libraryPage = (): HTMLElement => {
   // snackbarContainer.append(snackbar());
   page.append(header('library'), pageContent, footer(), snackbarContainer);
 
-  void loadGames({ limit: cardsPerLibraryPage });
+  void loadGames();
 
   return page;
 };

@@ -2,9 +2,9 @@ import './filter-chips.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import { fetchCategories } from '../../api/fetch-categories';
 import { snackbar } from '../snackbar/snackbar';
-import type { LibraryParameters } from '../../helpers/interfaces';
 import type { GameCategory } from '../../helpers/types';
 import type { LoadGames } from '../../pages/library/library';
+import { updateCategory } from '../../api/fetch-games/fetch-games-parameters';
 
 const chips = createHTMLElement({
   tag: 'div',
@@ -45,8 +45,7 @@ const loadCategories = async (messageContainer: HTMLElement): Promise<void> => {
 
 export const filterChips = (
   messageContainer: HTMLElement,
-  updateUIFunction: LoadGames,
-  UIParameters: LibraryParameters,
+  updateUI: LoadGames,
 ): HTMLElement => {
   chips.addEventListener('click', (event) => {
     //TODO fix delay when hover is active
@@ -61,11 +60,10 @@ export const filterChips = (
       chipButton.setAttribute('aria-checked', isPressedChip.toString());
     }
 
-    const parameters = UIParameters;
     const category = pressedChip.dataset.category as GameCategory;
-    parameters.category = category;
+    updateCategory(category);
 
-    void updateUIFunction(parameters);
+    void updateUI();
   });
 
   void loadCategories(messageContainer);
