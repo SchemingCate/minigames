@@ -6,7 +6,10 @@ import {
   updatePage,
 } from '../../api/fetch-games/fetch-games-parameters';
 
-const pageNumbersContainer = createHTMLElement({ tag: 'div' });
+const pageNumbersContainer = createHTMLElement({
+  tag: 'div',
+  classList: 'pagination_container',
+});
 
 const previous = createHTMLElement({
   tag: 'button',
@@ -17,11 +20,15 @@ const previous = createHTMLElement({
     ['data-direction', 'previous'],
   ],
 });
+
 const next = createHTMLElement({
   tag: 'button',
   textContent: '>',
   classList: 'pagination_button pagination_button--arrow',
-  attributes: [['data-direction', 'next']],
+  attributes: [
+    ['disabled', ''],
+    ['data-direction', 'next'],
+  ],
 });
 
 export const pagination = (updateUI: LoadGames): HTMLElement => {
@@ -80,20 +87,37 @@ export const updatePagination = (
 ): void => {
   pageNumbersContainer.replaceChildren('');
 
-  const firstPage = createHTMLElement({
-    tag: 'button',
-    textContent: '1',
-    classList: 'pagination_button pagination_button--page',
-    attributes: [['data-page', '1']],
-  });
+  if (totalPages <= 1) {
+    const firstPage = createHTMLElement({
+      tag: 'button',
+      textContent: '1',
+      classList: 'pagination_button pagination_button--page',
+      attributes: [['data-page', '1']],
+    });
 
-  if (totalPages === 0 || currentPage === 1)
+    pageNumbersContainer.append(firstPage);
+
     firstPage.setAttribute('aria-current', 'page');
 
-  pageNumbersContainer.append(firstPage);
+    previous.setAttribute('disabled', '');
+    next.setAttribute('disabled', '');
+    return;
+  }
 
-  for (let index = 1; index < totalPages; index++) {
-    const pageNumber = index + 1;
+  const maxVisible = window.innerWidth <= 425 ? 3 : 4;
+
+  const count = Math.min(maxVisible, totalPages);
+
+  let start = currentPage - Math.floor((count - 1) / 2);
+
+  start = Math.max(1, Math.min(start, totalPages - count + 1));
+
+  const visiblePagesNumbers = Array.from(
+    { length: count },
+    (_, index) => start + index,
+  );
+
+  for (const pageNumber of visiblePagesNumbers) {
     const page = createHTMLElement({
       tag: 'button',
       textContent: pageNumber.toString(),

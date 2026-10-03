@@ -30,4 +30,8 @@ $button-size: 40px;
       color: var.$col-white;
     }
   }
+  &_container {
+    display: flex;
+    gap: $button-gap;
+  }
 }
