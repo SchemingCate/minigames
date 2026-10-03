@@ -4,7 +4,10 @@ import { footer } from '../../components/footer/footer';
 import { createHTMLElement } from '../../helpers/dom';
 import { filterChips } from '../../components/filter-chips/filter-chips';
 import { sortDropdown } from '../../components/sort-dropdown/sort-dropdown';
-import { pagination } from '../../components/pagination/pagination';
+import {
+  pagination,
+  updatePagination,
+} from '../../components/pagination/pagination';
 import { gameModal } from '../../components/game-modal/game-modal';
 import { fetchGames } from '../../api/fetch-games/fetch-games';
 import {
@@ -17,6 +20,8 @@ import { snackbar } from '../../components/snackbar/snackbar';
 import { updateLimit } from '../../api/fetch-games/fetch-games-parameters';
 
 const cardsPerLibraryPage = 6;
+
+const pageContent = createHTMLElement({ tag: 'main', classList: 'library' });
 
 const gameCardsContainer = createHTMLElement({
   tag: 'div',
@@ -41,6 +46,10 @@ const loadGames = async (
     const data = await fetchGames();
     const games = data.data;
 
+    const currentPage = data.meta.page;
+    const totalPages = data.meta.totalPages;
+    updatePagination(currentPage, totalPages);
+
     if (games.length === 0) {
       gameCardsContainer.replaceChildren(emptyStateBanner());
       return;
@@ -48,8 +57,13 @@ const loadGames = async (
 
     const itemsPerPage = data.meta.limit;
     const totalItems = data.meta.totalItems;
+    const page = data.meta.page;
+    const itemsOnCurrentPage = Math.min(
+      itemsPerPage,
+      totalItems - (page - 1) * itemsPerPage,
+    );
     for (let index = 0; index < itemsPerPage; index++) {
-      if (index < totalItems) {
+      if (index < itemsOnCurrentPage) {
         fillGameCard(cards[index], games[index]);
         continue;
       }
@@ -72,7 +86,7 @@ export const libraryPage = (): HTMLElement => {
   updateLimit(cardsPerLibraryPage);
 
   const page = createHTMLElement({ tag: 'div' });
-  const pageContent = createHTMLElement({ tag: 'main', classList: 'library' });
+
   const pageTitle = createHTMLElement({
     tag: 'div',
     classList: 'library_page-title',
@@ -106,8 +120,8 @@ export const libraryPage = (): HTMLElement => {
     pageTitle,
     filterControls,
     gameCardsContainer,
-    pagination(),
     gameModal(),
+    pagination(loadGames),
   );
   // snackbarContainer.append(snackbar());
   page.append(header('library'), pageContent, footer(), snackbarContainer);

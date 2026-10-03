@@ -13,11 +13,11 @@ export interface GameInfo {
 }
 
 export interface LibraryParameters {
-  featured?: boolean;
-  page?: number;
-  limit?: number;
-  category?: GameCategory;
-  sort?: SortType;
+  featured: boolean;
+  page: number;
+  limit: number;
+  category: GameCategory;
+  sort: SortType;
 }
 
 export interface FilterValues {

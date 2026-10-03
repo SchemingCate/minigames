@@ -4,7 +4,10 @@ import { fetchCategories } from '../../api/fetch-categories';
 import { snackbar } from '../snackbar/snackbar';
 import type { GameCategory } from '../../helpers/types';
 import type { LoadGames } from '../../pages/library/library';
-import { updateCategory } from '../../api/fetch-games/fetch-games-parameters';
+import {
+  updateCategory,
+  updatePage,
+} from '../../api/fetch-games/fetch-games-parameters';
 
 const chips = createHTMLElement({
   tag: 'div',
@@ -61,6 +64,8 @@ export const filterChips = (
 
     const category = pressedChip.dataset.category as GameCategory;
     updateCategory(category);
+
+    updatePage(1);
 
     void updateUI();
   });
