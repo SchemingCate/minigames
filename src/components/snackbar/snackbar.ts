@@ -3,7 +3,13 @@ import './snackbar.scss';
 
 type SnackbarMode = 'success' | 'error';
 
-export const snackbar = (type: SnackbarMode, message: string): HTMLElement => {
+export const snackbarContainer = createHTMLElement({
+  tag: 'div',
+  classList: 'snackbars',
+  attributes: [['popover', 'manual']],
+});
+
+export const snackbar = (type: SnackbarMode, message: string): void => {
   const snackbar = createHTMLElement({
     tag: 'div',
     classList: 'snackbar',
@@ -24,5 +30,5 @@ export const snackbar = (type: SnackbarMode, message: string): HTMLElement => {
   const remove = () => snackbar.remove();
   closeButton.addEventListener('click', remove);
   setTimeout(remove, 5000); // TODO animate and design snackbar
-  return snackbar;
+  snackbarContainer.append(snackbar);
 };

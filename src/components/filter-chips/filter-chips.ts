@@ -18,7 +18,7 @@ const chips = createHTMLElement({
   ],
 });
 
-const loadCategories = async (messageContainer: HTMLElement): Promise<void> => {
+const loadCategories = async (): Promise<void> => {
   try {
     const data = await fetchCategories();
     const categories = data.data;
@@ -37,18 +37,15 @@ const loadCategories = async (messageContainer: HTMLElement): Promise<void> => {
       if (isDefault) chip.classList.add('chips_item--active');
       chips.append(chip);
     }
-    messageContainer.append(snackbar('success', 'Success: Categories loaded'));
+
+    snackbar('success', 'Success: Categories loaded');
   } catch {
-    messageContainer.append(
-      snackbar('error', 'Error: failed to load categories'),
-    );
+    snackbar('error', 'Error: failed to load categories');
   }
 };
 
-export const filterChips = (
-  messageContainer: HTMLElement,
-  updateUI: LoadGames,
-): HTMLElement => {
+export const filterChips = (updateUI: LoadGames): HTMLElement => {
+  chips.replaceChildren();
   chips.addEventListener('click', (event) => {
     //TODO fix delay when hover is active
     const pressedChip = (event.target as HTMLElement).closest(
@@ -70,7 +67,7 @@ export const filterChips = (
     void updateUI();
   });
 
-  void loadCategories(messageContainer);
+  void loadCategories();
 
   return chips;
 };

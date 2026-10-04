@@ -56,6 +56,8 @@ $hight-hero-img: 220px;
     }
 
     &_button {
+      opacity: 1 !important;
+      z-index: 4;
       position: absolute;
       top: 16px;
       right: 16px;
@@ -97,9 +99,11 @@ $hight-hero-img: 220px;
         justify-content: space-between;
         align-items: center;
         &_title {
+          width: auto;
           font-size: var.$fnt-size-display-medium;
           color: var.$col-on-primary;
           font-weight: var.$fnt-weight-bold;
+          min-height: var.$fnt-size-display-medium;
         }
         &_feedback {
           display: flex;
@@ -160,11 +164,86 @@ $hight-hero-img: 220px;
       }
     }
   }
+
+  &--loading {
+    -webkit-user-select: none;
+    user-select: none;
+    .game-modal_content {
+      animation: pulse 1.5s ease-in-out infinite;
+      &_hero {
+        background-color: var.$col-outline;
+        & img {
+          opacity: 0;
+        }
+      }
+
+      &_main {
+        &_header {
+          &_title {
+            width: 50%;
+            border-radius: 4px;
+            background-color: var.$col-outline;
+          }
+        }
+
+        &_description {
+          height: 100px;
+          width: 100%;
+          background-color: var.$col-outline;
+          border-radius: 4px;
+        }
+
+        &_specs_item {
+          border-color: var.$col-outline;
+          background-color: var.$col-outline;
+          height: 49.5px;
+          box-shadow: var.$box-shadow-lvl-0-grey;
+        }
+
+        &_action button {
+          border-color: var.$col-outline;
+          background-color: var.$col-outline;
+          pointer-events: none;
+          border-style: none;
+        }
+
+        &_records_heading {
+          background-color: var.$col-outline;
+          display: inline-block;
+          border-radius: 4px;
+          color: transparent;
+        }
+      }
+    }
+  }
+}
+
+.game-modal .error {
+  background-color: var.$col-bg !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  background-color: var.$col-white;
+}
+
+.game-modal_content:has(+ .error) {
+  animation: none;
+  & .game-modal_content_main {
+    opacity: 0;
+  }
 }
 
 @starting-style {
   .game-modal[open],
   .game-modal[open]::backdrop {
     opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
   }
 }
