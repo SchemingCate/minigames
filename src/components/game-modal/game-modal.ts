@@ -11,6 +11,7 @@ import {
   recordsTablePlaceholder,
 } from '../records-table/records-table';
 import { errorBanner } from '../error-banner/error-banner';
+import { commentsPlaceholder } from '../comments/comments';
 
 interface CommandEvent extends Event {
   readonly command: string;
@@ -142,7 +143,14 @@ export const gameModal = (): HTMLElement => {
 
   records.append(recordsHeader, recordsTablePlaceholder());
 
-  mainContent.append(gameHeader, gameDescription, gameSpecs, action, records);
+  mainContent.append(
+    gameHeader,
+    gameDescription,
+    gameSpecs,
+    action,
+    records,
+    commentsPlaceholder(),
+  );
   content.append(closeButton, hero, mainContent);
   gameModalDialog.append(content);
 

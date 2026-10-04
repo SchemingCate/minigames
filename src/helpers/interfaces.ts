@@ -107,3 +107,12 @@ export interface GameData {
   specs: GameSpecs;
   topRecords: Record[];
 }
+
+export interface CommentData {
+  commentId: string;
+  authorName: string;
+  text: string;
+  likesCount: number;
+  isLikedByCurrentUser: boolean;
+  createdAt: string;
+}
