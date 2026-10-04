@@ -56,6 +56,7 @@ $hight-hero-img: 220px;
     }
 
     &_button {
+      opacity: 1 !important;
       z-index: 4;
       position: absolute;
       top: 16px;
@@ -214,6 +215,23 @@ $hight-hero-img: 220px;
         }
       }
     }
+  }
+}
+
+.game-modal .error {
+  background-color: var.$col-bg !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  background-color: var.$col-white;
+}
+
+.game-modal_content:has(+ .error) {
+  animation: none;
+  & .game-modal_content_main {
+    opacity: 0;
   }
 }
 

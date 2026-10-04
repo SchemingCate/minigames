@@ -10,6 +10,7 @@ import {
   fillRecordsTable,
   recordsTablePlaceholder,
 } from '../records-table/records-table';
+import { errorBanner } from '../error-banner/error-banner';
 
 interface CommandEvent extends Event {
   readonly command: string;
@@ -211,6 +212,11 @@ export const updateGameModal = async (parameters: GameParameters) => {
   } catch (error) {
     console.error(error);
     // error = snackbar error
-    // error banner
+    gameModalDialog.classList.remove('game-modal--loading');
+    gameModalDialog.append(
+      errorBanner(error, () => {
+        void updateGameModal(parameters);
+      }),
+    );
   }
 };
