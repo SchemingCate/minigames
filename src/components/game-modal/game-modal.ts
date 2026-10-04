@@ -207,10 +207,10 @@ export const updateGameModal = async (parameters: GameParameters) => {
     });
 
     fillRecordsTable(gameDetails.topRecords);
-    // success - snack bar info
+
+    // success - snack bar info ?
   } catch (error) {
-    console.error(error);
-    // error = snackbar error
+    // error = snackbar error ?
     gameModalDialog.classList.remove('game-modal--loading');
     gameModalDialog.append(
       errorBanner(error, () => {

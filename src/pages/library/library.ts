@@ -18,6 +18,7 @@ import { errorBanner } from '../../components/error-banner/error-banner';
 import { emptyStateBanner } from '../../components/empty-state-banner/empty-state-banner';
 import { snackbar } from '../../components/snackbar/snackbar';
 import { updateLimit } from '../../api/fetch-games/fetch-games-parameters';
+import { snackbarContainer } from '../../components/snackbar/snackbar';
 
 const cardsPerLibraryPage = 6;
 
@@ -26,11 +27,6 @@ const pageContent = createHTMLElement({ tag: 'main', classList: 'library' });
 const gameCardsContainer = createHTMLElement({
   tag: 'div',
   classList: 'cards',
-});
-
-const snackbarContainer = createHTMLElement({
-  tag: 'div',
-  classList: 'snackbars',
 });
 
 export type LoadGames = () => Promise<void>;
@@ -70,9 +66,9 @@ const loadGames = async (
       cards[index].remove();
     }
 
-    snackbarContainer.append(snackbar('success', 'Success: Games loaded')); // TODO remove snackbar on when response doesn't need to have clarification
+    snackbar('success', 'Success: Games loaded'); // TODO remove snackbar on when response doesn't need to have clarification
   } catch (error) {
-    snackbarContainer.append(snackbar('error', 'Error: failed to load games'));
+    snackbar('error', 'Error: failed to load games');
     gameCardsContainer.replaceChildren(
       errorBanner(error, () => {
         gameCardsContainer.replaceChildren(...cards);
@@ -106,10 +102,7 @@ export const libraryPage = (): HTMLElement => {
     classList: 'controls',
   });
 
-  filterControls.append(
-    filterChips(snackbarContainer, loadGames),
-    sortDropdown(loadGames),
-  );
+  filterControls.append(filterChips(loadGames), sortDropdown(loadGames));
   pageTitle.append(pageTitleHeading, pageTitleDescription);
 
   const cards = Array.from({ length: cardsPerLibraryPage }, createGameCard);
@@ -123,7 +116,7 @@ export const libraryPage = (): HTMLElement => {
     gameModal(),
     pagination(loadGames),
   );
-  // snackbarContainer.append(snackbar());
+
   page.append(header('library'), pageContent, footer(), snackbarContainer);
 
   void loadGames();
