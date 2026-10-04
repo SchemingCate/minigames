@@ -1,27 +1,29 @@
 import './game-card.scss';
 import { createHTMLElement } from '../../helpers/dom';
 import { getImageUrl } from '../../helpers/get-image-url';
-import { feedbackCount } from '../feedback-count/feedback-count';
-import type { gameInfo } from '../../helpers/interfaces';
+import {
+  feedbackCountPlaceholder,
+  fillFeedbackCount,
+} from '../feedback-count/feedback-count';
+import type { GameInfo } from '../../helpers/interfaces';
+// import { button } from '../button/button';
 
-export const gameCard = (info: gameInfo): HTMLElement => {
+// let button: HTMLButtonElement;
+
+export const createGameCard = (): HTMLElement => {
   const card = createHTMLElement({
     tag: 'article',
-    classList: 'card',
+    classList: 'card card--loading',
   });
 
   const imageContainer = createHTMLElement({
     tag: 'div',
-    classList: 'card_image',
+    classList: 'card_image card_image--loading',
   });
 
-  const imgUrl = getImageUrl(info.cardImage);
   const image = createHTMLElement({
     tag: 'img',
-    attributes: [
-      ['src', imgUrl],
-      ['alt', info.name],
-    ],
+    attributes: [['id', 'cardImage']],
   });
   imageContainer.append(image);
 
@@ -32,12 +34,11 @@ export const gameCard = (info: gameInfo): HTMLElement => {
   const heading = createHTMLElement({
     tag: 'h2',
     classList: 'card_content_title_heading',
-    textContent: info.name,
   });
   const category = createHTMLElement({
     tag: 'span',
     classList: 'card_content_title_category',
-    textContent: info.category,
+    // textContent: info.category,
   });
   const contentTitle = createHTMLElement({
     tag: 'div',
@@ -48,12 +49,11 @@ export const gameCard = (info: gameInfo): HTMLElement => {
   const description = createHTMLElement({
     tag: 'p',
     classList: 'card_content_description',
-    textContent: info.shortDescription,
   });
 
-  const rating = feedbackCount('rating', info.rating);
+  const rating = feedbackCountPlaceholder('rating');
 
-  const likes = feedbackCount('likes', info.likesCount);
+  const likes = feedbackCountPlaceholder('likes');
 
   const feedback = createHTMLElement({
     tag: 'div',
@@ -63,10 +63,8 @@ export const gameCard = (info: gameInfo): HTMLElement => {
   const price = createHTMLElement({
     tag: 'span',
     classList: 'card_content_footer_price',
-    textContent: info.price,
   });
-  if (info.price === 'Free')
-    price.classList.add('card_content_footer_price--free');
+
   const detailsButton = createHTMLElement({
     tag: 'button',
     classList: 'card_content_footer_button',
@@ -77,6 +75,9 @@ export const gameCard = (info: gameInfo): HTMLElement => {
       ['commandfor', 'gameModal'],
     ],
   });
+
+  // button = detailsButton;
+
   const footer = createHTMLElement({
     tag: 'div',
     classList: 'card_content_footer',
@@ -89,4 +90,37 @@ export const gameCard = (info: gameInfo): HTMLElement => {
   card.append(imageContainer, contentContainer);
 
   return card;
+};
+
+export const fillGameCard = (card: HTMLElement, info: GameInfo): void => {
+  // TODO look into refactoring without !
+  card.querySelector('.card_content_title_heading')!.textContent = info.name;
+  card.querySelector('.card_content_title_category')!.textContent =
+    info.category;
+  card.querySelector('.card_content_footer_price')!.textContent = info.price;
+  card.querySelector('.card_content_description')!.textContent =
+    info.shortDescription;
+  // button.setAttribute('dataset-game', info.slug);
+  const button = card.querySelector<HTMLButtonElement>(
+    '.card_content_footer_button',
+  );
+  if (button) {
+    button.dataset.game = info.slug;
+  }
+
+  const feedbackContainer = card.querySelector<HTMLElement>(
+    '.card_content_footer_feedback',
+  );
+  if (feedbackContainer) {
+    const feedbackCount = {
+      likes: info.likesCount,
+      rating: info.rating,
+    };
+    fillFeedbackCount(feedbackContainer, feedbackCount);
+  }
+  card.classList.remove('card--loading');
+  const image = card.querySelector<HTMLImageElement>('#cardImage');
+  // TODO tackle unavailable image case
+  image!.setAttribute('src', getImageUrl(info.cardImage));
+  image!.setAttribute('alt', 'info.name');
 };

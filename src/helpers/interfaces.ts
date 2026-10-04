@@ -1,4 +1,6 @@
-export interface gameInfo {
+import type { SortType, GameCategory } from './types';
+
+export interface GameInfo {
   slug: string;
   name: string;
   category: string;
@@ -10,21 +12,61 @@ export interface gameInfo {
   featured: boolean;
 }
 
-export interface record {
-  position: 1 | 2 | 3;
-  playerName: string;
-  score: number;
-  achievedAt: string;
+export interface LibraryParameters {
+  featured: boolean;
+  page: number;
+  limit: number;
+  category: GameCategory;
+  sort: SortType;
 }
 
-export interface gameSpecs {
-  genre: string;
-  players: string;
-  duration: string;
-  price: string;
+export interface FeedbackCount {
+  likes: number;
+  rating: number;
 }
 
-export interface gameData {
+export interface GameParameters {
+  userEmail?: string;
+  gameSlug: string;
+}
+
+export interface FilterValues {
+  category: GameCategory;
+  sort: SortType;
+}
+
+export interface Meta {
+  page: number;
+  limit: number;
+  totalItems: number;
+  totalPages: number;
+  appliedFilter: FilterValues;
+}
+
+export interface MetaCategories {
+  totalItems: number;
+  description: string;
+  additionalProp1?: object;
+}
+
+export interface Category {
+  slug: string;
+  label: string;
+  isDefault: boolean;
+}
+
+export interface CategoriesResponse {
+  data: Category[];
+  meta: MetaCategories;
+}
+
+export interface GameListResponse {
+  data: GameInfo[];
+  meta: Meta;
+  additionalProp1?: object;
+}
+
+export interface GameDetails {
   slug: string;
   name: string;
   heroImage: string;
@@ -32,6 +74,36 @@ export interface gameData {
   likesCount: number;
   isLikedByCurrentUser: boolean;
   fullDescription: string;
-  specs: gameSpecs;
-  topRecords: record[];
+  specs: GameSpecs;
+  topRecords: Record[];
+}
+
+export interface GameDetailsResponse {
+  data: GameDetails;
+}
+
+export interface Record {
+  position: 1 | 2 | 3;
+  playerName: string;
+  score: number;
+  achievedAt: string;
+}
+
+export interface GameSpecs {
+  genre: string;
+  players: string;
+  duration: string;
+  price: string;
+}
+
+export interface GameData {
+  slug: string;
+  name: string;
+  heroImage: string;
+  rating: number;
+  likesCount: number;
+  isLikedByCurrentUser: boolean;
+  fullDescription: string;
+  specs: GameSpecs;
+  topRecords: Record[];
 }

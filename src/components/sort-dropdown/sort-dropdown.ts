@@ -1,30 +1,36 @@
 import './sort-dropdown.scss';
 import { createHTMLElement } from '../../helpers/dom';
+import type { LoadGames } from '../../pages/library/library';
+import type { SortType } from '../../helpers/types';
+import {
+  updatePage,
+  updateSort,
+} from '../../api/fetch-games/fetch-games-parameters';
 
 const sortOptions = [
   {
-    slug: 'rating-highest',
+    slug: 'rating-desc',
     label: 'Rating ↑',
     isActive: true,
   },
   {
-    slug: 'rating-lowest',
+    slug: 'rating-asc',
     label: 'Rating ↓',
     isActive: false,
   },
   {
-    slug: 'rating-a-z',
+    slug: 'name-asc',
     label: 'Name A→Z',
     isActive: false,
   },
   {
-    slug: 'rating-z-a',
+    slug: 'name-desc',
     label: 'Name Z→A',
     isActive: false,
   },
 ];
 
-export const sortDropdown = (): HTMLElement => {
+export const sortDropdown = (updateUI: LoadGames): HTMLElement => {
   const sort = createHTMLElement({ tag: 'div', classList: 'sort' });
   const sortButton = createHTMLElement({
     tag: 'button',
@@ -48,7 +54,7 @@ export const sortDropdown = (): HTMLElement => {
     ],
   });
 
-  let selectedId = 'rating-highest';
+  let selectedId: SortType = 'rating-desc';
   for (const { slug, label, isActive } of sortOptions) {
     const optionElement = createHTMLElement({
       tag: 'li',
@@ -78,9 +84,14 @@ export const sortDropdown = (): HTMLElement => {
     if (!target.classList.contains('sort_list_item')) return;
     const previous = sort.querySelector(`#${selectedId}`);
     previous?.setAttribute('aria-selected', 'false');
-    selectedId = target.id;
+    selectedId = target.id as SortType; //TODO refactor
     target.setAttribute('aria-selected', 'true');
     sortButton.textContent = `Sort by: ${target.textContent}`;
+
+    const sortParameter = selectedId;
+    updatePage(1);
+    updateSort(sortParameter);
+    void updateUI();
   });
 
   return sort;
