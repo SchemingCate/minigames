@@ -45,6 +45,7 @@ const loadCategories = async (): Promise<void> => {
 };
 
 export const filterChips = (updateUI: LoadGames): HTMLElement => {
+  chips.replaceChildren();
   chips.addEventListener('click', (event) => {
     //TODO fix delay when hover is active
     const pressedChip = (event.target as HTMLElement).closest(

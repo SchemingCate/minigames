@@ -79,6 +79,9 @@ const loadGames = async (
 };
 
 export const libraryPage = (): HTMLElement => {
+  pageContent.replaceChildren();
+  gameCardsContainer.replaceChildren();
+
   updateLimit(cardsPerLibraryPage);
 
   const page = createHTMLElement({ tag: 'div' });
