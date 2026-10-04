@@ -146,7 +146,10 @@ export const gameModal = (): HTMLElement => {
   gameModalDialog.append(content);
 
   gameModalDialog.addEventListener('click', (event) => {
-    if (event.target === gameModalDialog) gameModalDialog.close();
+    if (event.target !== gameModalDialog) {
+      return;
+    }
+    gameModalDialog.close();
     gameModalDialog.classList.add('game-modal--loading');
   });
 
