@@ -1,6 +1,7 @@
 import { createHTMLElement } from '../../helpers/dom';
 import './records-table.scss';
 import type { Record } from '../../helpers/interfaces';
+import { getTimeAgoString } from '../../helpers/get-time-age-string';
 
 const placeRewardMap = {
   1: '🥇',
@@ -45,7 +46,7 @@ const createRecordItem = (place: number, record?: Record): HTMLElement => {
   if (record) {
     name.textContent = record.playerName;
     points.textContent = record.score.toString();
-    time.textContent = record.achievedAt;
+    time.textContent = getTimeAgoString(record.achievedAt);
   }
   item.append(placeElement, name, points, time);
   return item;

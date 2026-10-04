@@ -207,7 +207,6 @@ export const updateGameModal = async (parameters: GameParameters) => {
     });
 
     fillRecordsTable(gameDetails.topRecords);
-
     // success - snack bar info
   } catch (error) {
     console.error(error);
