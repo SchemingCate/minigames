@@ -98,10 +98,11 @@ $hight-hero-img: 220px;
         justify-content: space-between;
         align-items: center;
         &_title {
+          width: auto;
           font-size: var.$fnt-size-display-medium;
           color: var.$col-on-primary;
           font-weight: var.$fnt-weight-bold;
-          height: var.$fnt-size-display-medium;
+          min-height: var.$fnt-size-display-medium;
         }
         &_feedback {
           display: flex;

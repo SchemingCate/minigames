@@ -5,6 +5,11 @@ import { feedbackCountPlaceholder } from '../feedback-count/feedback-count';
 // import { recordsTable } from '../records-table/records-table';
 import type { GameParameters } from '../../helpers/interfaces';
 import { fetchGameDetails } from '../../api/fetch-game-details';
+import { fillFeedbackCount } from '../feedback-count/feedback-count';
+import {
+  fillRecordsTable,
+  recordsTablePlaceholder,
+} from '../records-table/records-table';
 
 interface CommandEvent extends Event {
   readonly command: string;
@@ -24,13 +29,11 @@ const heroImage = createHTMLElement({
 
 const gameTitle = createHTMLElement({
   tag: 'h2',
-  // textContent: gameData.name,
   classList: 'game-modal_content_main_header_title',
 });
 
 const gameDescription = createHTMLElement({
   tag: 'p',
-  // textContent: gameData.fullDescription,
   classList: 'game-modal_content_main_description',
 });
 
@@ -39,7 +42,12 @@ const feedback = createHTMLElement({
   classList: 'game-modal_content_main_header_feedback',
 });
 
-const specElementsPairs = [];
+const gameSpecs = createHTMLElement({
+  tag: 'dl',
+  classList: 'game-modal_content_main_specs',
+});
+
+const specValueElements: HTMLElement[] = [];
 
 export const gameModal = (): HTMLElement => {
   const content = createHTMLElement({
@@ -80,12 +88,9 @@ export const gameModal = (): HTMLElement => {
 
   gameHeader.append(gameTitle, feedback);
 
-  const gameSpecs = createHTMLElement({
-    tag: 'dl',
-    classList: 'game-modal_content_main_specs',
-  });
+  const gameSpecsValuesNames = ['Genre', 'Players', 'Duration', 'Price'];
 
-  for (let index = 0; index < 4; index++) {
+  for (const valueName of gameSpecsValuesNames) {
     const item = createHTMLElement({
       tag: 'div',
       classList: 'game-modal_content_main_specs_item',
@@ -93,36 +98,20 @@ export const gameModal = (): HTMLElement => {
     const specElement = createHTMLElement({
       tag: 'dt',
       classList: 'game-modal_content_main_specs_item_name',
+      textContent: valueName,
     });
     const valueElement = createHTMLElement({
       tag: 'dd',
       classList: 'game-modal_content_main_specs_item_value',
+      attributes: [
+        ['data-value', 'true'],
+        ['data-valuekey', valueName],
+      ],
     });
-    specElementsPairs.push([specElement, valueElement]);
+    specValueElements.push(valueElement);
     item.append(specElement, valueElement);
     gameSpecs.append(item);
   }
-
-  // for (const [spec, value] of Object.entries(gameData.specs) as [
-  //   keyof GameSpecs,
-  //   string,
-  // ][]) {
-  //   const item = createHTMLElement({
-  //     tag: 'div',
-  //     classList: 'game-modal_content_main_specs_item',
-  //   });
-  //   const specElement = createHTMLElement({
-  //     tag: 'dt',
-  //     classList: 'game-modal_content_main_specs_item_name',
-  //   });
-  //   const valueElement = createHTMLElement({
-  //     tag: 'dd',
-  //     // textContent: value,
-  //     classList: 'game-modal_content_main_specs_item_value',
-  //   });
-  //   item.append(specElement, valueElement);
-  //   gameSpecs.append(item);
-  // }
 
   const action = createHTMLElement({
     tag: 'div',
@@ -140,25 +129,19 @@ export const gameModal = (): HTMLElement => {
   });
   action.append(playButton, favButton);
 
-  // const records = createHTMLElement({
-  //   tag: 'div',
-  //   classList: 'game-modal_content_main_records',
-  // });
-  // const recordsHeader = createHTMLElement({
-  //   tag: 'h2',
-  //   textContent: '🏆 Top Records',
-  //   classList: 'game-modal_content_main_records_heading',
-  // });
+  const records = createHTMLElement({
+    tag: 'div',
+    classList: 'game-modal_content_main_records',
+  });
+  const recordsHeader = createHTMLElement({
+    tag: 'h2',
+    textContent: '🏆 Top Records',
+    classList: 'game-modal_content_main_records_heading',
+  });
 
-  // records.append(recordsHeader, recordsTable(gameData.topRecords));
+  records.append(recordsHeader, recordsTablePlaceholder());
 
-  mainContent.append(
-    gameHeader,
-    gameDescription,
-    gameSpecs,
-    action,
-    // records
-  );
+  mainContent.append(gameHeader, gameDescription, gameSpecs, action, records);
   content.append(closeButton, hero, mainContent);
   gameModalDialog.append(content);
 
@@ -185,11 +168,41 @@ export const updateGameModal = async (parameters: GameParameters) => {
     const gameDetails = data.data;
 
     gameModalDialog.classList.remove('game-modal--loading');
-    // update according to info
+
     heroImage.src = getImageUrl(gameDetails.heroImage);
     heroImage.alt = gameDetails.name;
     gameTitle.textContent = gameDetails.name;
     gameDescription.textContent = gameDetails.fullDescription;
+    fillFeedbackCount(feedback, {
+      likes: gameDetails.likesCount,
+      rating: gameDetails.rating,
+    });
+
+    const cont = gameSpecs.querySelectorAll<HTMLElement>(
+      '.game-modal_content_main_specs_item_value[data-value="true"]',
+    );
+    cont.forEach((element) => {
+      if (!element.dataset.valuekey) return;
+      switch (element.dataset.valuekey.toLowerCase()) {
+        case 'genre': {
+          element.textContent = gameDetails.specs['genre'];
+          break;
+        }
+        case 'players': {
+          element.textContent = gameDetails.specs['players'];
+          break;
+        }
+        case 'duration': {
+          element.textContent = gameDetails.specs['duration'];
+          break;
+        }
+        case 'price': {
+          element.textContent = gameDetails.specs['price'];
+        }
+      }
+    });
+
+    fillRecordsTable(gameDetails.topRecords);
 
     // success - snack bar info
   } catch (error) {
