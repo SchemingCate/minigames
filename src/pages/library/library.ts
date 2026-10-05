@@ -11,8 +11,7 @@ import {
 import { gameModal } from '../../components/game-modal/game-modal';
 import { fetchGames } from '../../api/fetch-games/fetch-games';
 import {
-  createGameCard,
-  fillGameCard,
+  createGameCard
 } from '../../components/game-card/game-card';
 import { errorBanner } from '../../components/error-banner/error-banner';
 import { emptyStateBanner } from '../../components/empty-state-banner/empty-state-banner';
@@ -20,7 +19,7 @@ import { snackbar } from '../../components/snackbar/snackbar';
 import { updateLimit } from '../../api/fetch-games/fetch-games-parameters';
 import { snackbarContainer } from '../../components/snackbar/snackbar';
 
-const cardsPerLibraryPage = 6;
+const CARDS_PER_PAGE_DEFAULT = 6;
 
 const pageContent = createHTMLElement({ tag: 'main', classList: 'library' });
 
@@ -34,9 +33,10 @@ export type LoadGames = () => Promise<void>;
 const loadGames = async (
   //TODO needs refactoring first :')
 ): Promise<void> => {
-  const cards = Array.from({ length: cardsPerLibraryPage }, createGameCard);
+  const instances = Array.from({ length: CARDS_PER_PAGE_DEFAULT }, () => createGameCard());;
+  const cards = instances.map(({ card }) => card);
   gameCardsContainer.replaceChildren('');
-  for (const element of cards) gameCardsContainer.append(element);
+  gameCardsContainer.replaceChildren(...cards);
 
   try {
     const data = await fetchGames();
@@ -60,10 +60,10 @@ const loadGames = async (
     );
     for (let index = 0; index < itemsPerPage; index++) {
       if (index < itemsOnCurrentPage) {
-        fillGameCard(cards[index], games[index]);
+        instances[index].fillGameCard(games[index]);
         continue;
       }
-      cards[index].remove();
+      instances[index].card.remove();
     }
 
     snackbar('success', 'Success: Games loaded'); // TODO remove snackbar on when response doesn't need to have clarification
@@ -79,10 +79,11 @@ const loadGames = async (
 };
 
 export const libraryPage = (): HTMLElement => {
+
   pageContent.replaceChildren();
   gameCardsContainer.replaceChildren();
 
-  updateLimit(cardsPerLibraryPage);
+  updateLimit(CARDS_PER_PAGE_DEFAULT);
 
   const page = createHTMLElement({ tag: 'div' });
 
@@ -108,9 +109,10 @@ export const libraryPage = (): HTMLElement => {
   filterControls.append(filterChips(loadGames), sortDropdown(loadGames));
   pageTitle.append(pageTitleHeading, pageTitleDescription);
 
-  const cards = Array.from({ length: cardsPerLibraryPage }, createGameCard);
+  const instances = Array.from({ length: CARDS_PER_PAGE_DEFAULT }, () => createGameCard());;
+  const cards = instances.map(({ card }) => card);
 
-  for (const element of cards) gameCardsContainer.append(element);
+  gameCardsContainer.replaceChildren(...cards);
 
   pageContent.append(
     pageTitle,
