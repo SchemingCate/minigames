@@ -1,23 +1,21 @@
 import './library.scss';
-import { header } from '../../components/header/header';
-import { footer } from '../../components/footer/footer';
+import { header } from '../../components/shared/header/header';
+import { footer } from '../../components/shared/footer/footer';
 import { createHTMLElement } from '../../helpers/dom';
-import { filterChips } from '../../components/filter-chips/filter-chips';
-import { sortDropdown } from '../../components/sort-dropdown/sort-dropdown';
+import { filterChips } from '../../components/for-library-page/filter-chips/filter-chips';
+import { sortDropdown } from '../../components/for-library-page/sort-dropdown/sort-dropdown';
 import {
   pagination,
   updatePagination,
-} from '../../components/pagination/pagination';
-import { gameModal } from '../../components/game-modal/game-modal';
+} from '../../components/for-library-page/pagination/pagination';
+import { gameModal } from '../../components/shared/game-modal/game-modal';
 import { fetchGames } from '../../api/fetch-games/fetch-games';
-import {
-  createGameCard
-} from '../../components/game-card/game-card';
-import { errorBanner } from '../../components/error-banner/error-banner';
-import { emptyStateBanner } from '../../components/empty-state-banner/empty-state-banner';
-import { snackbar } from '../../components/snackbar/snackbar';
+import { createGameCard } from '../../components/for-library-page/game-card/game-card';
+import { errorBanner } from '../../components/shared/error-banner/error-banner';
+import { emptyStateBanner } from '../../components/shared/empty-state-banner/empty-state-banner';
+import { snackbar } from '../../components/shared/snackbar/snackbar';
 import { updateLimit } from '../../api/fetch-games/fetch-games-parameters';
-import { snackbarContainer } from '../../components/snackbar/snackbar';
+import { snackbarContainer } from '../../components/shared/snackbar/snackbar';
 
 const CARDS_PER_PAGE_DEFAULT = 6;
 
@@ -33,7 +31,9 @@ export type LoadGames = () => Promise<void>;
 const loadGames = async (
   //TODO needs refactoring first :')
 ): Promise<void> => {
-  const instances = Array.from({ length: CARDS_PER_PAGE_DEFAULT }, () => createGameCard());;
+  const instances = Array.from({ length: CARDS_PER_PAGE_DEFAULT }, () =>
+    createGameCard(),
+  );
   const cards = instances.map(({ card }) => card);
   gameCardsContainer.replaceChildren('');
   gameCardsContainer.replaceChildren(...cards);
@@ -79,7 +79,6 @@ const loadGames = async (
 };
 
 export const libraryPage = (): HTMLElement => {
-
   pageContent.replaceChildren();
   gameCardsContainer.replaceChildren();
 
@@ -109,7 +108,9 @@ export const libraryPage = (): HTMLElement => {
   filterControls.append(filterChips(loadGames), sortDropdown(loadGames));
   pageTitle.append(pageTitleHeading, pageTitleDescription);
 
-  const instances = Array.from({ length: CARDS_PER_PAGE_DEFAULT }, () => createGameCard());;
+  const instances = Array.from({ length: CARDS_PER_PAGE_DEFAULT }, () =>
+    createGameCard(),
+  );
   const cards = instances.map(({ card }) => card);
 
   gameCardsContainer.replaceChildren(...cards);
