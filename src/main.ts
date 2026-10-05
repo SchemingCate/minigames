@@ -2,7 +2,7 @@ import './style.scss';
 import './pages/home/home-page';
 import { homePage } from './pages/home/home-page';
 import { libraryPage } from './pages/library/library';
-import { modal } from './components/modal/modal';
+import { modal } from './components/shared/modal/modal';
 
 const startApp = () => {
   const body = document.querySelector('#app');
