@@ -1,0 +1,22 @@
+@use '../../../styles/tokens.scss' as var;
+
+.snackbar {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0;
+  width: 100%;
+  padding: 8px;
+  background-color: white;
+  box-shadow: var.$box-shadow-lvl-1;
+  border-radius: var.$brdr-radius-extra-small;
+  font-weight: var.$fnt-weight-bold;
+  color: var.$col-on-primary;
+
+  &--error {
+    background-color: #fc5e5e;
+  }
+
+  &--success {
+    background-color: #5bce5b;
+  }
+}

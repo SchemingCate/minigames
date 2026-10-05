@@ -1,0 +1,249 @@
+@use '../../../styles/tokens.scss' as var;
+
+$modal-width: 600px;
+$modal-width-mobile: 375px;
+$size-close-button: 40px;
+$size-close-button-mobile: 32px;
+$hight-hero-img: 220px;
+
+.game-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: $modal-width;
+  min-width: $modal-width-mobile;
+  background-color: var.$col-bg;
+  border: var.$brdr-size-x-small solid var.$col-outline-variant;
+  border-radius: var.$brdr-radius-extra-large;
+  box-shadow: var.$box-shadow-lvl-3;
+
+  opacity: 0;
+  transition:
+    opacity var.$transition-time ease,
+    overlay var.$transition-time allow-discrete,
+    display var.$transition-time allow-discrete;
+
+  &::backdrop {
+    background-color: var.$col-backdrop;
+    backdrop-filter: var.$filter-backdrop;
+
+    opacity: 0;
+    transition:
+      opacity 0.3s ease,
+      overlay 0.3s allow-discrete,
+      display 0.3s allow-discrete;
+  }
+
+  &[open],
+  &[open]::backdrop {
+    opacity: 1;
+  }
+
+  &_content {
+    position: relative;
+    width: 100%;
+
+    &_hero {
+      width: 100%;
+      height: $hight-hero-img;
+      & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &_button {
+      opacity: 1 !important;
+      z-index: 4;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: $size-close-button;
+      height: $size-close-button;
+      background-color: var.$col-white;
+      border: var.$brdr-size solid var.$col-black;
+      border-radius: var.$brdr-radius-full;
+      box-shadow: 2px 2px var.$col-black;
+      color: var.$col-black;
+      transition:
+        background-color var.$transition-time,
+        color var.$transition-time,
+        border-color var.$transition-time;
+      @media (max-width: var.$width-trans-to-mobile) {
+        width: $size-close-button-mobile;
+        height: $size-close-button-mobile;
+      }
+      &:hover {
+        border-color: var.$col-on-primary;
+        background-color: var.$col-surface;
+        color: var.$col-on-primary;
+      }
+      &::after {
+        font-family: 'Material Symbols Outlined';
+        content: '\e5cd';
+        font-size: 24px;
+      }
+    }
+
+    &_main {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 24px;
+
+      &_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &_title {
+          width: auto;
+          font-size: var.$fnt-size-display-medium;
+          color: var.$col-on-primary;
+          font-weight: var.$fnt-weight-bold;
+          min-height: var.$fnt-size-display-medium;
+        }
+        &_feedback {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+      }
+
+      &_description {
+        font-weight: 400;
+        line-height: 125%;
+        color: var.$col-on-bg;
+      }
+
+      &_specs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+
+        @media (max-width: 562px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        &_item {
+          display: flex;
+          flex-direction: column;
+          padding: var.$padding-btn-small;
+          border-radius: var.$brdr-radius-small;
+          border: var.$brdr-size-x-small solid var.$col-outline-variant;
+          box-shadow: var.$box-shadow-lvl-0;
+          &_name {
+            font-size: var.$fnt-size-label-medium;
+            text-transform: capitalize;
+            color: var.$col-on-bg;
+          }
+          &_value {
+            font-size: var.$fnt-size-label-large;
+            font-weight: var.$fnt-weight-bold;
+            color: var.$col-on-primary;
+          }
+        }
+      }
+
+      &_action {
+        display: flex;
+        gap: 16px;
+        height: 48px;
+        &_play {
+          flex-grow: 1;
+        }
+        &_favorite {
+          flex-grow: 1;
+        }
+      }
+
+      &_records_heading {
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  &--loading {
+    -webkit-user-select: none;
+    user-select: none;
+    .game-modal_content {
+      animation: pulse 1.5s ease-in-out infinite;
+      &_hero {
+        background-color: var.$col-outline;
+        & img {
+          opacity: 0;
+        }
+      }
+
+      &_main {
+        &_header {
+          &_title {
+            width: 50%;
+            border-radius: 4px;
+            background-color: var.$col-outline;
+          }
+        }
+
+        &_description {
+          height: 100px;
+          width: 100%;
+          background-color: var.$col-outline;
+          border-radius: 4px;
+        }
+
+        &_specs_item {
+          border-color: var.$col-outline;
+          background-color: var.$col-outline;
+          height: 49.5px;
+          box-shadow: var.$box-shadow-lvl-0-grey;
+        }
+
+        &_action button {
+          border-color: var.$col-outline;
+          background-color: var.$col-outline;
+          pointer-events: none;
+          border-style: none;
+        }
+
+        &_records_heading {
+          background-color: var.$col-outline;
+          display: inline-block;
+          border-radius: 4px;
+          color: transparent;
+        }
+      }
+    }
+  }
+}
+
+.game-modal .error {
+  background-color: var.$col-bg !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  background-color: var.$col-white;
+}
+
+.game-modal_content:has(+ .error) {
+  animation: none;
+  & .game-modal_content_main {
+    opacity: 0;
+  }
+}
+
+@starting-style {
+  .game-modal[open],
+  .game-modal[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
