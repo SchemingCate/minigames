@@ -5,12 +5,12 @@
   flex-direction: column;
   &_heading {
     color: var.$col-on-primary;
-    font-weight: 700;
-    font-size: 24px;
+    font-weight: var.$fnt-weight-bold;
+    font-size: var.$fnt-size-headline-medium;
   }
   &_paragraph {
-    font-weight: 400;
-    font-size: 14px;
+    font-weight: var.$fnt-weight-regular;
+    font-size: var.$fnt-size-label-large;
     color: var.$col-on-bg;
   }
 
