@@ -1,0 +1,27 @@
+@use '../../../styles/tokens.scss' as var;
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  &_heading {
+    color: var.$col-on-primary;
+    font-weight: 700;
+    font-size: 24px;
+  }
+  &_paragraph {
+    font-weight: 400;
+    font-size: 14px;
+    color: var.$col-on-bg;
+  }
+
+  &_form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    &_body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+}

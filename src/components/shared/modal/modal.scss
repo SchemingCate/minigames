@@ -9,4 +9,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: var.$box-shadow-lvl-3-black;
+  border-radius: var.$brdr-radius-extra-large;
+  &_content {
+    padding: 32px;
+  }
 }

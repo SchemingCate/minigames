@@ -11,7 +11,10 @@ export const modal = (): HTMLElement => {
     attributes: [['id', 'auth']],
   });
 
-  const authDialogContent = createHTMLElement({ tag: 'div' });
+  const authDialogContent = createHTMLElement({
+    tag: 'div',
+    classList: 'modal_content',
+  });
 
   const modeButtonsContainer = createHTMLElement({ tag: 'div' });
 
