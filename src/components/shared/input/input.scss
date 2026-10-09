@@ -1,0 +1,22 @@
+@use '../../../styles/tokens.scss' as var;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  &_label {
+    font-weight: 700;
+    color: var.$col-on-primary;
+  }
+  &_input {
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 8px;
+    border: 2px solid var.$col-on-primary;
+    &:focus {
+      outline: none;
+      background-color: var.$col-surface-low;
+    }
+  }
+}
