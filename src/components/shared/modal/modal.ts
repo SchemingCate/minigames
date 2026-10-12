@@ -16,19 +16,69 @@ export const modal = (): HTMLElement => {
     classList: 'modal_content',
   });
 
-  const modeButtonsContainer = createHTMLElement({ tag: 'div' });
+  const modeButtonsContainer = createHTMLElement({ tag: 'fieldset' });
 
-  const modeButtonLogin = createHTMLElement({
-    tag: 'button',
+  const modeRadioLogin = createHTMLElement({
+    tag: 'input',
+    attributes: [
+      ['type', 'radio'],
+      ['id', 'loginButton'],
+      ['value', 'login'],
+      ['checked', ''],
+      ['name', 'loginMode'],
+    ],
+  });
+  const modeLabelLogin = createHTMLElement({
+    tag: 'label',
     textContent: 'Login',
+    attributes: [['for', 'loginButton']],
   });
-  const modeButtonRegister = createHTMLElement({
-    tag: 'button',
-    textContent: 'Register',
-  });
-  modeButtonsContainer.append(modeButtonLogin, modeButtonRegister);
 
-  authDialogContent.append(modeButtonsContainer, loginForm());
+  const modeRadioRegister = createHTMLElement({
+    tag: 'input',
+    attributes: [
+      ['type', 'radio'],
+      ['value', 'register'],
+      ['id', 'registerButton'],
+      ['name', 'loginMode'],
+    ],
+  });
+  const modeLabelRegister = createHTMLElement({
+    tag: 'label',
+    textContent: 'Register',
+    attributes: [['for', 'registerButton']],
+  });
+
+  modeButtonsContainer.append(
+    modeRadioLogin,
+    modeLabelLogin,
+    modeRadioRegister,
+    modeLabelRegister,
+  );
+
+  const formContainer = createHTMLElement({ tag: 'div' });
+
+  modeButtonsContainer.addEventListener('change', (event) => {
+    const target = event.target as HTMLInputElement;
+    if (target.type !== 'radio') return;
+    switch (target.value) {
+      case 'login': {
+        formContainer.replaceChildren(loginForm());
+        break;
+      }
+      case 'register': {
+        formContainer.replaceChildren('Register');
+        break;
+      }
+      default: {
+        return;
+      }
+    }
+  });
+
+  formContainer.append(loginForm());
+
+  authDialogContent.append(modeButtonsContainer, formContainer);
 
   const closeButton = button(ButtonType.CloseAuth);
   authDialog.append(authDialogContent, closeButton);
