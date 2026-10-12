@@ -1,4 +1,5 @@
 import { createHTMLElement } from '../../../helpers/dom';
+import { formValidation } from '../../../helpers/form-validation';
 import { createField } from '../input/input';
 
 export const registerForm = () => {
@@ -31,6 +32,7 @@ export const registerForm = () => {
     required: true,
     autocomplete: 'username',
     minLength: 2,
+    pattern: '[A-Z][A-Za-z0-9]*',
   });
 
   const emailField = createField({
@@ -51,6 +53,7 @@ export const registerForm = () => {
     label: 'Password',
     placeholder: 'Min. 8 characters',
     required: true,
+    pattern: String.raw`(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])[\x21-\x7E]{6,}`,
     minLength: 6,
     autocomplete: 'new-password',
   });
@@ -91,6 +94,8 @@ export const registerForm = () => {
   form.append(formBody, buttonSubmit);
 
   container.append(heading, paragraph, form, span, buttonGoogleLogin);
+
+  formValidation(form);
 
   return container;
 };
