@@ -2,12 +2,24 @@ import { homePage } from './pages/home/home-page';
 import { libraryPage } from './pages/library/library';
 import { modal } from './components/shared/modal/modal';
 
-export const startApp = () => {
-  const body = document.querySelector('#app');
-  body?.append(homePage());
-  body?.append(modal());
+const pages = { home: homePage, library: libraryPage };
+type PageName = keyof typeof pages;
 
-  body?.addEventListener('click', (event) => {
+const isPageName = (value: string | undefined): value is PageName =>
+  value === 'home' || value === 'library';
+
+export const renderPage = (root: HTMLElement, page: PageName): void => {
+  root.replaceChildren(pages[page](), modal());
+};
+
+export const startApp = (
+  root = document.querySelector<HTMLElement>('#app'),
+): void => {
+  if (!root) return;
+
+  renderPage(root, 'home');
+
+  root.addEventListener('click', (event) => {
     const link = (event.target as HTMLElement).closest<HTMLAnchorElement>(
       'a[data-page]',
     );
@@ -15,14 +27,7 @@ export const startApp = () => {
 
     event.preventDefault();
 
-    if (link.dataset.page === 'home') {
-      body.replaceChildren();
-      body?.append(homePage());
-      body?.append(modal());
-    } else if (link.dataset.page === 'library') {
-      body.replaceChildren();
-      body?.append(libraryPage());
-      body?.append(modal());
-    }
+    const page = link.dataset.page;
+    if (isPageName(page)) renderPage(root, page);
   });
 };
