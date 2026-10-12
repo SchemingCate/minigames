@@ -18,10 +18,8 @@ export const createHTMLElement = <K extends keyof HTMLElementTagNameMap>({
   if (classList) {
     element.classList = classList;
   }
-  if (attributes) {
-    for (const [name, value] of attributes) {
-      element.setAttribute(name, value);
-    }
+  for (const [name, value] of attributes) {
+    element.setAttribute(name, value);
   }
   return element;
 };
