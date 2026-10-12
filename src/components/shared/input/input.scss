@@ -9,14 +9,32 @@
     font-weight: 700;
     color: var.$col-on-primary;
   }
-  &_input {
-    height: 48px;
-    padding: 0 16px;
-    border-radius: 8px;
-    border: 2px solid var.$col-on-primary;
-    &:focus {
-      outline: none;
-      background-color: var.$col-surface-low;
+
+  &_input-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    &_input {
+      height: 48px;
+      padding: 0 16px;
+      border-radius: 8px;
+      border: 2px solid var.$col-on-primary;
+      &:focus {
+        outline: none;
+        background-color: var.$col-surface-low;
+      }
+      &--error {
+        border-color: var.$col-error;
+      }
+    }
+    &_error {
+      position: absolute;
+      width: 100%;
+      bottom: -20px;
+      color: var.$col-error;
+      font-weight: 400;
+      font-size: 12px;
+      text-align: center;
     }
   }
 }
