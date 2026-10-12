@@ -1,7 +1,7 @@
 import { createHTMLElement } from '../../../helpers/dom';
 import './records-table.scss';
 import type { Record } from '../../../helpers/interfaces';
-import { getTimeAgoString } from '../../../helpers/get-time-age-string';
+import { getTimeAgoString } from '../../../helpers/get-time-ago-string';
 
 const placeRewardMap = {
   1: '🥇',
