@@ -10,6 +10,7 @@ interface FieldElementObject {
   placeholder: string;
   required?: boolean;
   minLength?: number;
+  maxLength?: number;
   autocomplete?: AutoFill;
   pattern?: string;
 }
@@ -22,6 +23,7 @@ export const createField = ({
   placeholder,
   required,
   minLength,
+  maxLength,
   autocomplete,
   pattern,
 }: FieldElementObject): HTMLElement => {
@@ -56,6 +58,7 @@ export const createField = ({
   inputContainer.append(inputElement, errorElement);
 
   if (required) inputElement.required = true;
+  if (maxLength) inputElement.maxLength = maxLength;
   if (minLength) inputElement.minLength = minLength;
   if (autocomplete) inputElement.autocomplete = autocomplete;
   if (pattern) inputElement.pattern = pattern;

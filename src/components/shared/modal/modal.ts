@@ -3,6 +3,7 @@ import { createHTMLElement } from '../../../helpers/dom';
 import { button } from '../button/button';
 import { ButtonType } from '../../../helpers/enums';
 import { loginForm } from '../login-form/login-form';
+import { registerForm } from '../register-form/register-form';
 
 export const modal = (): HTMLElement => {
   const authDialog = createHTMLElement({
@@ -67,7 +68,7 @@ export const modal = (): HTMLElement => {
         break;
       }
       case 'register': {
-        formContainer.replaceChildren('Register');
+        formContainer.replaceChildren(registerForm());
         break;
       }
       default: {
