@@ -63,8 +63,6 @@ const getErrorMessage = (input: HTMLInputElement): string => {
 };
 
 export const formValidation = (form: HTMLFormElement) => {
-  console.log('hi');
-
   const submitButton = form.querySelector<HTMLButtonElement>(
     'button[type="submit"]',
   )!;
