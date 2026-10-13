@@ -4,6 +4,7 @@ export default defineConfig({
   base: '/minigames/',
   test: {
     environment: 'jsdom',
+    setupFiles: ['./vitest.setup.ts'],
     include: ['src/**/*.test.ts'],
     coverage: {
       provider: 'v8',
