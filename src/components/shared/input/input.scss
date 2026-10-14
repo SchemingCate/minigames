@@ -17,7 +17,7 @@ $error-bottom-positioning-absolute: -20px;
     display: flex;
     flex-direction: column;
     &_input {
-      height: $size-6;
+      height: var.$size-6;
       padding: $input-padding;
       border-radius: var.$brdr-radius-small;
       border: var.$brdr-size solid var.$col-on-primary;
