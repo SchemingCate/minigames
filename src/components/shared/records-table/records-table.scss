@@ -4,13 +4,13 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var.$size-1;
 
   &_item {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 16px;
+    gap: var.$size-2;
+    padding: var.$size-2;
     background-color: var.$col-white;
     border-radius: var.$brdr-radius-small;
     &_name {

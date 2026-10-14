@@ -3,9 +3,9 @@
 .snackbar {
   display: flex;
   justify-content: space-between;
-  margin: 16px 0;
+  margin: var.$size-2 0;
   width: 100%;
-  padding: 8px;
+  padding: var.$size-1;
   background-color: white;
   box-shadow: var.$box-shadow-lvl-1;
   border-radius: var.$brdr-radius-extra-small;
