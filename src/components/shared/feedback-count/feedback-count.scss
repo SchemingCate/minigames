@@ -1,16 +1,18 @@
 @use '../../../styles/tokens.scss' as var;
 
+$skeleton-width: 5ch;
+
 .feedback-count {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var.$size-05;
   font-weight: var.$fnt-weight-bold;
-  height: 24px;
+  height: var.$size-3;
   font-size: var.$fnt-size-label-large;
   color: var.$col-on-primary;
   &::before {
-    font-size: 24px;
-    font-family: 'Material Symbols Outlined';
+    font-size: var.$fnt-size-headline-medium;
+    font-family: var.$fnt-family-icons-outlined;
   }
   &--likes {
     &::before {
@@ -27,8 +29,8 @@
 
   &--loading {
     background-color: var.$col-outline;
-    width: 5ch;
-    border-radius: 4px;
+    width: $skeleton-width;
+    border-radius: var.$brdr-radius-extra-small;
     animation: pulse 1.5s ease-in-out infinite;
     &::before {
       opacity: 0;

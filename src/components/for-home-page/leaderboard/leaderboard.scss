@@ -1,9 +1,12 @@
 @use '../../../styles/tokens.scss' as var;
 
+$table-row-height: var.$size-9;
+$section-padding: var.$size-5;
+
 .wrapper {
   max-width: var.$width-max-content;
   margin: 0 auto;
-  padding: 40px;
+  padding: $section-padding;
 }
 
 .table {
@@ -15,14 +18,14 @@
   font-family: var.$fnt-family-roboto;
   text-align: center;
   &_head {
-    height: 72px;
+    height: $table-row-height;
     background-color: var.$col-tertiary;
     font-weight: var.$fnt-weight-extra-bold;
     color: var.$col-white;
     text-transform: uppercase;
   }
   &_row {
-    height: 72px;
+    height: $table-row-height;
     font-weight: var.$fnt-weight-bold;
     color: var.$col-on-primary;
     &:nth-child(even) {

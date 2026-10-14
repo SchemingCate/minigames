@@ -4,7 +4,11 @@ $modal-width: 600px;
 $modal-width-mobile: 375px;
 $size-close-button: 40px;
 $size-close-button-mobile: 32px;
+$box-shadow-close-button: 2px 2px var.$col-black;
 $hight-hero-img: 220px;
+$specs-reposition-threshold: 562px;
+$skeleton-description-height: 100px;
+$skeleton-specs-item-height: 49.5px;
 
 .game-modal {
   position: absolute;
@@ -59,14 +63,14 @@ $hight-hero-img: 220px;
       opacity: 1 !important;
       z-index: 4;
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: var.$size-2;
+      right: var.$size-2;
       width: $size-close-button;
       height: $size-close-button;
       background-color: var.$col-white;
       border: var.$brdr-size solid var.$col-black;
       border-radius: var.$brdr-radius-full;
-      box-shadow: 2px 2px var.$col-black;
+      box-shadow: $box-shadow-close-button;
       color: var.$col-black;
       transition:
         background-color var.$transition-time,
@@ -82,17 +86,17 @@ $hight-hero-img: 220px;
         color: var.$col-on-primary;
       }
       &::after {
-        font-family: 'Material Symbols Outlined';
+        font-family: var.$fnt-family-icons-outlined;
         content: '\e5cd';
-        font-size: 24px;
+        font-size: var.$fnt-size-headline-medium;
       }
     }
 
     &_main {
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      padding: 24px;
+      gap: var.$size-3;
+      padding: var.$size-3;
 
       &_header {
         display: flex;
@@ -108,22 +112,22 @@ $hight-hero-img: 220px;
         &_feedback {
           display: flex;
           align-items: center;
-          gap: 16px;
+          gap: var.$size-2;
         }
       }
 
       &_description {
-        font-weight: 400;
-        line-height: 125%;
+        font-weight: var.$fnt-weight-regular;
+        line-height: var.$line-height-medium;
         color: var.$col-on-bg;
       }
 
       &_specs {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
+        gap: var.$size-2;
 
-        @media (max-width: 562px) {
+        @media (max-width: $specs-reposition-threshold) {
           grid-template-columns: repeat(2, 1fr);
         }
 
@@ -149,8 +153,8 @@ $hight-hero-img: 220px;
 
       &_action {
         display: flex;
-        gap: 16px;
-        height: 48px;
+        gap: var.$size-2;
+        height: var.$size-6;
         &_play {
           flex-grow: 1;
         }
@@ -160,7 +164,7 @@ $hight-hero-img: 220px;
       }
 
       &_records_heading {
-        margin-bottom: 16px;
+        margin-bottom: var.$size-2;
       }
     }
   }
@@ -181,22 +185,22 @@ $hight-hero-img: 220px;
         &_header {
           &_title {
             width: 50%;
-            border-radius: 4px;
+            border-radius: var.$brdr-radius-extra-small;
             background-color: var.$col-outline;
           }
         }
 
         &_description {
-          height: 100px;
+          height: $skeleton-description-height;
           width: 100%;
           background-color: var.$col-outline;
-          border-radius: 4px;
+          border-radius: var.$brdr-radius-extra-small;
         }
 
         &_specs_item {
           border-color: var.$col-outline;
           background-color: var.$col-outline;
-          height: 49.5px;
+          height: 49$skeleton-specs-item-height;
           box-shadow: var.$box-shadow-lvl-0-grey;
         }
 
@@ -210,7 +214,7 @@ $hight-hero-img: 220px;
         &_records_heading {
           background-color: var.$col-outline;
           display: inline-block;
-          border-radius: 4px;
+          border-radius: var.$brdr-radius-extra-small;
           color: transparent;
         }
       }

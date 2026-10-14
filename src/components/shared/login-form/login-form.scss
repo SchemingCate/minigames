@@ -17,11 +17,11 @@
   &_form {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: var.$size-3;
     &_body {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: var.$size-2;
     }
   }
 }

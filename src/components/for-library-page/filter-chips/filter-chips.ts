@@ -9,16 +9,7 @@ import {
   updatePage,
 } from '../../../api/fetch-games/fetch-games-parameters';
 
-const chips = createHTMLElement({
-  tag: 'div',
-  classList: 'chips',
-  attributes: [
-    ['role', 'radiogroup'],
-    ['aria-label', 'filter by game type'],
-  ],
-});
-
-const loadCategories = async (): Promise<void> => {
+const loadCategories = async (chips: HTMLElement): Promise<void> => {
   try {
     const data = await fetchCategories();
     const categories = data.data;
@@ -45,7 +36,15 @@ const loadCategories = async (): Promise<void> => {
 };
 
 export const filterChips = (updateUI: LoadGames): HTMLElement => {
-  chips.replaceChildren();
+  const chips = createHTMLElement({
+    tag: 'div',
+    classList: 'chips',
+    attributes: [
+      ['role', 'radiogroup'],
+      ['aria-label', 'filter by game type'],
+    ],
+  });
+
   chips.addEventListener('click', (event) => {
     //TODO fix delay when hover is active
     const pressedChip = (event.target as HTMLElement).closest(
@@ -67,7 +66,7 @@ export const filterChips = (updateUI: LoadGames): HTMLElement => {
     void updateUI();
   });
 
-  void loadCategories();
+  void loadCategories(chips);
 
   return chips;
 };
