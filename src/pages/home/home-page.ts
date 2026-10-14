@@ -1,7 +1,7 @@
-import { header } from '../../components/header/header';
-import { hero } from '../../components/hero/hero';
-import { leaderboard } from '../../components/leaderboard/leaderboard';
-import { footer } from '../../components/footer/footer';
+import { header } from '../../components/shared/header/header';
+import { hero } from '../../components/for-home-page/hero/hero';
+import { leaderboard } from '../../components/for-home-page/leaderboard/leaderboard';
+import { footer } from '../../components/shared/footer/footer';
 
 export const homePage: () => Node = () => {
   const page = document.createElement('div');

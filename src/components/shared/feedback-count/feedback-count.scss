@@ -1,0 +1,45 @@
+@use '../../../styles/tokens.scss' as var;
+
+$skeleton-width: 5ch;
+
+.feedback-count {
+  display: flex;
+  align-items: center;
+  gap: var.$size-05;
+  font-weight: var.$fnt-weight-bold;
+  height: var.$size-3;
+  font-size: var.$fnt-size-label-large;
+  color: var.$col-on-primary;
+  &::before {
+    font-size: var.$fnt-size-headline-medium;
+    font-family: var.$fnt-family-icons-outlined;
+  }
+  &--likes {
+    &::before {
+      content: '\e87d';
+      color: var.$col-like;
+    }
+  }
+  &--rating {
+    &::before {
+      content: '\e838';
+      color: var.$col-primary;
+    }
+  }
+
+  &--loading {
+    background-color: var.$col-outline;
+    width: $skeleton-width;
+    border-radius: var.$brdr-radius-extra-small;
+    animation: pulse 1.5s ease-in-out infinite;
+    &::before {
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulse {
+    50% {
+      opacity: 0.5;
+    }
+  }
+}

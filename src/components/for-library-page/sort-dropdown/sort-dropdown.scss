@@ -1,0 +1,72 @@
+@use '../../../styles/tokens.scss' as var;
+
+$width-button: 190px;
+$width-dropdown: 200px;
+$padding-dropdown-item: 16px;
+$padding-dropdown-item-left: 38px;
+$gap-button-dropdown: 4px;
+
+.sort {
+  position: relative;
+  @media (max-width: var.$width-trans-to-mobile) {
+    width: 100%;
+  }
+  &_button {
+    width: $width-button;
+    padding: var.$padding-btn-medium;
+    border-radius: var.$brdr-radius-extra-large;
+    background-color: var.$col-white;
+    border: var.$brdr-size solid var.$col-black;
+    text-align: left;
+    font-weight: var.$fnt-weight-bold;
+    font-size: var.$fnt-size-button;
+    font-family: var.$fnt-family-inter;
+    &:hover,
+    &[aria-expanded='true'] {
+      background-color: var.$col-surface;
+    }
+    @media (max-width: var.$width-trans-to-mobile) {
+      min-width: 100%;
+    }
+    @media (max-width: var.$width-trans-to-mobile) {
+      font-size: var.$fnt-size-label-medium;
+    }
+  }
+  &_list {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    width: $width-dropdown;
+    margin-top: $gap-button-dropdown;
+    overflow: hidden;
+    background-color: var.$col-white;
+    border-radius: var.$brdr-radius-extra-large;
+    border: var.$brdr-size solid var.$col-on-primary;
+    box-shadow: var.$box-shadow-lvl-1;
+    list-style: none;
+    @media (max-width: var.$width-trans-to-mobile) {
+      width: 100%;
+      font-size: var.$fnt-size-label-medium;
+    }
+    &_item {
+      padding: $padding-dropdown-item $padding-dropdown-item
+        $padding-dropdown-item $padding-dropdown-item-left;
+      font-size: var.$fnt-size-button;
+      font-weight: var.$fnt-weight-medium;
+      border-top: var.$brdr-size-x-small solid var.$col-on-primary;
+      color: var.$col-on-primary;
+      &:first-child {
+        border-top: none;
+      }
+      &[aria-selected='true'] {
+        background-color: var.$col-primary-low;
+        pointer-events: none;
+        font-weight: var.$fnt-weight-extra-bold;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: var.$col-surface;
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+@use '../../../styles/tokens.scss' as var;
+
+$input-padding: 0 var.$size-2;
+$error-bottom-positioning-absolute: -20px;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var.$size-1;
+  font-size: var.$fnt-size-body-small;
+  &_label {
+    color: var.$col-on-primary;
+  }
+
+  &_input-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    &_input {
+      height: var.$size-6;
+      padding: $input-padding;
+      border-radius: var.$brdr-radius-small;
+      border: var.$brdr-size solid var.$col-on-primary;
+      &:focus {
+        outline: none;
+        background-color: var.$col-surface-low;
+      }
+      &--error {
+        border-color: var.$col-error;
+      }
+    }
+    &_error {
+      position: absolute;
+      width: 100%;
+      bottom: $error-bottom-positioning-absolute;
+      color: var.$col-error;
+      font-weight: var.$fnt-weight-regular;
+      font-size: var.$fnt-size-label-medium;
+      text-align: center;
+    }
+  }
+}

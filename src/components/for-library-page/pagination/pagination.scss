@@ -1,0 +1,37 @@
+@use '../../../styles/tokens.scss' as var;
+
+$pagination-padding: 40px;
+$button-gap: 16px;
+$button-size: 40px;
+
+.pagination {
+  padding: $pagination-padding;
+  display: flex;
+  gap: $button-gap;
+  justify-content: center;
+  &_button {
+    height: $button-size;
+    width: $button-size;
+    border-radius: var.$brdr-radius-full;
+    border: var.$brdr-size solid var.$col-on-primary;
+    background-color: var.$col-white;
+    font-weight: var.$fnt-weight-bold;
+    font-size: var.$fnt-size-button;
+    &:hover {
+      background-color: var.$col-surface;
+    }
+    &:disabled {
+      pointer-events: none;
+      background-color: var.$col-disabled;
+      border-color: var.$col-outline-variant;
+    }
+    &[aria-current='page'] {
+      background-color: var.$col-bg-footer-low;
+      color: var.$col-white;
+    }
+  }
+  &_container {
+    display: flex;
+    gap: $button-gap;
+  }
+}

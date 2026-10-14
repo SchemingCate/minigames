@@ -1,26 +1,23 @@
 import './library.scss';
-import { header } from '../../components/header/header';
-import { footer } from '../../components/footer/footer';
+import { header } from '../../components/shared/header/header';
+import { footer } from '../../components/shared/footer/footer';
 import { createHTMLElement } from '../../helpers/dom';
-import { filterChips } from '../../components/filter-chips/filter-chips';
-import { sortDropdown } from '../../components/sort-dropdown/sort-dropdown';
+import { filterChips } from '../../components/for-library-page/filter-chips/filter-chips';
+import { sortDropdown } from '../../components/for-library-page/sort-dropdown/sort-dropdown';
 import {
   pagination,
   updatePagination,
-} from '../../components/pagination/pagination';
-import { gameModal } from '../../components/game-modal/game-modal';
+} from '../../components/for-library-page/pagination/pagination';
+import { gameModal } from '../../components/shared/game-modal/game-modal';
 import { fetchGames } from '../../api/fetch-games/fetch-games';
-import {
-  createGameCard,
-  fillGameCard,
-} from '../../components/game-card/game-card';
-import { errorBanner } from '../../components/error-banner/error-banner';
-import { emptyStateBanner } from '../../components/empty-state-banner/empty-state-banner';
-import { snackbar } from '../../components/snackbar/snackbar';
+import { createGameCard } from '../../components/for-library-page/game-card/game-card';
+import { errorBanner } from '../../components/shared/error-banner/error-banner';
+import { emptyStateBanner } from '../../components/shared/empty-state-banner/empty-state-banner';
+import { snackbar } from '../../components/shared/snackbar/snackbar';
 import { updateLimit } from '../../api/fetch-games/fetch-games-parameters';
-import { snackbarContainer } from '../../components/snackbar/snackbar';
+import { snackbarContainer } from '../../components/shared/snackbar/snackbar';
 
-const cardsPerLibraryPage = 6;
+const CARDS_PER_PAGE_DEFAULT = 6;
 
 const pageContent = createHTMLElement({ tag: 'main', classList: 'library' });
 
@@ -34,9 +31,12 @@ export type LoadGames = () => Promise<void>;
 const loadGames = async (
   //TODO needs refactoring first :')
 ): Promise<void> => {
-  const cards = Array.from({ length: cardsPerLibraryPage }, createGameCard);
+  const instances = Array.from({ length: CARDS_PER_PAGE_DEFAULT }, () =>
+    createGameCard(),
+  );
+  const cards = instances.map(({ card }) => card);
   gameCardsContainer.replaceChildren('');
-  for (const element of cards) gameCardsContainer.append(element);
+  gameCardsContainer.replaceChildren(...cards);
 
   try {
     const data = await fetchGames();
@@ -60,10 +60,10 @@ const loadGames = async (
     );
     for (let index = 0; index < itemsPerPage; index++) {
       if (index < itemsOnCurrentPage) {
-        fillGameCard(cards[index], games[index]);
+        instances[index].fillGameCard(games[index]);
         continue;
       }
-      cards[index].remove();
+      instances[index].card.remove();
     }
 
     snackbar('success', 'Success: Games loaded'); // TODO remove snackbar on when response doesn't need to have clarification
@@ -82,7 +82,7 @@ export const libraryPage = (): HTMLElement => {
   pageContent.replaceChildren();
   gameCardsContainer.replaceChildren();
 
-  updateLimit(cardsPerLibraryPage);
+  updateLimit(CARDS_PER_PAGE_DEFAULT);
 
   const page = createHTMLElement({ tag: 'div' });
 
@@ -108,9 +108,12 @@ export const libraryPage = (): HTMLElement => {
   filterControls.append(filterChips(loadGames), sortDropdown(loadGames));
   pageTitle.append(pageTitleHeading, pageTitleDescription);
 
-  const cards = Array.from({ length: cardsPerLibraryPage }, createGameCard);
+  const instances = Array.from({ length: CARDS_PER_PAGE_DEFAULT }, () =>
+    createGameCard(),
+  );
+  const cards = instances.map(({ card }) => card);
 
-  for (const element of cards) gameCardsContainer.append(element);
+  gameCardsContainer.replaceChildren(...cards);
 
   pageContent.append(
     pageTitle,
